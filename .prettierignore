@@ -1,0 +1,8 @@
+dist
+coverage
+public/palabras
+src/estilos/tokens.css
+src/estilos/components.css
+docs
+data/contenido
+package-lock.json

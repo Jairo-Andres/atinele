@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atínele · La palabra del día, a la colombiana</title>
+    <meta
+      name="description"
+      content="Juego diario colombiano inspirado en Wordle: adivina la palabra del día en 6 intentos y comparte tu resultado por WhatsApp."
+    />
+    <meta name="theme-color" content="#1A1D21" />
+    <meta property="og:title" content="Atínele · La palabra del día, a la colombiana" />
+    <meta
+      property="og:description"
+      content="Adivina la palabra del día en 6 intentos y comparte tu cuadrícula por WhatsApp."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Overpass:wght@800;900&display=swap"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <script type="module" src="./src/main.ts"></script>
+  </head>
+  <body>
+    <a class="saltar ja-btn" href="#juego" data-i18n="saltar">Saltar al juego</a>
+
+    <header class="cabecera">
+      <div class="cabecera__marca">
+        <h1 class="titulo">Atínele</h1>
+        <p class="subtitulo">
+          <span data-i18n="subtitulo">La palabra del día, a la colombiana</span>
+          <span class="numero" id="numero-reto"></span>
+        </p>
+      </div>
+      <nav class="acciones" aria-label="Menú">
+        <button
+          class="icono"
+          type="button"
+          data-abrir="dlg-ayuda"
+          data-i18n-aria="ayuda"
+          data-i18n-title="ayuda"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5" />
+            <path d="M9.3 9.2a2.8 2.8 0 1 1 3.9 2.6c-.8.4-1.2 1-1.2 1.8v.6" />
+            <circle cx="12" cy="17.3" r=".6" class="relleno" />
+          </svg>
+        </button>
+        <button
+          class="icono"
+          type="button"
+          data-abrir="dlg-estadisticas"
+          data-i18n-aria="estadisticas"
+          data-i18n-title="estadisticas"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12M12 20V5M19 20v-5" /></svg>
+        </button>
+        <button
+          class="icono"
+          type="button"
+          data-abrir="dlg-ajustes"
+          data-i18n-aria="ajustes"
+          data-i18n-title="ajustes"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h10M18 7h2M4 17h4M12 17h8" />
+            <circle cx="16" cy="7" r="2" />
+            <circle cx="10" cy="17" r="2" />
+          </svg>
+        </button>
+        <button
+          class="icono icono--texto"
+          type="button"
+          id="btn-idioma"
+          data-i18n-aria="cambiarIdioma"
+        >
+          <span data-i18n="idiomaCorto">EN</span>
+        </button>
+      </nav>
+    </header>
+
+    <div class="modos" role="tablist" data-i18n-aria="modos">
+      <button
+        role="tab"
+        id="tab-palabra"
+        aria-controls="panel-palabra"
+        aria-selected="true"
+        type="button"
+      >
+        <span data-i18n="modoPalabra">Palabra</span>
+      </button>
+      <button
+        role="tab"
+        id="tab-municipio"
+        aria-controls="panel-municipio"
+        aria-selected="false"
+        tabindex="-1"
+        type="button"
+      >
+        <span data-i18n="modoMunicipio">Municipio</span>
+        <span class="pronto" data-i18n="prontoCorto">Pronto</span>
+      </button>
+      <button
+        role="tab"
+        id="tab-dicho"
+        aria-controls="panel-dicho"
+        aria-selected="false"
+        tabindex="-1"
+        type="button"
+      >
+        <span data-i18n="modoDicho">Dicho</span>
+        <span class="pronto" data-i18n="prontoCorto">Pronto</span>
+      </button>
+    </div>
+
+    <main id="juego" tabindex="-1">
+      <section id="panel-palabra" role="tabpanel" aria-labelledby="tab-palabra" class="panel">
+        <div id="tablero" class="tablero" role="group" data-i18n-aria="tablero"></div>
+        <div id="teclado" class="teclado" role="group" data-i18n-aria="teclado"></div>
+      </section>
+      <section
+        id="panel-municipio"
+        role="tabpanel"
+        aria-labelledby="tab-municipio"
+        class="panel panel--pronto"
+        hidden
+      >
+        <p class="ja-label" data-i18n="pronto">Próximamente</p>
+        <p data-i18n="prontoMunicipio"></p>
+      </section>
+      <section
+        id="panel-dicho"
+        role="tabpanel"
+        aria-labelledby="tab-dicho"
+        class="panel panel--pronto"
+        hidden
+      >
+        <p class="ja-label" data-i18n="pronto">Próximamente</p>
+        <p data-i18n="prontoDicho"></p>
+      </section>
+    </main>
+
+    <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+    <div id="anuncio" class="solo-lector" aria-live="polite"></div>
+
+    <footer class="pie">
+      <p class="pie__autor">
+        <span class="bullet-f" aria-hidden="true">F</span>
+        <span data-i18n="hechoPor">Hecho por Jairo Sierra</span>
+        <span class="pie__linea" data-i18n="linea">Línea F · Frontend</span>
+      </p>
+      <ul class="pie__enlaces">
+        <li><a id="enlace-portafolio" data-i18n="portafolio" href="#">Portafolio</a></li>
+        <li><a id="enlace-repo" data-i18n="repo" href="#">Código en GitHub</a></li>
+        <li><a id="enlace-linkedin" href="#">LinkedIn</a></li>
+        <li>
+          <button type="button" class="enlace" data-abrir="dlg-fuentes" data-i18n="fuentes">
+            Fuentes y licencias
+          </button>
+        </li>
+      </ul>
+    </footer>
+
+    <dialog id="dlg-ayuda" class="dialogo" aria-labelledby="ayuda-titulo">
+      <div class="dialogo__cabeza">
+        <h2 id="ayuda-titulo" data-i18n="ayuda">Cómo jugar</h2>
+        <button type="button" class="icono cerrar" data-cerrar data-i18n-aria="cerrar">×</button>
+      </div>
+      <p data-i18n="ayudaIntro"></p>
+      <p data-i18n="ayudaColores"></p>
+      <ul class="ejemplos">
+        <li>
+          <span class="mini-fila" aria-hidden="true"
+            ><span class="ficha" data-estado="correcta">G</span><span class="ficha">A</span
+            ><span class="ficha">T</span><span class="ficha">O</span
+            ><span class="ficha">S</span></span
+          ><span data-i18n="ayudaCorrecta"></span>
+        </li>
+        <li>
+          <span class="mini-fila" aria-hidden="true"
+            ><span class="ficha">L</span><span class="ficha">E</span><span class="ficha">T</span
+            ><span class="ficha" data-estado="presente">R</span><span class="ficha">A</span></span
+          ><span data-i18n="ayudaPresente"></span>
+        </li>
+        <li>
+          <span class="mini-fila" aria-hidden="true"
+            ><span class="ficha">C</span><span class="ficha">A</span><span class="ficha">R</span
+            ><span class="ficha">R</span><span class="ficha" data-estado="ausente">O</span></span
+          ><span data-i18n="ayudaAusente"></span>
+        </li>
+      </ul>
+      <p data-i18n="ayudaTildes"></p>
+      <p data-i18n="ayudaDiario"></p>
+      <p class="texto-suave" data-i18n="ayudaPronto"></p>
+    </dialog>
+
+    <dialog id="dlg-estadisticas" class="dialogo" aria-labelledby="estadisticas-titulo">
+      <div class="dialogo__cabeza">
+        <h2 id="estadisticas-titulo" data-i18n="estadisticas">Estadísticas</h2>
+        <button type="button" class="icono cerrar" data-cerrar data-i18n-aria="cerrar">×</button>
+      </div>
+      <section id="resultado" class="resultado" hidden>
+        <p class="resultado__titulo" id="resultado-titulo"></p>
+        <p class="resultado__respuesta">
+          <span data-i18n="laRespuesta">La palabra era</span>
+          <strong id="resultado-palabra"></strong>
+        </p>
+      </section>
+      <dl class="numeros" id="numeros"></dl>
+      <h3 data-i18n="distribucion">Intentos para acertar</h3>
+      <ol class="distribucion" id="distribucion"></ol>
+      <section id="compartir" class="compartir" hidden>
+        <p class="cuenta">
+          <span data-i18n="proximo">Próximo reto en</span> <time id="cuenta-regresiva"></time>
+        </p>
+        <div class="compartir__botones">
+          <button
+            type="button"
+            class="ja-btn ja-btn--primary"
+            id="btn-compartir"
+            data-i18n="compartir"
+          >
+            Compartir
+          </button>
+          <a class="ja-btn" id="btn-whatsapp" target="_blank" rel="noopener" data-i18n="whatsapp"
+            >Enviar por WhatsApp</a
+          >
+          <button type="button" class="ja-btn" id="btn-copiar" data-i18n="copiar">Copiar</button>
+        </div>
+        <div id="copia-manual" hidden>
+          <label for="texto-manual" data-i18n="copiarManual">Copia el resultado:</label>
+          <textarea id="texto-manual" rows="9" readonly></textarea>
+        </div>
+      </section>
+    </dialog>
+
+    <dialog id="dlg-ajustes" class="dialogo" aria-labelledby="ajustes-titulo">
+      <div class="dialogo__cabeza">
+        <h2 id="ajustes-titulo" data-i18n="ajustes">Ajustes</h2>
+        <button type="button" class="icono cerrar" data-cerrar data-i18n-aria="cerrar">×</button>
+      </div>
+      <fieldset class="opciones">
+        <legend data-i18n="tema">Tema</legend>
+        <label
+          ><input type="radio" name="tema" value="sistema" /> <span data-i18n="temaSistema"></span
+        ></label>
+        <label
+          ><input type="radio" name="tema" value="claro" /> <span data-i18n="temaClaro"></span
+        ></label>
+        <label
+          ><input type="radio" name="tema" value="oscuro" /> <span data-i18n="temaOscuro"></span
+        ></label>
+      </fieldset>
+      <label class="interruptor"
+        ><input type="checkbox" id="alto-contraste" /> <span data-i18n="altoContraste"></span
+      ></label>
+      <p class="texto-suave" data-i18n="privacidad"></p>
+      <button type="button" class="ja-btn" id="btn-borrar" data-i18n="borrarDatos">
+        Borrar mis datos
+      </button>
+    </dialog>
+
+    <dialog id="dlg-fuentes" class="dialogo" aria-labelledby="fuentes-titulo">
+      <div class="dialogo__cabeza">
+        <h2 id="fuentes-titulo" data-i18n="fuentes">Fuentes y licencias</h2>
+        <button type="button" class="icono cerrar" data-cerrar data-i18n-aria="cerrar">×</button>
+      </div>
+      <ul class="lista-fuentes">
+        <li data-i18n="fuentesPalabras"></li>
+        <li data-i18n="fuentesCodigo"></li>
+        <li data-i18n="fuentesWordle"></li>
+      </ul>
+    </dialog>
+
+    <noscript>
+      <p class="sin-js">
+        Atínele necesita JavaScript para funcionar. / Atínele needs JavaScript to work.
+      </p>
+    </noscript>
+  </body>
+</html>

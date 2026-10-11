@@ -1,0 +1,32 @@
+# Regenera public/palabras/*.txt desde el diccionario es_CO de RLA-ES.
+# Se corre a mano (Actions → "Palabras válidas" → Run workflow) y deja las
+# listas como artefacto para descargarlas y revisarlas antes de hacer commit.
+name: Palabras válidas
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar unmunch (Hunspell)
+        run: sudo apt-get update && sudo apt-get install -y hunspell-tools
+      - name: Descargar y expandir el diccionario es_CO
+        run: |
+          mkdir -p /tmp/dic && cd /tmp/dic
+          npm pack dictionary-es-co@2.0.0
+          tar xzf dictionary-es-co-2.0.0.tgz
+          unmunch package/index.dic package/index.aff > expandido.txt
+      - run: node scripts/generar-validas.mjs /tmp/dic/expandido.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: palabras
+          path: public/palabras/
