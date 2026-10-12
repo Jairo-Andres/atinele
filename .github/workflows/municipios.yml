@@ -1,0 +1,24 @@
+# Descarga DIVIPOLA (DANE) desde datos.gov.co y genera public/datos/municipios.json.
+# Se corre a mano (Actions → "Municipios" → Run workflow) y deja el archivo como
+# artefacto para descargarlo y revisarlo antes de hacer commit.
+name: Municipios
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  descargar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run municipios
+      - uses: actions/upload-artifact@v4
+        with:
+          name: municipios
+          path: public/datos/municipios.json
