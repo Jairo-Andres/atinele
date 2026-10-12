@@ -90,6 +90,15 @@ const es = {
   cercania: 'Cercanía',
   intentoN: 'Intento {n}',
   intentosMunicipio: 'Intentos',
+  mapaTitulo: 'Mapa de Colombia con los municipios y tus intentos',
+  mapaAyuda: 'Toca un punto para ver qué municipio es. Acerca con + o pellizcando.',
+  mapaElegido: '{lugar}. Pulsa Adivinar para intentarlo.',
+  mapaRespuesta: 'Era {lugar} (★ o ✓ en el mapa).',
+  mapaAcercar: 'Acercar',
+  mapaAlejar: 'Alejar',
+  mapaTodo: 'Ver todo el país',
+  mapaLeyenda:
+    'Círculo punteado: distancia de tu último intento. Departamento tachado: descartado.',
   anuncioMunicipio: 'Intento {n}: {lugar}. A {km} km hacia el {dir}. Cercanía {pct} %. {dpto}.',
   anuncioAcierto: 'Intento {n}: {lugar}. ¡Ahí es!',
   dirN: 'norte',
@@ -113,9 +122,11 @@ const es = {
   ayudaPalabraTitulo: 'Palabra',
   ayudaMunicipioTitulo: 'Municipio',
   ayudaMunicipio:
-    'Adivina el municipio del día en 6 intentos. Por ahora siempre es una capital de departamento (o Bogotá). Cada intento te dice a cuántos kilómetros está, en qué dirección y qué tan cerca estás, y si es del mismo departamento.',
+    'Adivina el municipio del día en 6 intentos. Por ahora siempre es una capital de departamento (o Bogotá). Cada intento te dice a cuántos kilómetros está, en qué dirección y qué tan cerca estás, y si es del mismo departamento. En el mapa puedes tocar un punto para ver qué municipio es; el círculo punteado marca la distancia de tu último intento.',
   fuentesMunicipios:
     'Municipios y coordenadas: DANE, DIVIPOLA - Códigos municipios (datos.gov.co, gdxc-w37w), licencia CC BY-SA 4.0. Los nombres se pasaron de mayúsculas a tipo título.',
+  fuentesMapa:
+    'Mapa: Natural Earth 1:10m (dominio público), simplificado. Es un dibujo de referencia, no un límite oficial.',
 };
 
 type Textos = typeof es;
@@ -210,6 +221,14 @@ const en: Textos = {
   cercania: 'Proximity',
   intentoN: 'Guess {n}',
   intentosMunicipio: 'Guesses',
+  mapaTitulo: 'Map of Colombia with its towns and your guesses',
+  mapaAyuda: 'Tap a dot to see which town it is. Zoom in with + or by pinching.',
+  mapaElegido: '{lugar}. Press Guess to try it.',
+  mapaRespuesta: 'It was {lugar} (★ or ✓ on the map).',
+  mapaAcercar: 'Zoom in',
+  mapaAlejar: 'Zoom out',
+  mapaTodo: 'Show the whole country',
+  mapaLeyenda: 'Dotted circle: distance of your last guess. Hatched department: ruled out.',
   anuncioMunicipio: 'Guess {n}: {lugar}. {km} km to the {dir}. Proximity {pct} %. {dpto}.',
   anuncioAcierto: 'Guess {n}: {lugar}. That is it!',
   dirN: 'north',
@@ -233,9 +252,11 @@ const en: Textos = {
   ayudaPalabraTitulo: 'Word',
   ayudaMunicipioTitulo: 'Town',
   ayudaMunicipio:
-    "Guess today's Colombian town in 6 tries. For now it is always a department capital (or Bogotá). Each guess tells you how many kilometers away it is, in which direction, how close you are, and whether it is in the same department.",
+    "Guess today's Colombian town in 6 tries. For now it is always a department capital (or Bogotá). Each guess tells you how many kilometers away it is, in which direction, how close you are, and whether it is in the same department. On the map you can tap a dot to see which town it is; the dotted circle shows the distance of your last guess.",
   fuentesMunicipios:
     'Towns and coordinates: DANE, DIVIPOLA - Códigos municipios (datos.gov.co, gdxc-w37w), CC BY-SA 4.0 license. Names were converted from uppercase to title case.',
+  fuentesMapa:
+    'Map: Natural Earth 1:10m (public domain), simplified. It is a reference drawing, not an official boundary.',
 };
 
 const textos: Record<Idioma, Textos> = { es, en };

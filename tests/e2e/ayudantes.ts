@@ -50,6 +50,9 @@ interface MunicipioE2E {
   cod: string;
   nombre: string;
   dpto: string;
+  codDpto: string;
+  lat: number;
+  lon: number;
 }
 const datosMunicipios = JSON.parse(readFileSync('public/datos/municipios.json', 'utf8')) as {
   municipios: MunicipioE2E[];

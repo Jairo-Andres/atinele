@@ -21,7 +21,8 @@
     "validar": "node scripts/validar.mjs",
     "calendario": "node scripts/generar-calendario.mjs",
     "palabras": "node scripts/generar-validas.mjs",
-    "municipios": "node scripts/descargar-divipola.mjs"
+    "municipios": "node scripts/descargar-divipola.mjs",
+    "mapa": "node scripts/generar-mapa.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

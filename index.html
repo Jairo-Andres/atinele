@@ -161,6 +161,26 @@
           </div>
           <p class="buscador__nota texto-suave" data-i18n="notaDistancia"></p>
         </form>
+        <figure id="mapa-municipio" class="mapa" hidden>
+          <div class="mapa__marco">
+            <svg id="mapa-svg" role="img" tabindex="0" aria-describedby="mapa-pie"></svg>
+            <div class="mapa__controles">
+              <button type="button" class="icono" data-mapa="mas" data-i18n-aria="mapaAcercar">
+                <span aria-hidden="true">+</span>
+              </button>
+              <button type="button" class="icono" data-mapa="menos" data-i18n-aria="mapaAlejar">
+                <span aria-hidden="true">−</span>
+              </button>
+              <button type="button" class="icono" data-mapa="todo" data-i18n-aria="mapaTodo">
+                <span aria-hidden="true">⤢</span>
+              </button>
+            </div>
+          </div>
+          <figcaption>
+            <p id="mapa-pie" class="mapa__pie" aria-live="polite"></p>
+            <p class="mapa__leyenda texto-suave" data-i18n="mapaLeyenda"></p>
+          </figcaption>
+        </figure>
         <ol
           id="intentos-municipio"
           class="intentos-municipio"
@@ -311,6 +331,7 @@
       <ul class="lista-fuentes">
         <li data-i18n="fuentesPalabras"></li>
         <li data-i18n="fuentesMunicipios"></li>
+        <li data-i18n="fuentesMapa"></li>
         <li data-i18n="fuentesCodigo"></li>
         <li data-i18n="fuentesWordle"></li>
       </ul>

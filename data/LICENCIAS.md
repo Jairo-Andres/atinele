@@ -34,6 +34,18 @@ punto decimal. Esta adaptación se comparte bajo la misma licencia CC BY-SA 4.0.
 UPPERCASE to title case, decimal points in coordinates. This adaptation is shared
 under the same CC BY-SA 4.0 license.
 
+## public/datos/mapa.json
+
+**ES** · Generado con `npm run mapa` a partir de Natural Earth 1:10m (Admin 0 y
+Admin 1), versión 5.1.2, de **dominio público**
+(https://www.naturalearthdata.com/about/terms-of-use/). Se simplificó con mapshaper
+y se le asignó a cada departamento su código DIVIPOLA. Es un dibujo de referencia,
+no un límite oficial.
+
+**EN** · Generated with `npm run mapa` from Natural Earth 1:10m (Admin 0 and
+Admin 1) v5.1.2, **public domain**. Simplified with mapshaper; each department got
+its DIVIPOLA code. A reference drawing, not an official boundary.
+
 ## data/contenido/respuestas-municipio.json
 
 Lista propia de códigos DIVIPOLA (capitales de departamento y Bogotá).

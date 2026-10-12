@@ -11,7 +11,9 @@ import {
   type Municipio,
   type Pista,
 } from '../juego/municipios';
+import type { DatosMapa } from '../juego/mapa';
 import { anunciar, avisar } from '../ui/aviso';
+import { MapaMunicipios } from './mapa';
 
 export interface OpcionesMunicipio {
   codigoRespuesta: string;
@@ -24,6 +26,8 @@ export interface OpcionesMunicipio {
   lista: HTMLOListElement;
   alCambiar: (partida: Partida) => void;
   alTerminar: (partida: Partida, animado: boolean) => void;
+  /** Mapa de ayuda; si no carga, el juego sigue sin él. */
+  mapa?: { figura: HTMLElement; svg: SVGSVGElement; pie: HTMLElement; datos: Promise<DatosMapa> };
 }
 
 const GRADOS: Record<Direccion, number> = {
@@ -44,6 +48,7 @@ export class JuegoMunicipio {
   private opciones: Municipio[] = [];
   private activa = -1;
   private elegido: Municipio | null = null;
+  private mapa: MapaMunicipios | null = null;
 
   constructor(private readonly o: OpcionesMunicipio) {
     o.entrada.disabled = true;
@@ -58,6 +63,7 @@ export class JuegoMunicipio {
         o.form.dataset.listo = 'true';
         this.dibujar();
         if (this.terminado) o.alTerminar(o.partida, false);
+        this.iniciarMapa();
       },
       () => {
         o.entrada.placeholder = '';
@@ -77,6 +83,27 @@ export class JuegoMunicipio {
       this.enviarTexto();
     });
     this.dibujar();
+  }
+
+  private iniciarMapa(): void {
+    const m = this.o.mapa;
+    if (!m) return;
+    m.datos.then(
+      (mapa) => {
+        this.mapa = new MapaMunicipios({
+          figura: m.figura,
+          svg: m.svg,
+          pie: m.pie,
+          municipios: this.candidatos,
+          mapa,
+          alElegir: (mun) => this.elegir(mun),
+        });
+        this.dibujar();
+      },
+      () => {
+        // Sin mapa se puede jugar igual con el buscador.
+      },
+    );
   }
 
   get terminado(): boolean {
@@ -111,6 +138,7 @@ export class JuegoMunicipio {
   }
 
   retraducir(): void {
+    this.mapa?.retraducir();
     this.dibujar();
   }
 
@@ -316,5 +344,6 @@ export class JuegoMunicipio {
       return li;
     });
     this.o.lista.replaceChildren(...filas);
+    this.mapa?.actualizar(pistas, this.terminado ? (this.respuesta ?? null) : null);
   }
 }

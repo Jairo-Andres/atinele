@@ -18,6 +18,7 @@ import { retoDelDia, type Calendario } from './juego/calendario';
 import { enlaceWhatsApp, textoCompartir, textoConFilas } from './juego/compartir';
 import { formatoCuentaRegresiva, hoyEnColombia, msHastaManana } from './juego/dia';
 import { porcentajeVictorias, rachaVigente, registrarPartida } from './juego/estadisticas';
+import type { DatosMapa } from './juego/mapa';
 import type { DatosMunicipios } from './juego/municipios';
 import { JuegoMunicipio } from './modos/municipio';
 import { JuegoPalabra } from './modos/palabra';
@@ -66,6 +67,12 @@ async function cargarMunicipios(): Promise<DatosMunicipios> {
   const r = await fetch(`${import.meta.env.BASE_URL}datos/municipios.json`);
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return (await r.json()) as DatosMunicipios;
+}
+
+async function cargarMapa(): Promise<DatosMapa> {
+  const r = await fetch(`${import.meta.env.BASE_URL}datos/mapa.json`);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return (await r.json()) as DatosMapa;
 }
 
 // ---------- Estadísticas y resultado ----------
@@ -288,6 +295,12 @@ function iniciar(): void {
       entrada: $<HTMLInputElement>('entrada-municipio'),
       sugerencias: $<HTMLUListElement>('sugerencias-municipio'),
       lista: $<HTMLOListElement>('intentos-municipio'),
+      mapa: {
+        figura: $('mapa-municipio'),
+        svg: document.getElementById('mapa-svg') as unknown as SVGSVGElement,
+        pie: $('mapa-pie'),
+        datos: cargarMapa(),
+      },
       alCambiar: (p) => alCambiar('municipio', p),
       alTerminar: (_p, animado) => {
         if (animado) window.setTimeout(() => mostrarEstadisticas('municipio'), 600);

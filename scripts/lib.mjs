@@ -68,3 +68,18 @@ export function distanciaKm(a, b) {
     Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
   return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h)));
 }
+
+/** Punto dentro de anillos [[lon, lat], ...] (par-impar). Igual a src/juego/mapa.ts. */
+export function dentro(lat, lon, anillos) {
+  let adentro = false;
+  for (const a of anillos) {
+    for (let i = 0, j = a.length - 1; i < a.length; j = i++) {
+      const [xi, yi] = a[i];
+      const [xj, yj] = a[j];
+      if (yi > lat !== yj > lat && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) {
+        adentro = !adentro;
+      }
+    }
+  }
+  return adentro;
+}

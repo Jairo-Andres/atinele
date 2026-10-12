@@ -23,7 +23,7 @@
 - El reto del día sale de `data/contenido/calendario.json` según la fecha **de Colombia** (America/Bogota); cambia a medianoche hora colombiana. / The daily challenge comes from the calendar using the Colombian date.
 - El calendario se sirve ofuscado en el build para evitar spoilers al buscar texto (no es seguridad: el sitio es estático). / The calendar is obfuscated in the bundle to avoid accidental spoilers.
 - Las palabras válidas (`public/palabras/5.txt`) se cargan después de pintar el tablero. / Valid words load after the board is drawn.
-- **Municipio**: escribes un municipio (con autocompletado accesible) y el juego dice a cuántos km está, hacia dónde (flecha) y qué tan cerca (%). La distancia es en línea recta entre los puntos que publica el DANE en DIVIPOLA (`public/datos/municipios.json`). Las respuestas son las 32 capitales de departamento más Bogotá (`data/contenido/respuestas-municipio.json`). / **Town**: type a town and get distance, direction and proximity, from DANE's DIVIPOLA coordinates.
+- **Municipio**: escribes un municipio (con autocompletado accesible) y el juego dice a cuántos km está, hacia dónde (flecha) y qué tan cerca (%). La distancia es en línea recta entre los puntos que publica el DANE en DIVIPOLA (`public/datos/municipios.json`). Un mapa SVG hecho a mano (sin teselas ni librerías) muestra los departamentos, un punto por municipio, tus intentos y un círculo con la distancia del último; tocar un punto lo elige en el buscador. Las respuestas son las 32 capitales de departamento más Bogotá (`data/contenido/respuestas-municipio.json`). / **Town**: type a town and get distance, direction and proximity, from DANE's DIVIPOLA coordinates.
 - Estadísticas y racha se guardan solo en el navegador (`localStorage`). / Stats live only in the browser.
 
 ## Desarrollo local / Local development
@@ -35,6 +35,7 @@ npm install
 npm run dev          # http://localhost:5173
 npm test             # pruebas unitarias con cobertura / unit tests with coverage
 npm run municipios   # descarga DIVIPOLA del DANE / downloads DIVIPOLA (needs www.datos.gov.co)
+npm run mapa         # regenera el contorno del mapa (Natural Earth) / rebuilds the map outline
 npm run validar      # valida respuestas y calendario / validates content
 npx playwright install chromium   # solo la primera vez / first time only
 npm run test:e2e     # e2e + accesibilidad / e2e + accessibility
@@ -71,6 +72,7 @@ npm run build        # genera dist/ / builds dist/
 | Se acabó el calendario / Calendar ran out                                | El juego repite el ciclo y avisa en la consola. Agrega palabras y corre `npm run calendario`. / The game loops; add words.                                                                                         |
 | "No se pudieron cargar los municipios" / Towns fail to load              | `public/datos/municipios.json` no está en el repo o no se publicó. Corre `npm run municipios`, haz commit del archivo y vuelve a desplegar. / The file is missing: generate it and commit it.                      |
 | `npm run municipios` falla / fails                                       | datos.gov.co caído o bloqueado por tu red: usa el workflow _Municipios_. Si dice "coordenadas fuera de Colombia", el DANE cambió un dato: revisa la fila que indica. / Use the workflow or check the reported row. |
+| El mapa no aparece / Map is missing                                      | `public/datos/mapa.json` no se publicó; el juego sigue funcionando con el buscador. Regenéralo con `npm run mapa` (usa `npx mapshaper`). / The game still works without it.                                        |
 | Un municipio no aparece / A town is missing                              | Las áreas no municipalizadas no se pueden jugar. Si es un municipio nuevo, vuelve a descargar DIVIPOLA. / Non-municipal areas are excluded; re-download DIVIPOLA.                                                  |
 | Las fuentes se ven distintas / Fonts look different                      | Google Fonts bloqueado; se usa la fuente de respaldo. / Fallback font in use.                                                                                                                                      |
 | Un recurso aparece bloqueado en la consola / Resource blocked in console | La CSP de `vercel.json` no lo permite. La prueba e2e de CSP usa las mismas cabeceras. / The CSP in `vercel.json` blocks it.                                                                                        |
@@ -80,6 +82,7 @@ npm run build        # genera dist/ / builds dist/
 - Código / Code: [MIT](LICENSE).
 - Palabras válidas / Valid words: diccionario es_CO del proyecto [RLA-ES](https://github.com/sbosio/rla-es) (versión 2.8, `dictionary-es-co@2.0.0`), redistribuido bajo LGPL 3.0 o posterior. Detalles en [`data/LICENCIAS.md`](data/LICENCIAS.md).
 - Municipios / Towns: DANE, _DIVIPOLA - Códigos municipios_ ([datos.gov.co `gdxc-w37w`](https://www.datos.gov.co/d/gdxc-w37w)), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). `public/datos/municipios.json` es una adaptación (nombres en tipo título) y se comparte bajo la misma licencia. / Adapted (title case), shared under the same license.
+- Mapa / Map: [Natural Earth](https://www.naturalearthdata.com/) 1:10m v5.1.2, dominio público / public domain, simplificado con mapshaper (`public/datos/mapa.json`).
 - Identidad visual "Rutas + Cota" (tokens, componentes, favicon JAS): copiada sin modificar del sistema de diseño del portafolio.
 - Inspirado en Wordle, marca de The New York Times Company. Este proyecto no está afiliado. / Inspired by Wordle; not affiliated with The New York Times Company.
 

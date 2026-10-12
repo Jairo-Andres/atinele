@@ -1,7 +1,7 @@
 // Valida el contenido del juego. Corre en CI: si algo está mal, sale con código 1.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { LARGOS, LETRAS, RAIZ, largo, leerJson, leerValidas, normalizar } from './lib.mjs';
+import { LARGOS, LETRAS, RAIZ, dentro, largo, leerJson, leerValidas, normalizar } from './lib.mjs';
 
 const errores = [];
 const avisos = [];
@@ -79,6 +79,34 @@ if (!existsSync(join(RAIZ, RUTA_MUNICIPIOS))) {
   }
 }
 if (!(calendario.municipios ?? []).length) errores.push('calendario.json: no tiene municipios');
+
+// ---------- Mapa ----------
+const RUTA_MAPA = 'public/datos/mapa.json';
+if (!existsSync(join(RAIZ, RUTA_MAPA))) {
+  errores.push(`Falta ${RUTA_MAPA}: corre "npm run mapa".`);
+} else if (existsSync(join(RAIZ, RUTA_MUNICIPIOS))) {
+  const mapa = leerJson(RUTA_MAPA);
+  const municipios = leerJson(RUTA_MUNICIPIOS).municipios;
+  const deptos = new Map(mapa.departamentos.map((d) => [d.codDpto, d.anillos]));
+  if (deptos.size !== 33) errores.push(`${RUTA_MAPA}: tiene ${deptos.size} departamentos, no 33`);
+  // Cada municipio debe caer en el dibujo de su departamento (con margen por la
+  // simplificación de los bordes). Así se detecta un código DANE mal asignado.
+  const porDpto = new Map();
+  for (const m of municipios) {
+    const c = porDpto.get(m.codDpto) ?? { total: 0, dentro: 0 };
+    c.total++;
+    if (deptos.has(m.codDpto) && dentro(m.lat, m.lon, deptos.get(m.codDpto))) c.dentro++;
+    porDpto.set(m.codDpto, c);
+  }
+  for (const [cod, c] of porDpto) {
+    if (!deptos.has(cod)) errores.push(`${RUTA_MAPA}: falta el departamento ${cod}`);
+    else if (c.total >= 5 && c.dentro / c.total < 0.5) {
+      errores.push(
+        `${RUTA_MAPA}: solo ${c.dentro} de ${c.total} municipios del ${cod} caen en su dibujo`,
+      );
+    }
+  }
+}
 
 for (const n of LARGOS) {
   const v = leerValidas(n);
