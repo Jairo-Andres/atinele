@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { enlaceWhatsApp, filaEmoji, textoCompartir } from '../../src/juego/compartir';
+import {
+  cuadrosCercania,
+  enlaceWhatsApp,
+  filaEmoji,
+  filaMunicipio,
+  textoCompartir,
+  textoConFilas,
+} from '../../src/juego/compartir';
 import { evaluar } from '../../src/juego/evaluar';
 
 const base = {
@@ -40,5 +47,47 @@ describe('compartir', () => {
 
   it('enlace de WhatsApp sin número', () => {
     expect(enlaceWhatsApp('Hola #1 🟩')).toBe('https://wa.me/?text=Hola%20%231%20%F0%9F%9F%A9');
+  });
+});
+
+describe('compartir municipio', () => {
+  it('cuadros de cercanía', () => {
+    expect(cuadrosCercania(0)).toBe('⬛⬛⬛⬛⬛');
+    expect(cuadrosCercania(9)).toBe('⬛⬛⬛⬛⬛');
+    expect(cuadrosCercania(10)).toBe('🟨⬛⬛⬛⬛');
+    expect(cuadrosCercania(65)).toBe('🟩🟩🟩⬛⬛');
+    expect(cuadrosCercania(72)).toBe('🟩🟩🟩🟨⬛');
+    expect(cuadrosCercania(99)).toBe('🟩🟩🟩🟩🟨');
+    expect(cuadrosCercania(100)).toBe('🟩🟩🟩🟩🟩');
+    expect(cuadrosCercania(150)).toBe('🟩🟩🟩🟩🟩');
+    expect(cuadrosCercania(50, true)).toBe('🟧🟧🟦⬛⬛');
+  });
+
+  it('fila con flecha o con pin al acertar', () => {
+    expect(filaMunicipio({ acierto: false, cercania: 72, direccion: 'NE' })).toBe('🟩🟩🟩🟨⬛ ↗️');
+    expect(filaMunicipio({ acierto: true, cercania: 100, direccion: 'N' })).toBe('🟩🟩🟩🟩🟩 📍');
+  });
+
+  it('texto completo sin nombres', () => {
+    const texto = textoConFilas({
+      nombre: 'Atínele',
+      numero: 3,
+      icono: '📍',
+      etiquetaModo: 'Municipio',
+      filas: ['🟩🟩⬛⬛⬛ ⬅️', '🟩🟩🟩🟩🟩 📍'],
+      ganado: true,
+      maxIntentos: 6,
+      url: 'https://atinele.vercel.app',
+    });
+    expect(texto).toBe(
+      [
+        'Atínele #3 🇨🇴',
+        '📍 Municipio 2/6',
+        '🟩🟩⬛⬛⬛ ⬅️',
+        '🟩🟩🟩🟩🟩 📍',
+        '',
+        'https://atinele.vercel.app',
+      ].join('\n'),
+    );
   });
 });

@@ -13,12 +13,34 @@ const cal: Calendario = {
 
 describe('retoDelDia', () => {
   it('devuelve el reto según la fecha', () => {
-    expect(retoDelDia(cal, '2026-10-12')).toEqual({ numero: 1, palabra: 'PERRO', repetido: false });
-    expect(retoDelDia(cal, '2026-10-13')).toEqual({ numero: 2, palabra: 'SUEÑO', repetido: false });
+    expect(retoDelDia(cal, '2026-10-12')).toEqual({
+      numero: 1,
+      palabra: 'PERRO',
+      municipio: null,
+      repetido: false,
+    });
+    expect(retoDelDia(cal, '2026-10-13')).toEqual({
+      numero: 2,
+      palabra: 'SUEÑO',
+      municipio: null,
+      repetido: false,
+    });
   });
 
   it('repite el ciclo cuando se acaba el calendario', () => {
-    expect(retoDelDia(cal, '2026-10-14')).toEqual({ numero: 3, palabra: 'PERRO', repetido: true });
+    expect(retoDelDia(cal, '2026-10-14')).toEqual({
+      numero: 3,
+      palabra: 'PERRO',
+      municipio: null,
+      repetido: true,
+    });
+  });
+
+  it('el municipio tiene su propio ciclo', () => {
+    const conMunicipios = { ...cal, municipios: ['05001', '11001', '76001'] };
+    expect(retoDelDia(conMunicipios, '2026-10-12').municipio).toBe('05001');
+    expect(retoDelDia(conMunicipios, '2026-10-14').municipio).toBe('76001');
+    expect(retoDelDia(conMunicipios, '2026-10-15').municipio).toBe('05001');
   });
 
   it('falla con calendario vacío', () => {

@@ -1,6 +1,15 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { RESPUESTA, abrir, escribir, palabrasQueNoSon } from './ayudantes';
+import {
+  MUNICIPIO,
+  RESPUESTA,
+  abrir,
+  abrirMunicipio,
+  adivinar,
+  escribir,
+  municipiosQueNoSon,
+  palabrasQueNoSon,
+} from './ayudantes';
 
 const ETIQUETAS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 
@@ -52,9 +61,24 @@ for (const tema of ['light', 'dark'] as const) {
         await revisar(page);
       });
 
+      test('municipio con intentos y sugerencias abiertas', async ({ page }) => {
+        await abrirMunicipio(page);
+        for (const m of municipiosQueNoSon(2)) await adivinar(page, m);
+        await page.getByRole('combobox').fill(MUNICIPIO.nombre.slice(0, 3));
+        await page.keyboard.press('ArrowDown');
+        await revisar(page);
+      });
+
+      test('municipio acertado', async ({ page }) => {
+        await abrirMunicipio(page);
+        await adivinar(page, MUNICIPIO);
+        await expect(page.locator('#dlg-estadisticas')).toBeVisible();
+        await revisar(page);
+      });
+
       test('fuentes y pestaña próximamente', async ({ page }) => {
         await abrir(page);
-        await page.locator('#tab-municipio').click();
+        await page.locator('#tab-dicho').click();
         await revisar(page);
         await page.locator('[data-abrir="dlg-fuentes"]').click();
         await revisar(page);

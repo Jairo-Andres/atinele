@@ -43,3 +43,48 @@ export async function escribir(page: Page, palabra: string): Promise<void> {
   await expect(filas.nth(antes).locator(REVELADA)).toHaveCount(palabra.length);
   await expect(page.locator('#tablero .revelando')).toHaveCount(0);
 }
+
+// ---------- Modo Municipio ----------
+// Usa public/datos/municipios.json (lo genera `npm run municipios` desde DIVIPOLA).
+interface MunicipioE2E {
+  cod: string;
+  nombre: string;
+  dpto: string;
+}
+const datosMunicipios = JSON.parse(readFileSync('public/datos/municipios.json', 'utf8')) as {
+  municipios: MunicipioE2E[];
+};
+const codigosCalendario = (
+  JSON.parse(readFileSync('data/contenido/calendario.json', 'utf8')) as { municipios: string[] }
+).municipios;
+
+function porCodigo(cod: string): MunicipioE2E {
+  const m = datosMunicipios.municipios.find((x) => x.cod === cod);
+  if (!m) throw new Error(`No está el municipio ${cod} en public/datos/municipios.json`);
+  return m;
+}
+
+/** Respuesta del día 1 del modo Municipio. */
+export const MUNICIPIO = porCodigo(codigosCalendario[0] as string);
+
+/** Otras capitales (siempre están en DIVIPOLA) para fallar a propósito. */
+export function municipiosQueNoSon(n: number): MunicipioE2E[] {
+  return codigosCalendario.slice(1, 1 + n).map(porCodigo);
+}
+
+export async function abrirMunicipio(page: Page): Promise<void> {
+  await page.clock.setFixedTime(FECHA);
+  await page.goto('/#municipio');
+  await page.locator('#dlg-ayuda').waitFor();
+  await page.keyboard.press('Escape');
+  await page.locator('#form-municipio[data-listo="true"]').waitFor({ state: 'attached' });
+}
+
+/** Escribe "Nombre, Departamento" (siempre único) y lo envía. */
+export async function adivinar(page: Page, m: MunicipioE2E): Promise<void> {
+  const pistas = page.locator('#intentos-municipio .pista:not(.pista--vacia)');
+  const antes = await pistas.count();
+  await page.locator('#entrada-municipio').fill(`${m.nombre}, ${m.dpto}`);
+  await page.keyboard.press('Enter');
+  await expect(pistas).toHaveCount(antes + 1);
+}
