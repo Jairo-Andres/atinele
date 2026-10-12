@@ -20,15 +20,15 @@ export interface Ajustes {
 
 export interface Datos {
   ajustes: Ajustes;
-  partidas: Record<string, { palabra?: Partida }>;
-  estadisticas: { palabra: Estadisticas };
+  partidas: Record<string, { palabra?: Partida; municipio?: Partida }>;
+  estadisticas: { palabra: Estadisticas; municipio: Estadisticas };
 }
 
 export function datosVacios(): Datos {
   return {
     ajustes: { tema: 'sistema', altoContraste: false, idioma: null, vioInstrucciones: false },
     partidas: {},
-    estadisticas: { palabra: estadisticasVacias() },
+    estadisticas: { palabra: estadisticasVacias(), municipio: estadisticasVacias() },
   };
 }
 
@@ -49,6 +49,7 @@ export function cargar(hoy: string, almacen: Storage | null = obtenerAlmacen()):
       partidas: leido.partidas ?? {},
       estadisticas: {
         palabra: { ...base.estadisticas.palabra, ...leido.estadisticas?.palabra },
+        municipio: { ...base.estadisticas.municipio, ...leido.estadisticas?.municipio },
       },
     };
     for (const dia of Object.keys(datos.partidas)) {

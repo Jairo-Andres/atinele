@@ -21,7 +21,24 @@ Lista propia. Cada palabra marcada `general` está en el diccionario es_CO; las
 marcadas `colombianismo` citan su fuente en el campo `fuente`.
 Own list. `general` words are in the es_CO dictionary; `colombianismo` words cite their source.
 
-## Próximas fases / Next phases
+## public/datos/municipios.json
 
-- Municipios: DANE, _DIVIPOLA - Códigos municipios_, datos.gov.co `gdxc-w37w`, CC BY-SA 4.0.
+**ES** · Generado con `npm run municipios` a partir de DANE, _DIVIPOLA - Códigos
+municipios_, publicado en datos.gov.co (conjunto `gdxc-w37w`) bajo
+**CC BY-SA 4.0** (https://creativecommons.org/licenses/by-sa/4.0/). Cambios: nombres
+de municipio y departamento pasados de MAYÚSCULAS a tipo título y coordenadas con
+punto decimal. Esta adaptación se comparte bajo la misma licencia CC BY-SA 4.0.
+
+**EN** · Generated with `npm run municipios` from DANE's _DIVIPOLA_ dataset
+(datos.gov.co `gdxc-w37w`, **CC BY-SA 4.0**). Changes: names converted from
+UPPERCASE to title case, decimal points in coordinates. This adaptation is shared
+under the same CC BY-SA 4.0 license.
+
+## data/contenido/respuestas-municipio.json
+
+Lista propia de códigos DIVIPOLA (capitales de departamento y Bogotá).
+Own list of DIVIPOLA codes (department capitals and Bogotá).
+
+## Próxima fase / Next phase
+
 - Dichos: lista propia con fuente por dicho.

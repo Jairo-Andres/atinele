@@ -211,6 +211,11 @@ h3 {
   font-weight: var(--weight-regular);
 }
 
+.modos [role='tab'].jugado::after {
+  content: '✓';
+  color: var(--status-good);
+}
+
 /* ---------- Juego ---------- */
 main {
   flex: 1;
@@ -699,5 +704,197 @@ main:focus {
   .compartir__botones {
     grid-template-columns: repeat(3, auto);
     justify-content: center;
+  }
+}
+
+/* ---------- Modo Municipio ---------- */
+.buscador {
+  display: grid;
+  gap: var(--space-2);
+  width: min(100%, 26rem);
+}
+.buscador__etiqueta {
+  font-weight: var(--weight-bold);
+}
+.buscador__fila {
+  display: flex;
+  gap: var(--space-2);
+}
+.buscador__nota {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+.combo {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.combo input {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-3);
+  border: var(--border-2) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font: var(--text-base) / 1 var(--font-body);
+}
+.combo input:focus-visible {
+  border-color: var(--route-f);
+}
+.sugerencias {
+  position: absolute;
+  z-index: 5;
+  inset-inline: 0;
+  top: calc(100% + 4px);
+  max-height: 18rem;
+  margin: 0;
+  padding: var(--space-1);
+  overflow-y: auto;
+  list-style: none;
+  background: var(--color-bg);
+  border: var(--border-1) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+.sugerencias[hidden] {
+  display: none;
+}
+.sugerencias [role='option'] {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--tap-min);
+  align-items: center;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.sugerencias [role='option']:hover {
+  background: var(--color-surface);
+}
+.sugerencias [role='option'][aria-selected='true'],
+.sugerencias [role='option'][aria-selected='true'] .sugerencia__dpto {
+  background: var(--route-f);
+  color: var(--on-route-f);
+}
+.sugerencia__dpto {
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+  text-align: end;
+}
+
+.intentos-municipio {
+  display: grid;
+  gap: var(--space-2);
+  width: min(100%, 26rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pista {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  min-height: 3.5rem;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-1) solid var(--color-border-strong);
+  border-left: 6px solid var(--route-f);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+.pista--vacia {
+  display: flex;
+  border-style: dashed;
+  border-left-width: 1px;
+  color: var(--color-fg-muted);
+  background: none;
+  box-shadow: none;
+  font-size: var(--text-sm);
+}
+.pista[data-acierto='true'] {
+  border-color: var(--ficha-correcta);
+  background: var(--ficha-correcta);
+  color: var(--tinta-correcta);
+}
+.pista__nombre {
+  display: grid;
+  min-width: 0;
+}
+.pista__nombre strong {
+  overflow-wrap: anywhere;
+}
+.pista__nombre span {
+  font-size: var(--text-sm);
+  opacity: 0.85;
+}
+.pista__datos {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-variant-numeric: tabular-nums;
+}
+.pista__km {
+  font-weight: var(--weight-bold);
+}
+.pista__dir {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+.pista__dir svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: var(--route-f);
+  transform: rotate(var(--giro, 0deg));
+}
+.pista__pct {
+  min-width: 3.5rem;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    var(--status-good-bg) var(--p, 0%),
+    var(--color-surface-2) var(--p, 0%)
+  );
+  border: var(--border-1) solid var(--color-border);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+.pista__acierto {
+  font-weight: var(--weight-bold);
+}
+.pista__dpto {
+  grid-column: 1 / -1;
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+}
+.pista__dpto[data-mismo='true'] {
+  color: var(--status-good);
+  font-weight: var(--weight-bold);
+}
+.estadisticas-modo {
+  margin: 0;
+  color: var(--color-fg-muted);
+  font-size: var(--text-sm);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pista--nueva {
+    animation: aparece 0.35s ease-out;
+  }
+  @keyframes aparece {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+}
+@media (max-width: 380px) {
+  .pista {
+    grid-template-columns: 1fr;
   }
 }

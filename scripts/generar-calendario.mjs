@@ -1,4 +1,4 @@
-// Agrega al final de data/contenido/calendario.json las palabras "listo" que
+// Agrega al final de data/contenido/calendario.json las palabras y municipios "listo" que
 // aún no están, mezcladas con una semilla fija (resultado reproducible).
 // Nunca reordena días ya publicados, para no cambiar retos pasados.
 //
@@ -47,7 +47,17 @@ for (const palabra of mezclar(nuevas, SEMILLA + calendario.dias.length)) {
   calendario.dias.push({ n: calendario.dias.length + 1, palabra });
 }
 
+// Municipios: lista aparte (su ciclo es independiente del de palabras).
+calendario.municipios ??= [];
+const usados = new Set(calendario.municipios);
+const nuevosMunicipios = leerJson('data/contenido/respuestas-municipio.json')
+  .filter((m) => m.estado === 'listo' && !usados.has(m.cod))
+  .map((m) => m.cod);
+calendario.municipios.push(
+  ...mezclar(nuevosMunicipios, SEMILLA + 7 + calendario.municipios.length),
+);
+
 escribirJson(RUTA, calendario);
 console.log(
-  `Calendario: ${calendario.dias.length} días desde ${calendario.inicio} (+${nuevas.length}).`,
+  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) y ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) desde ${calendario.inicio}.`,
 );

@@ -1,5 +1,7 @@
 // Valida el contenido del juego. Corre en CI: si algo está mal, sale con código 1.
-import { LARGOS, LETRAS, largo, leerJson, leerValidas, normalizar } from './lib.mjs';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { LARGOS, LETRAS, RAIZ, largo, leerJson, leerValidas, normalizar } from './lib.mjs';
 
 const errores = [];
 const avisos = [];
@@ -38,6 +40,46 @@ for (const [i, d] of calendario.dias.entries()) {
     errores.push(`calendario.json día ${d.n}: ${d.palabra} está pendiente`);
 }
 
+// ---------- Municipios ----------
+const RUTA_MUNICIPIOS = 'public/datos/municipios.json';
+const respuestasMunicipio = leerJson('data/contenido/respuestas-municipio.json');
+if (!existsSync(join(RAIZ, RUTA_MUNICIPIOS))) {
+  errores.push(
+    `Falta ${RUTA_MUNICIPIOS}: corre "npm run municipios" (necesita acceso a datos.gov.co).`,
+  );
+} else {
+  const datos = leerJson(RUTA_MUNICIPIOS);
+  const porCodigo = new Map(datos.municipios.map((m) => [m.cod, m]));
+  if (!String(datos.fuente).startsWith('DANE - DIVIPOLA')) {
+    errores.push(
+      `${RUTA_MUNICIPIOS}: la fuente debe ser DANE - DIVIPOLA (generado por npm run municipios)`,
+    );
+  }
+  if (datos.municipios.length < 1000) {
+    errores.push(`${RUTA_MUNICIPIOS}: solo tiene ${datos.municipios.length} municipios`);
+  }
+  if (!(datos.distanciaMaxKm > 0)) errores.push(`${RUTA_MUNICIPIOS}: falta distanciaMaxKm`);
+  const codigos = new Set();
+  for (const [i, r] of respuestasMunicipio.entries()) {
+    const donde = `respuestas-municipio.json[${i}] (${r.cod})`;
+    const m = porCodigo.get(r.cod);
+    if (!m) errores.push(`${donde}: no existe en DIVIPOLA`);
+    else if (m.tipo === 'Área no municipalizada')
+      errores.push(`${donde}: es un área no municipalizada`);
+    if (!['listo', 'pendiente'].includes(r.estado)) errores.push(`${donde}: estado inválido`);
+    if (codigos.has(r.cod)) errores.push(`${donde}: repetido`);
+    codigos.add(r.cod);
+  }
+  for (const cod of calendario.municipios ?? []) {
+    const r = respuestasMunicipio.find((x) => x.cod === cod);
+    if (!r)
+      errores.push(`calendario.json: el municipio ${cod} no está en respuestas-municipio.json`);
+    else if (r.estado !== 'listo')
+      errores.push(`calendario.json: el municipio ${cod} está pendiente`);
+  }
+}
+if (!(calendario.municipios ?? []).length) errores.push('calendario.json: no tiene municipios');
+
 for (const n of LARGOS) {
   const v = leerValidas(n);
   for (const p of v) {
@@ -58,4 +100,6 @@ if (errores.length) {
   for (const e of errores) console.error(`Error: ${e}`);
   process.exit(1);
 }
-console.log(`Contenido válido: ${respuestas.length} respuestas, ${calendario.dias.length} días.`);
+console.log(
+  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días y ${(calendario.municipios ?? []).length} municipios.`,
+);

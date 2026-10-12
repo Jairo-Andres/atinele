@@ -6,20 +6,20 @@ Estimación: unos 5 días de trabajo efectivo para la versión 1 (suposición, d
 
 Ver [Decisiones pendientes](#decisiones-pendientes).
 
-## Fase 1 · Base y modo Palabra
+## Fase 1 · Base y modo Palabra (hecha 2026-10-11)
 
-- [ ] Crear el proyecto Vite + TS en `C:\Users\Acer\Documents\Proyectos Programacion\atinele` con ESLint, Prettier, Vitest y Playwright.
-- [ ] Copiar `tokens.css`, `components.css`, favicons y logos sin modificar.
-- [ ] `normalizar`, `evaluar`, `dia`, `calendario`, `compartir`, `estadisticas`, `almacen` con sus pruebas.
-- [ ] Script `generar-validas` (lista es_CO) tras confirmar la licencia de RLA-ES.
-- [ ] Tablero, teclado en pantalla y físico, diálogo de resultado, compartir.
-- [ ] Primeras 30 palabras respuesta para probar (luego hasta 365).
+- [x] Crear el proyecto Vite + TS en `C:\Users\Acer\Documents\Proyectos Programacion\atinele` con ESLint, Prettier, Vitest y Playwright.
+- [x] Copiar `tokens.css`, `components.css`, favicons y logos sin modificar.
+- [x] `normalizar`, `evaluar`, `dia`, `calendario`, `compartir`, `estadisticas`, `almacen` con sus pruebas.
+- [x] Script `generar-validas` (lista es_CO) tras confirmar la licencia de RLA-ES.
+- [x] Tablero, teclado en pantalla y físico, diálogo de resultado, compartir.
+- [x] Primeras 30 palabras respuesta para probar (luego hasta 365).
 
-## Fase 2 · Modo Municipio
+## Fase 2 · Modo Municipio (hecha 2026-10-12)
 
-- [ ] Script `descargar-divipola` (corre en el PC de Jairo o en Actions) y `municipios.json`.
-- [ ] `geo` con pruebas, autocompletado accesible, filas de pistas.
-- [ ] `respuestas-municipio.json` con capitales (códigos tomados de DIVIPOLA).
+- [x] Script `descargar-divipola` (corre en el PC de Jairo o en Actions) y `municipios.json`.
+- [x] `geo` con pruebas, autocompletado accesible, filas de pistas.
+- [x] `respuestas-municipio.json` con capitales (códigos tomados de DIVIPOLA). Ojo: 25001 es Agua de Dios, no la capital de Cundinamarca; Bogotá (11001) la reemplaza.
 
 ## Fase 3 · Modo Dicho y contenido
 

@@ -37,3 +37,34 @@ export function leerValidas(n) {
       .filter(Boolean),
   );
 }
+
+const MINUSCULAS = new Set(['de', 'del', 'la', 'las', 'el', 'los', 'y', 'e', 'en']);
+
+/**
+ * DIVIPOLA publica los nombres en mayúsculas (con tildes). Los pasa a tipo
+ * título para mostrarlos: "CARTAGENA DE INDIAS" → "Cartagena de Indias".
+ * Las abreviaturas con punto (D.C.) se dejan en mayúsculas.
+ */
+export function tipoTitulo(texto) {
+  return texto
+    .trim()
+    .toLocaleLowerCase('es-CO')
+    .split(/(\s+|-|\()/)
+    .map((parte, i) => {
+      if (/^\s+$|^-$|^\($/.test(parte) || parte === '') return parte;
+      if (parte.includes('.')) return parte.toLocaleUpperCase('es-CO');
+      if (i > 0 && MINUSCULAS.has(parte)) return parte;
+      return parte.charAt(0).toLocaleUpperCase('es-CO') + parte.slice(1);
+    })
+    .join('');
+}
+
+/** Distancia en km (haversine, radio 6371 km). Igual que src/juego/geo.ts. */
+export function distanciaKm(a, b) {
+  const rad = (g) => (g * Math.PI) / 180;
+  const dLat = rad(b.lat - a.lat);
+  const dLon = rad(b.lon - a.lon);
+  const h =
+    Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h)));
+}

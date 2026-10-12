@@ -15,9 +15,11 @@ import {
 } from './config';
 import { idiomaInicial, t, traducirDocumento, usarIdioma, idioma, type Idioma } from './i18n';
 import { retoDelDia, type Calendario } from './juego/calendario';
-import { enlaceWhatsApp, textoCompartir } from './juego/compartir';
+import { enlaceWhatsApp, textoCompartir, textoConFilas } from './juego/compartir';
 import { formatoCuentaRegresiva, hoyEnColombia, msHastaManana } from './juego/dia';
 import { porcentajeVictorias, rachaVigente, registrarPartida } from './juego/estadisticas';
+import type { DatosMunicipios } from './juego/municipios';
+import { JuegoMunicipio } from './modos/municipio';
 import { JuegoPalabra } from './modos/palabra';
 import { avisar } from './ui/aviso';
 import { abrirDialogo, hayDialogoAbierto, iniciarDialogos } from './ui/dialogos';
@@ -34,9 +36,11 @@ usarIdioma(idiomaInicial(datos.ajustes.idioma, navigator.language));
 /** El calendario guarda la forma con tildes (ÁRBOL) para mostrarla al final. */
 const formaVisible = reto.palabra;
 
-function partidaDeHoy(): Partida {
+type IdModo = 'palabra' | 'municipio';
+
+function partidaDeHoy(modo: IdModo = 'palabra'): Partida {
   const dia = (datos.partidas[hoy] ??= {});
-  return (dia.palabra ??= { intentos: [], estado: 'jugando' });
+  return (dia[modo] ??= { intentos: [], estado: 'jugando' });
 }
 
 function guardarDatos(): void {
@@ -58,10 +62,32 @@ async function cargarValidas(): Promise<Set<string>> {
   return new Set((await r.text()).split('\n').filter(Boolean));
 }
 
+async function cargarMunicipios(): Promise<DatosMunicipios> {
+  const r = await fetch(`${import.meta.env.BASE_URL}datos/municipios.json`);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return (await r.json()) as DatosMunicipios;
+}
+
 // ---------- Estadísticas y resultado ----------
 let juego: JuegoPalabra;
+let juegoMunicipio: JuegoMunicipio | null = null;
+/** Modo cuyas estadísticas muestra el diálogo. */
+let modoEstadisticas: IdModo = 'palabra';
 
 function textoResultado(): string {
+  if (modoEstadisticas === 'municipio' && juegoMunicipio) {
+    const p = partidaDeHoy('municipio');
+    return textoConFilas({
+      nombre: NOMBRE,
+      numero: reto.numero,
+      icono: '📍',
+      etiquetaModo: 'Municipio',
+      filas: juegoMunicipio.filasCompartir(datos.ajustes.altoContraste),
+      ganado: p.estado === 'ganada',
+      maxIntentos: MAX_INTENTOS,
+      url: URL_PUBLICA,
+    });
+  }
   const p = partidaDeHoy();
   return textoCompartir({
     nombre: NOMBRE,
@@ -76,9 +102,13 @@ function textoResultado(): string {
 }
 
 function pintarEstadisticas(): void {
-  const e = datos.estadisticas.palabra;
-  const p = partidaDeHoy();
+  const modo = modoEstadisticas;
+  const e = datos.estadisticas[modo];
+  const p = partidaDeHoy(modo);
   const terminado = p.estado !== 'jugando';
+  $('estadisticas-modo').textContent = t('statsDe', {
+    modo: t(modo === 'palabra' ? 'modoPalabra' : 'modoMunicipio'),
+  });
 
   const numeros: [string, number][] = [
     [t('jugadas'), e.jugadas],
@@ -122,7 +152,9 @@ function pintarEstadisticas(): void {
   $('compartir').hidden = !terminado;
   if (terminado) {
     $('resultado-titulo').textContent = p.estado === 'ganada' ? t('ganaste') : t('perdiste');
-    $('resultado-palabra').textContent = formaVisible;
+    $('resultado-etiqueta').textContent = t(modo === 'palabra' ? 'laRespuesta' : 'elMunicipio');
+    $('resultado-palabra').textContent =
+      modo === 'palabra' ? formaVisible : (juegoMunicipio?.respuestaVisible() ?? '');
     $<HTMLAnchorElement>('btn-whatsapp').href = enlaceWhatsApp(textoResultado());
   }
 }
@@ -174,7 +206,12 @@ function iniciarPestanas(): void {
       $(otra.getAttribute('aria-controls') as string).hidden = !activa;
     }
     if (enfocar) tab.focus();
+    const id = tab.id.replace('tab-', '');
+    if (id === 'palabra' || id === 'municipio') modoEstadisticas = id;
+    history.replaceState(null, '', id === 'palabra' ? location.pathname : `#${id}`);
   };
+  const inicial = tabs.find((tab) => `#${tab.id.replace('tab-', '')}` === location.hash);
+  if (inicial) activar(inicial, false);
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => activar(tab, false));
     tab.addEventListener('keydown', (e) => {
@@ -190,6 +227,31 @@ function palabraActiva(): boolean {
   return !$('panel-palabra').hidden;
 }
 
+function alCambiar(modo: IdModo, p: Partida): void {
+  if (p.estado !== 'jugando') {
+    datos.estadisticas[modo] = registrarPartida(
+      datos.estadisticas[modo],
+      hoy,
+      p.estado === 'ganada',
+      p.intentos.length,
+    );
+    marcarPestanas();
+  }
+  guardarDatos();
+}
+
+function mostrarEstadisticas(modo: IdModo): void {
+  modoEstadisticas = modo;
+  abrirDialogo('dlg-estadisticas');
+}
+
+/** Marca con ✓ las pestañas de los modos ya terminados hoy. */
+function marcarPestanas(): void {
+  for (const modo of ['palabra', 'municipio'] as const) {
+    $(`tab-${modo}`).classList.toggle('jugado', partidaDeHoy(modo).estado !== 'jugando');
+  }
+}
+
 // ---------- Arranque ----------
 function iniciar(): void {
   aplicarAjustes();
@@ -200,6 +262,7 @@ function iniciar(): void {
   $<HTMLAnchorElement>('enlace-linkedin').href = URL_LINKEDIN;
   iniciarDialogos();
   iniciarPestanas();
+  marcarPestanas();
 
   juego = new JuegoPalabra({
     respuesta: reto.palabra,
@@ -209,21 +272,28 @@ function iniciar(): void {
     tablero: $('tablero'),
     teclado: $('teclado'),
     validas: cargarValidas(),
-    alCambiar: (p) => {
-      if (p.estado !== 'jugando') {
-        datos.estadisticas.palabra = registrarPartida(
-          datos.estadisticas.palabra,
-          hoy,
-          p.estado === 'ganada',
-          p.intentos.length,
-        );
-      }
-      guardarDatos();
-    },
+    alCambiar: (p) => alCambiar('palabra', p),
     alTerminar: (_p, animado) => {
-      if (animado) abrirDialogo('dlg-estadisticas');
+      if (animado) mostrarEstadisticas('palabra');
     },
   });
+
+  if (reto.municipio) {
+    juegoMunicipio = new JuegoMunicipio({
+      codigoRespuesta: reto.municipio,
+      maxIntentos: MAX_INTENTOS,
+      partida: partidaDeHoy('municipio'),
+      datos: cargarMunicipios(),
+      form: $<HTMLFormElement>('form-municipio'),
+      entrada: $<HTMLInputElement>('entrada-municipio'),
+      sugerencias: $<HTMLUListElement>('sugerencias-municipio'),
+      lista: $<HTMLOListElement>('intentos-municipio'),
+      alCambiar: (p) => alCambiar('municipio', p),
+      alTerminar: (_p, animado) => {
+        if (animado) window.setTimeout(() => mostrarEstadisticas('municipio'), 600);
+      },
+    });
+  }
 
   // Teclado físico.
   document.addEventListener('keydown', (e) => {
@@ -242,6 +312,13 @@ function iniciar(): void {
     e.preventDefault();
   });
 
+  document.querySelector('[data-abrir="dlg-estadisticas"]')?.addEventListener(
+    'click',
+    () => {
+      modoEstadisticas = $('panel-municipio').hidden ? 'palabra' : 'municipio';
+    },
+    { capture: true },
+  );
   $('dlg-estadisticas').addEventListener('abierto', () => {
     $('copia-manual').hidden = true;
     pintarEstadisticas();
@@ -282,6 +359,7 @@ function iniciar(): void {
     traducirDocumento();
     $('numero-reto').textContent = `· ${t('reto', { n: reto.numero })}`;
     juego.retraducir();
+    juegoMunicipio?.retraducir();
   });
 
   // Si el día cambia con la página abierta, recargar al volver.
