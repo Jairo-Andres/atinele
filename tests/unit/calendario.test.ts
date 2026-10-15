@@ -17,12 +17,14 @@ describe('retoDelDia', () => {
       numero: 1,
       palabra: 'PERRO',
       municipio: null,
+      dicho: null,
       repetido: false,
     });
     expect(retoDelDia(cal, '2026-10-13')).toEqual({
       numero: 2,
       palabra: 'SUEÑO',
       municipio: null,
+      dicho: null,
       repetido: false,
     });
   });
@@ -32,6 +34,7 @@ describe('retoDelDia', () => {
       numero: 3,
       palabra: 'PERRO',
       municipio: null,
+      dicho: null,
       repetido: true,
     });
   });
@@ -43,6 +46,21 @@ describe('retoDelDia', () => {
     expect(retoDelDia(conMunicipios, '2026-10-15').municipio).toBe('05001');
   });
 
+  it('el dicho tiene su propio ciclo', () => {
+    const dicho = (id: string) => ({
+      id,
+      texto: 'Al que madruga, Dios le ayuda',
+      oculta: 'madruga',
+      significado: { es: 'x', en: 'x' },
+      pista: { es: 'x', en: 'x' },
+      fuente: { nombre: 'x', url: 'https://x' },
+    });
+    const conDichos = { ...cal, dichos: [dicho('d001'), dicho('d002'), dicho('d003')] };
+    expect(retoDelDia(conDichos, '2026-10-12').dicho?.id).toBe('d001');
+    expect(retoDelDia(conDichos, '2026-10-14').dicho?.id).toBe('d003');
+    expect(retoDelDia(conDichos, '2026-10-15').dicho?.id).toBe('d001');
+  });
+
   it('falla con calendario vacío', () => {
     expect(() => retoDelDia({ inicio: '2026-10-12', dias: [] }, '2026-10-12')).toThrow();
   });
@@ -51,6 +69,7 @@ describe('retoDelDia', () => {
     const real = calendarioReal as Calendario;
     expect(real.dias.length).toBeGreaterThan(0);
     expect(retoDelDia(real, real.inicio).numero).toBe(1);
+    expect(retoDelDia(real, real.inicio).dicho).not.toBeNull();
   });
 });
 

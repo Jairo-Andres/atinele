@@ -51,6 +51,15 @@ its DIVIPOLA code. A reference drawing, not an official boundary.
 Lista propia de códigos DIVIPOLA (capitales de departamento y Bogotá).
 Own list of DIVIPOLA codes (department capitals and Bogotá).
 
-## Próxima fase / Next phase
+## data/contenido/dichos.json
 
-- Dichos: lista propia con fuente por dicho.
+**ES** · Los dichos son de tradición oral colombiana. Cada uno se copió tal como
+aparece en la publicación que cita en `fuente` (nombre y enlace) y se revisó contra
+ella el 2026-10-15. Los títulos de la guía del Instituto Caro y Cuervo se pasaron a
+masculino ("amarrado", "cabra", "cuadros"). Los significados y las pistas, en
+español e inglés, son textos propios del proyecto (MIT), no copias de las fuentes.
+
+**EN** · Sayings belong to Colombian oral tradition. Each one is copied as it
+appears in the publication cited in `fuente` and was checked against it on
+2026-10-15. Meanings and hints (Spanish and English) are the project's own text
+(MIT), not copied from the sources.

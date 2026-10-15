@@ -1,3 +1,4 @@
+import type { Dicho } from './dichos';
 import { numeroReto } from './dia';
 
 export interface DiaCalendario {
@@ -10,6 +11,8 @@ export interface Calendario {
   dias: DiaCalendario[];
   /** Códigos DIVIPOLA en orden; su ciclo es independiente del de palabras. */
   municipios?: string[];
+  /** Dichos completos en orden (van ofuscados con el calendario); ciclo propio. */
+  dichos?: Dicho[];
 }
 
 export interface RetoDelDia {
@@ -17,6 +20,8 @@ export interface RetoDelDia {
   palabra: string;
   /** Código DIVIPOLA del municipio del día, si el calendario tiene municipios. */
   municipio: string | null;
+  /** Dicho del día, si el calendario tiene dichos. */
+  dicho: Dicho | null;
   /** true si el calendario se acabó y se está repitiendo el ciclo. */
   repetido: boolean;
 }
@@ -30,5 +35,13 @@ export function retoDelDia(calendario: Calendario, hoy: string): RetoDelDia {
   const municipio = municipios.length
     ? (municipios[(numero - 1) % municipios.length] as string)
     : null;
-  return { numero, palabra: dia.palabra, municipio, repetido: numero > calendario.dias.length };
+  const dichos = calendario.dichos ?? [];
+  const dicho = dichos.length ? (dichos[(numero - 1) % dichos.length] as Dicho) : null;
+  return {
+    numero,
+    palabra: dia.palabra,
+    municipio,
+    dicho,
+    repetido: numero > calendario.dias.length,
+  };
 }

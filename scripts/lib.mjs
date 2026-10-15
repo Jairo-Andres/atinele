@@ -83,3 +83,17 @@ export function dentro(lat, lon, anillos) {
   }
   return adentro;
 }
+
+/** true si la palabra aparece completa en el texto (sin importar mayúsculas). Igual a partesDicho. */
+export function contienePalabra(texto, palabra) {
+  const t = texto.toLocaleLowerCase('es-CO');
+  const p = palabra.toLocaleLowerCase('es-CO');
+  if (!p) return false;
+  const letra = /[\p{L}\p{M}]/u;
+  for (let i = t.indexOf(p); i >= 0; i = t.indexOf(p, i + 1)) {
+    const a = texto[i - 1];
+    const d = texto[i + p.length];
+    if ((a === undefined || !letra.test(a)) && (d === undefined || !letra.test(d))) return true;
+  }
+  return false;
+}

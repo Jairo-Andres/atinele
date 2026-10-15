@@ -1,4 +1,4 @@
-// Agrega al final de data/contenido/calendario.json las palabras y municipios "listo" que
+// Agrega al final de data/contenido/calendario.json las palabras, municipios y dichos "listo" que
 // aún no están, mezcladas con una semilla fija (resultado reproducible).
 // Nunca reordena días ya publicados, para no cambiar retos pasados.
 //
@@ -57,7 +57,28 @@ calendario.municipios.push(
   ...mezclar(nuevosMunicipios, SEMILLA + 7 + calendario.municipios.length),
 );
 
+// Dichos: van completos (texto, significado, pista y fuente) para que el sitio no
+// necesite otro archivo y queden ofuscados con el calendario. Los que ya están se
+// actualizan con el contenido de dichos.json sin cambiar su orden.
+calendario.dichos ??= [];
+const dichos = leerJson('data/contenido/dichos.json');
+const porId = new Map(dichos.map((d) => [d.id, d]));
+const publico = ({ id, texto, oculta, significado, pista, fuente }) => ({
+  id,
+  texto,
+  oculta,
+  significado,
+  pista,
+  fuente,
+});
+calendario.dichos = calendario.dichos.map((d) => (porId.has(d.id) ? publico(porId.get(d.id)) : d));
+const usadosDichos = new Set(calendario.dichos.map((d) => d.id));
+const nuevosDichos = dichos.filter((d) => d.estado === 'listo' && !usadosDichos.has(d.id));
+calendario.dichos.push(
+  ...mezclar(nuevosDichos, SEMILLA + 13 + calendario.dichos.length).map(publico),
+);
+
 escribirJson(RUTA, calendario);
 console.log(
-  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) y ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) desde ${calendario.inicio}.`,
+  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) y ${calendario.dichos.length} dichos (+${nuevosDichos.length}) desde ${calendario.inicio}.`,
 );

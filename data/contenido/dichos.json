@@ -1,0 +1,632 @@
+[
+  {
+    "id": "d001",
+    "texto": "Con hambre, no hay pan duro",
+    "oculta": "hambre",
+    "significado": {
+      "es": "Cuando de verdad se necesita algo, uno no se pone exigente y acepta lo que hay.",
+      "en": "When you really need something, you stop being picky and take what you can get."
+    },
+    "pista": {
+      "es": "Habla de comida y de necesidad.",
+      "en": "It is about food and need."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d002",
+    "texto": "Mugre que no mata, engorda",
+    "oculta": "engorda",
+    "significado": {
+      "es": "Se dice, medio en broma, para no preocuparse por un poco de suciedad en la comida o en las manos.",
+      "en": "Said half-jokingly so as not to worry about a little dirt on food or hands."
+    },
+    "pista": {
+      "es": "Algo que no hace daño, al contrario…",
+      "en": "Something that does no harm, on the contrary…"
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d003",
+    "texto": "Tengo un filo, que si me agacho me corto",
+    "oculta": "filo",
+    "significado": {
+      "es": "Exageración para decir que se tiene muchísima hambre. En Colombia, «tener filo» es tener hambre.",
+      "en": "An exaggeration for being extremely hungry. In Colombia, «tener filo» means being hungry."
+    },
+    "pista": {
+      "es": "En Colombia esta palabra también significa «hambre».",
+      "en": "In Colombia this word also means «hunger»."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d004",
+    "texto": "El que tiene tienda que la atienda",
+    "oculta": "tienda",
+    "significado": {
+      "es": "Cada quien debe ocuparse de lo suyo; si uno descuida lo que tiene, puede perderlo.",
+      "en": "Everyone should look after their own business; if you neglect what you have, you may lose it."
+    },
+    "pista": {
+      "es": "Un negocio de barrio.",
+      "en": "A neighborhood business."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d005",
+    "texto": "De eso tan bueno no dan tanto",
+    "oculta": "bueno",
+    "significado": {
+      "es": "Cuando algo parece demasiado bueno para ser verdad, conviene desconfiar.",
+      "en": "When something looks too good to be true, it is wise to be suspicious."
+    },
+    "pista": {
+      "es": "Desconfía de las ofertas increíbles.",
+      "en": "Be wary of amazing deals."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d006",
+    "texto": "Cuentas claras y el chocolate espeso",
+    "oculta": "espeso",
+    "significado": {
+      "es": "Las cosas, sobre todo el dinero y los acuerdos, deben quedar claras desde el principio.",
+      "en": "Things, especially money and agreements, should be clear from the start."
+    },
+    "pista": {
+      "es": "Así se prefiere el chocolate en taza.",
+      "en": "How hot chocolate is preferred."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d007",
+    "texto": "El que nace pa tamal, del cielo le caen las hojas",
+    "oculta": "tamal",
+    "significado": {
+      "es": "Lo que a uno le toca en la vida termina llegando, como si estuviera escrito.",
+      "en": "What is meant for you will find its way to you, as if it were destined."
+    },
+    "pista": {
+      "es": "Un plato envuelto en hojas.",
+      "en": "A dish wrapped in leaves."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d008",
+    "texto": "Le falta pelo pa' moña",
+    "oculta": "moña",
+    "significado": {
+      "es": "A alguien todavía le falta experiencia o capacidad para lo que quiere hacer.",
+      "en": "Someone still lacks the experience or skill for what they want to do."
+    },
+    "pista": {
+      "es": "Un peinado que necesita pelo largo.",
+      "en": "A hairstyle that needs long hair."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d009",
+    "texto": "Al que le van a dar, le guardan",
+    "oculta": "guardan",
+    "significado": {
+      "es": "Lo que a uno le corresponde, tarde o temprano le llega, aunque se demore.",
+      "en": "What is yours will come to you sooner or later, even if it takes a while."
+    },
+    "pista": {
+      "es": "Algo que se reserva para alguien.",
+      "en": "Something kept aside for someone."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d010",
+    "texto": "¡Serán guayabas!",
+    "oculta": "guayabas",
+    "significado": {
+      "es": "Expresión de incredulidad o burla ante algo que no parece cierto.",
+      "en": "An expression of disbelief or mockery at something that does not seem true."
+    },
+    "pista": {
+      "es": "Una fruta tropical, en plural.",
+      "en": "A tropical fruit, plural."
+    },
+    "fuente": {
+      "nombre": "Señal Colombia (RTVC), «Dichos colombianos: 10 frases típicas de Colombia», David Jáuregui Sarmiento, 17/07/2024",
+      "url": "https://www.senalcolombia.tv/cultura/dichos-colombianos-frases-tipicas"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d011",
+    "texto": "Le cuento el milagro, pero no el santo",
+    "oculta": "milagro",
+    "significado": {
+      "es": "Se cuenta lo que pasó, pero sin decir quién fue el protagonista.",
+      "en": "You tell what happened but not who was involved."
+    },
+    "pista": {
+      "es": "Lo que hace un santo.",
+      "en": "What a saint does."
+    },
+    "fuente": {
+      "nombre": "Radio Nacional de Colombia (RTVC), «Dichos colombianos: expresiones que hacen parte de nuestra identidad», 22/09/2026",
+      "url": "https://www.radionacional.co/cultura/dichos-colombianos-que-reflejan-nuestra-identidad-cultural"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d012",
+    "texto": "No me abra los ojos que no le voy a echar gotas",
+    "oculta": "gotas",
+    "significado": {
+      "es": "Respuesta en broma a quien mira con ojos grandes, sorprendido o pidiendo algo.",
+      "en": "A joking reply to someone staring wide-eyed, surprised or asking for something."
+    },
+    "pista": {
+      "es": "Lo que se echa en los ojos irritados.",
+      "en": "What you put in irritated eyes."
+    },
+    "fuente": {
+      "nombre": "Radio Nacional de Colombia (RTVC), «Dichos colombianos: expresiones que hacen parte de nuestra identidad», 22/09/2026",
+      "url": "https://www.radionacional.co/cultura/dichos-colombianos-que-reflejan-nuestra-identidad-cultural"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d013",
+    "texto": "¿Usted qué come que adivina?",
+    "oculta": "adivina",
+    "significado": {
+      "es": "Se le dice a quien acierta lo que uno estaba pensando o a punto de decir.",
+      "en": "Said to someone who guesses exactly what you were thinking or about to say."
+    },
+    "pista": {
+      "es": "Lo mismo que haces en este juego.",
+      "en": "The same thing you do in this game."
+    },
+    "fuente": {
+      "nombre": "Radio Nacional de Colombia (RTVC), «Dichos colombianos: expresiones que hacen parte de nuestra identidad», 22/09/2026",
+      "url": "https://www.radionacional.co/cultura/dichos-colombianos-que-reflejan-nuestra-identidad-cultural"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d014",
+    "texto": "Camarón que se duerme se lo lleva la corriente",
+    "oculta": "camarón",
+    "significado": {
+      "es": "El que se descuida o no actúa a tiempo pierde la oportunidad.",
+      "en": "If you are careless or slow to act, you miss the opportunity."
+    },
+    "pista": {
+      "es": "Un animal pequeño del mar o del río.",
+      "en": "A small sea or river animal."
+    },
+    "fuente": {
+      "nombre": "Noticias Caracol, «Estas son las frases típicas más usadas por los colombianos: ¿conoce alguna?», Danna Sofía Suárez Galeano",
+      "url": "https://www.noticiascaracol.com/colombia/conozca-cuales-son-las-frases-tipicas-mas-usadas-por-los-colombianos-so35"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d015",
+    "texto": "Duerme más que una pata hinchada",
+    "oculta": "hinchada",
+    "significado": {
+      "es": "Se dice de alguien que duerme muchísimo.",
+      "en": "Said of someone who sleeps a lot."
+    },
+    "pista": {
+      "es": "Como queda una parte del cuerpo después de un golpe.",
+      "en": "How a body part looks after a bump."
+    },
+    "fuente": {
+      "nombre": "Noticias Caracol, «Estas son las frases típicas más usadas por los colombianos: ¿conoce alguna?», Danna Sofía Suárez Galeano",
+      "url": "https://www.noticiascaracol.com/colombia/conozca-cuales-son-las-frases-tipicas-mas-usadas-por-los-colombianos-so35"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d016",
+    "texto": "Son como uña y mugre",
+    "oculta": "mugre",
+    "significado": {
+      "es": "Dos personas que son inseparables y siempre andan juntas.",
+      "en": "Two people who are inseparable and always together."
+    },
+    "pista": {
+      "es": "Lo que se acumula debajo de las uñas.",
+      "en": "What builds up under fingernails."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d017",
+    "texto": "Durmió conmigo anoche o qué, que ya no saluda",
+    "oculta": "saluda",
+    "significado": {
+      "es": "Reclamo en broma a quien llega y no dice hola.",
+      "en": "A joking complaint to someone who arrives without saying hello."
+    },
+    "pista": {
+      "es": "Lo primero que se hace al llegar.",
+      "en": "The first thing you do when you arrive."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d018",
+    "texto": "Duerme más que un gato con anemia",
+    "oculta": "anemia",
+    "significado": {
+      "es": "Otra forma de decir que alguien duerme demasiado.",
+      "en": "Another way of saying someone sleeps far too much."
+    },
+    "pista": {
+      "es": "Una condición de la sangre que da cansancio.",
+      "en": "A blood condition that makes you tired."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d019",
+    "texto": "Es más feo que carro visto por debajo",
+    "oculta": "debajo",
+    "significado": {
+      "es": "Exageración en broma para decir que algo o alguien es muy feo.",
+      "en": "A jokey exaggeration for something or someone very ugly."
+    },
+    "pista": {
+      "es": "El lado de un carro que casi nadie mira.",
+      "en": "The side of a car hardly anyone looks at."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d020",
+    "texto": "Colgar los guayos",
+    "oculta": "guayos",
+    "significado": {
+      "es": "Retirarse de una actividad, sobre todo del fútbol o del trabajo.",
+      "en": "To retire from an activity, especially football or work."
+    },
+    "pista": {
+      "es": "Los zapatos de los futbolistas.",
+      "en": "Football players' shoes."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d021",
+    "texto": "¡Se nos creció el enano!",
+    "oculta": "enano",
+    "significado": {
+      "es": "Cuando algo pequeño o fácil se vuelve un problema más grande de lo esperado.",
+      "en": "When something small or easy turns into a bigger problem than expected."
+    },
+    "pista": {
+      "es": "Alguien de baja estatura en los cuentos.",
+      "en": "A short character from fairy tales."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d022",
+    "texto": "Habla hasta por los codos",
+    "oculta": "codos",
+    "significado": {
+      "es": "Se dice de alguien que habla muchísimo.",
+      "en": "Said of someone who talks a great deal."
+    },
+    "pista": {
+      "es": "Una parte del brazo.",
+      "en": "A part of the arm."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d023",
+    "texto": "Dios le da pan al que no tiene dientes",
+    "oculta": "dientes",
+    "significado": {
+      "es": "A veces las oportunidades le llegan a quien no las puede o no las sabe aprovechar.",
+      "en": "Sometimes opportunities go to people who cannot or do not know how to use them."
+    },
+    "pista": {
+      "es": "Lo que se necesita para morder.",
+      "en": "What you need to bite."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d024",
+    "texto": "El vivo vive del bobo",
+    "oculta": "bobo",
+    "significado": {
+      "es": "El que es avispado se aprovecha del que es ingenuo.",
+      "en": "The sharp one takes advantage of the naive one."
+    },
+    "pista": {
+      "es": "Lo contrario de vivo.",
+      "en": "The opposite of sharp."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d025",
+    "texto": "A caballo regalado no se le mira el colmillo",
+    "oculta": "colmillo",
+    "significado": {
+      "es": "Un regalo se agradece sin ponerle defectos.",
+      "en": "A gift should be appreciated without looking for faults."
+    },
+    "pista": {
+      "es": "Un diente puntiagudo.",
+      "en": "A pointed tooth."
+    },
+    "fuente": {
+      "nombre": "Portafolio, «¿Las utiliza? Las frases que todo colombiano debe conocer», Agostina Olguin, 24/02/2025",
+      "url": "https://www.portafolio.co/tendencias/las-utiliza-las-frases-que-todo-colombiano-debe-conocer-624511"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d026",
+    "texto": "Gato escaldado, del agua fría huye",
+    "oculta": "gato",
+    "significado": {
+      "es": "Quien ya tuvo una mala experiencia se vuelve precavido, incluso con lo que no hace daño.",
+      "en": "Someone who had a bad experience becomes cautious, even of harmless things."
+    },
+    "pista": {
+      "es": "Un animal doméstico que no quiere bañarse.",
+      "en": "A pet that hates baths."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d027",
+    "texto": "Hay que hacer de tripas corazón",
+    "oculta": "tripas",
+    "significado": {
+      "es": "Sacar fuerzas y valor para enfrentar algo difícil o desagradable.",
+      "en": "To summon strength and courage to face something hard or unpleasant."
+    },
+    "pista": {
+      "es": "Algo que está dentro de la barriga.",
+      "en": "Something inside the belly."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d028",
+    "texto": "La fiebre no está en la sabana",
+    "oculta": "sabana",
+    "significado": {
+      "es": "El problema no está donde uno cree, sino en otra parte, a menudo en uno mismo.",
+      "en": "The problem is not where you think it is, but somewhere else, often in yourself."
+    },
+    "pista": {
+      "es": "Suena como la tela de la cama.",
+      "en": "Sounds like the cloth on a bed."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d029",
+    "texto": "De la mano a la boca, se pierde la sopa",
+    "oculta": "sopa",
+    "significado": {
+      "es": "Hasta el último momento algo seguro se puede dañar; no hay que confiarse.",
+      "en": "Even something certain can go wrong at the last moment; do not get overconfident."
+    },
+    "pista": {
+      "es": "Un plato que se come con cuchara.",
+      "en": "A dish eaten with a spoon."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d030",
+    "texto": "Febrero loco y marzo otro poco",
+    "oculta": "marzo",
+    "significado": {
+      "es": "Se usa para hablar del clima cambiante de esos meses.",
+      "en": "Used to talk about the changeable weather of those months."
+    },
+    "pista": {
+      "es": "Un mes del año.",
+      "en": "A month of the year."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d031",
+    "texto": "Caballo grande, ande o no ande",
+    "oculta": "grande",
+    "significado": {
+      "es": "Hay quien prefiere lo vistoso o lo grande aunque no sea lo más útil.",
+      "en": "Some people prefer what is big or showy even if it is not the most useful."
+    },
+    "pista": {
+      "es": "Lo contrario de pequeño.",
+      "en": "The opposite of small."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d032",
+    "texto": "El ladrón juzga por su condición",
+    "oculta": "ladrón",
+    "significado": {
+      "es": "Quien obra mal cree que todos los demás son como él.",
+      "en": "Those who do wrong believe everyone else is like them."
+    },
+    "pista": {
+      "es": "Alguien que roba.",
+      "en": "Someone who steals."
+    },
+    "fuente": {
+      "nombre": "La Kalle (Blu Radio), «Dichos y refranes populares de Colombia, ¿conoces el verdadero significado de estos 10?», 11/11/2021",
+      "url": "https://lakalle.bluradio.com/entretenimiento/ocio/dichos-y-refranes-populares-de-colombia-conoces-el-verdadero-significado-de-estos-10"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d033",
+    "texto": "Más amarrado que un tamal",
+    "oculta": "amarrado",
+    "significado": {
+      "es": "Se dice de alguien muy tacaño, que no suelta la plata.",
+      "en": "Said of someone very stingy who will not let go of their money."
+    },
+    "pista": {
+      "es": "Así va el tamal dentro de sus hojas: bien…",
+      "en": "How a tamal is tied in its leaves: tightly…"
+    },
+    "fuente": {
+      "nombre": "Instituto Caro y Cuervo (2024), «Más fresco/a que una lechuga. Propuesta didáctica para la enseñanza de comparaciones estereotipadas en la clase de ELE/L2» (título de una de sus guías; aquí en masculino)",
+      "url": "https://spanishincolombia.caroycuervo.gov.co/documentos/pdf/Mas_fresco_a%20que_una_lechuga.pdf"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d034",
+    "texto": "Más loco que una cabra",
+    "oculta": "cabra",
+    "significado": {
+      "es": "Se dice de alguien muy alocado o imprevisible.",
+      "en": "Said of someone wild or unpredictable."
+    },
+    "pista": {
+      "es": "Un animal que trepa montañas.",
+      "en": "An animal that climbs mountains."
+    },
+    "fuente": {
+      "nombre": "Instituto Caro y Cuervo (2024), «Más fresco/a que una lechuga. Propuesta didáctica para la enseñanza de comparaciones estereotipadas en la clase de ELE/L2» (título de una de sus guías; aquí en masculino)",
+      "url": "https://spanishincolombia.caroycuervo.gov.co/documentos/pdf/Mas_fresco_a%20que_una_lechuga.pdf"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "d035",
+    "texto": "Más raro que un perro a cuadros",
+    "oculta": "cuadros",
+    "significado": {
+      "es": "Algo o alguien muy extraño, fuera de lo común.",
+      "en": "Something or someone very strange, out of the ordinary."
+    },
+    "pista": {
+      "es": "Un estampado de tela, como el de una camisa de leñador.",
+      "en": "A fabric pattern, like a lumberjack shirt."
+    },
+    "fuente": {
+      "nombre": "Instituto Caro y Cuervo (2024), «Más fresco/a que una lechuga. Propuesta didáctica para la enseñanza de comparaciones estereotipadas en la clase de ELE/L2» (título de una de sus guías; aquí en masculino)",
+      "url": "https://spanishincolombia.caroycuervo.gov.co/documentos/pdf/Mas_fresco_a%20que_una_lechuga.pdf"
+    },
+    "estado": "listo"
+  }
+]
