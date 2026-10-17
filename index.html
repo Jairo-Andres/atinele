@@ -115,7 +115,6 @@
         type="button"
       >
         <span data-i18n="modoDicho">Dicho</span>
-        <span class="pronto" data-i18n="prontoCorto">Pronto</span>
       </button>
     </div>
 
@@ -187,15 +186,30 @@
           data-i18n-aria="intentosMunicipio"
         ></ol>
       </section>
-      <section
-        id="panel-dicho"
-        role="tabpanel"
-        aria-labelledby="tab-dicho"
-        class="panel panel--pronto"
-        hidden
-      >
-        <p class="ja-label" data-i18n="pronto">Próximamente</p>
-        <p data-i18n="prontoDicho"></p>
+      <section id="panel-dicho" role="tabpanel" aria-labelledby="tab-dicho" class="panel" hidden>
+        <figure class="dicho">
+          <blockquote id="dicho-texto" class="dicho__texto"></blockquote>
+          <figcaption id="dicho-fuente" class="dicho__fuente" hidden>
+            <span data-i18n="fuente">Fuente</span>:
+            <a target="_blank" rel="noopener"></a>
+          </figcaption>
+        </figure>
+        <p class="dicho__instruccion texto-suave" data-i18n="instruccionDicho"></p>
+        <button type="button" id="btn-pista" class="ja-btn" data-i18n="verPista" hidden>
+          Ver pista
+        </button>
+        <p id="dicho-pista" class="dicho__pista" tabindex="-1" hidden></p>
+        <div
+          id="tablero-dicho"
+          class="tablero tablero--dicho"
+          role="group"
+          data-i18n-aria="tablero"
+        ></div>
+        <section id="dicho-significado" class="dicho__significado" hidden>
+          <h3 data-i18n="queSignifica">Qué significa</h3>
+          <p></p>
+        </section>
+        <div id="teclado-dicho" class="teclado" role="group" data-i18n-aria="teclado"></div>
       </section>
     </main>
 
@@ -252,8 +266,9 @@
       <p data-i18n="ayudaTildes"></p>
       <h3 data-i18n="ayudaMunicipioTitulo">Municipio</h3>
       <p data-i18n="ayudaMunicipio"></p>
+      <h3 data-i18n="ayudaDichoTitulo">Dicho</h3>
+      <p data-i18n="ayudaDicho"></p>
       <p data-i18n="ayudaDiario"></p>
-      <p class="texto-suave" data-i18n="ayudaPronto"></p>
     </dialog>
 
     <dialog id="dlg-estadisticas" class="dialogo" aria-labelledby="estadisticas-titulo">
@@ -290,6 +305,15 @@
           >
           <button type="button" class="ja-btn" id="btn-copiar" data-i18n="copiar">Copiar</button>
         </div>
+        <button
+          type="button"
+          class="ja-btn ja-btn--primary compartir__todo"
+          id="btn-compartir-todo"
+          data-i18n="compartirTodo"
+          hidden
+        >
+          Compartir los tres
+        </button>
         <div id="copia-manual" hidden>
           <label for="texto-manual" data-i18n="copiarManual">Copia el resultado:</label>
           <textarea id="texto-manual" rows="9" readonly></textarea>
@@ -332,6 +356,7 @@
         <li data-i18n="fuentesPalabras"></li>
         <li data-i18n="fuentesMunicipios"></li>
         <li data-i18n="fuentesMapa"></li>
+        <li data-i18n="fuentesDichos"></li>
         <li data-i18n="fuentesCodigo"></li>
         <li data-i18n="fuentesWordle"></li>
       </ul>

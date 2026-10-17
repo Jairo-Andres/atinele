@@ -3,11 +3,15 @@ import { expect, test, type Page } from '@playwright/test';
 import {
   MUNICIPIO,
   RESPUESTA,
+  RESPUESTA_DICHO,
   abrir,
+  abrirDicho,
   abrirMunicipio,
   adivinar,
   escribir,
+  escribirDicho,
   municipiosQueNoSon,
+  palabrasDichoQueNoSon,
   palabrasQueNoSon,
 } from './ayudantes';
 
@@ -76,10 +80,26 @@ for (const tema of ['light', 'dark'] as const) {
         await revisar(page);
       });
 
-      test('fuentes y pestaña próximamente', async ({ page }) => {
-        await abrir(page);
-        await page.locator('#tab-dicho').click();
+      test('dicho con intentos y pista', async ({ page }) => {
+        await abrirDicho(page);
+        for (const p of palabrasDichoQueNoSon(3)) await escribirDicho(page, p);
+        await page.locator('#btn-pista').click();
+        await expect(page.locator('#dicho-pista')).toBeVisible();
         await revisar(page);
+      });
+
+      test('dicho acertado con significado y fuente', async ({ page }) => {
+        await abrirDicho(page);
+        await escribirDicho(page, RESPUESTA_DICHO);
+        await expect(page.locator('#dlg-estadisticas')).toBeVisible();
+        await revisar(page);
+        await page.keyboard.press('Escape');
+        await expect(page.locator('#dicho-significado')).toBeVisible();
+        await revisar(page);
+      });
+
+      test('fuentes', async ({ page }) => {
+        await abrir(page);
         await page.locator('[data-abrir="dlg-fuentes"]').click();
         await revisar(page);
       });

@@ -6,6 +6,7 @@ import {
   filaMunicipio,
   textoCompartir,
   textoConFilas,
+  textoTodo,
 } from '../../src/juego/compartir';
 import { evaluar } from '../../src/juego/evaluar';
 
@@ -89,5 +90,42 @@ describe('compartir municipio', () => {
         'https://atinele.vercel.app',
       ].join('\n'),
     );
+  });
+});
+
+describe('compartir varios modos', () => {
+  it('un solo encabezado, un bloque por modo y la pista con 💡', () => {
+    const texto = textoTodo({
+      nombre: 'Atínele',
+      numero: 4,
+      url: 'https://atinele.vercel.app',
+      bloques: [
+        {
+          icono: '🔤',
+          etiquetaModo: 'Palabra',
+          filas: ['🟩🟩🟩🟩🟩'],
+          ganado: true,
+          maxIntentos: 6,
+        },
+        {
+          icono: '💬',
+          etiquetaModo: 'Dicho',
+          filas: ['⬛⬛⬛⬛', '⬛⬛⬛⬛'],
+          ganado: false,
+          maxIntentos: 6,
+          extra: '💡',
+        },
+      ],
+    });
+    expect(texto.split('\n')).toEqual([
+      'Atínele #4 🇨🇴',
+      '🔤 Palabra 1/6',
+      '🟩🟩🟩🟩🟩',
+      '💬 Dicho X/6 💡',
+      '⬛⬛⬛⬛',
+      '⬛⬛⬛⬛',
+      '',
+      'https://atinele.vercel.app',
+    ]);
   });
 });

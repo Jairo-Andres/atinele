@@ -10,6 +10,8 @@ export interface OpcionesCompartir {
   altoContraste: boolean;
   url: string;
   etiquetaModo: string;
+  icono?: string;
+  extra?: string;
 }
 
 const EMOJI: Record<EstadoLetra, string> = { correcta: '🟩', presente: '🟨', ausente: '⬛' };
@@ -29,32 +31,46 @@ export function filaEmoji(estados: EstadoLetra[], altoContraste = false): string
 export function textoCompartir(o: OpcionesCompartir): string {
   return textoConFilas({
     ...o,
-    icono: '🔤',
+    icono: o.icono ?? '🔤',
     filas: o.intentos.map((f) => filaEmoji(f, o.altoContraste)),
   });
 }
 
-export interface OpcionesFilas {
-  nombre: string;
-  numero: number;
+export interface BloqueModo {
   icono: string;
   etiquetaModo: string;
   filas: string[];
   ganado: boolean;
   maxIntentos: number;
+  /** Marca al final del encabezado del modo, p. ej. 💡 si usó la pista. */
+  extra?: string;
+}
+
+export interface OpcionesFilas extends BloqueModo {
+  nombre: string;
+  numero: number;
   url: string;
+}
+
+function lineasModo(b: BloqueModo): string[] {
+  const marcador = b.ganado ? `${b.filas.length}/${b.maxIntentos}` : `X/${b.maxIntentos}`;
+  const extra = b.extra ? ` ${b.extra}` : '';
+  return [`${b.icono} ${b.etiquetaModo} ${marcador}${extra}`, ...b.filas];
 }
 
 /** Arma el texto común: encabezado, una línea por intento y el enlace. */
 export function textoConFilas(o: OpcionesFilas): string {
-  const marcador = o.ganado ? `${o.filas.length}/${o.maxIntentos}` : `X/${o.maxIntentos}`;
-  return [
-    `${o.nombre} #${o.numero} 🇨🇴`,
-    `${o.icono} ${o.etiquetaModo} ${marcador}`,
-    ...o.filas,
-    '',
-    o.url,
-  ].join('\n');
+  return [`${o.nombre} #${o.numero} 🇨🇴`, ...lineasModo(o), '', o.url].join('\n');
+}
+
+/** Los modos terminados del día en un solo mensaje. */
+export function textoTodo(o: {
+  nombre: string;
+  numero: number;
+  url: string;
+  bloques: BloqueModo[];
+}): string {
+  return [`${o.nombre} #${o.numero} 🇨🇴`, ...o.bloques.flatMap(lineasModo), '', o.url].join('\n');
 }
 
 /**

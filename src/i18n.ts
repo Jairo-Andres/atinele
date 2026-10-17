@@ -13,11 +13,6 @@ const es = {
   modoPalabra: 'Palabra',
   modoMunicipio: 'Municipio',
   modoDicho: 'Dicho',
-  pronto: 'Próximamente',
-  prontoCorto: 'Pronto',
-  prontoMunicipio:
-    'Adivina el municipio del día con pistas de distancia y dirección. Los datos vendrán de DIVIPOLA del DANE.',
-  prontoDicho: 'Completa la palabra que falta en un dicho colombiano y aprende qué significa.',
   tablero: 'Tablero',
   intento: 'Intento {n} de {total}',
   teclado: 'Teclado',
@@ -66,7 +61,6 @@ const es = {
   ayudaAusente: 'La O no está en la palabra.',
   ayudaTildes: 'Las tildes no cuentan; la Ñ es una letra aparte.',
   ayudaDiario: 'Hay un reto nuevo cada día a la medianoche, hora de Colombia.',
-  ayudaPronto: 'Pronto: el dicho del día.',
   fuentesPalabras:
     'Palabras válidas: diccionario es_CO del proyecto RLA-ES (LibreOffice/Hunspell), redistribuido bajo LGPL 3.0 o posterior.',
   fuentesCodigo: 'Código: licencia MIT.',
@@ -84,6 +78,7 @@ const es = {
   municipioNoEncontrado: 'Elige un municipio de la lista',
   elegirDpto: 'Hay varios con ese nombre: elige el departamento en la lista',
   yaIntentado: 'Ya intentaste ese municipio',
+  elegirDeLista: 'Hay varios parecidos: elige uno de la lista',
   mismoDpto: 'Mismo departamento',
   otroDpto: 'Otro departamento',
   ahiEs: '¡Ahí es!',
@@ -125,6 +120,19 @@ const es = {
     'Adivina el municipio del día en 6 intentos. Por ahora siempre es una capital de departamento (o Bogotá). Cada intento te dice a cuántos kilómetros está, en qué dirección y qué tan cerca estás, y si es del mismo departamento. En el mapa puedes tocar un punto para ver qué municipio es; el círculo punteado marca la distancia de tu último intento.',
   fuentesMunicipios:
     'Municipios y coordenadas: DANE, DIVIPOLA - Códigos municipios (datos.gov.co, gdxc-w37w), licencia CC BY-SA 4.0. Los nombres se pasaron de mayúsculas a tipo título.',
+  ayudaDichoTitulo: 'Dicho',
+  ayudaDicho:
+    'Completa la palabra que falta en un dicho colombiano, con los mismos colores del modo Palabra. El largo cambia cada día (de 4 a 8 letras). Desde el tercer intento puedes ver una pista; si la usas, sale un 💡 al compartir. Al final verás qué significa el dicho y de dónde lo tomamos.',
+  instruccionDicho: 'Adivina la palabra que falta.',
+  palabraOculta: 'palabra oculta de {n} letras',
+  verPista: 'Ver pista',
+  pista: 'Pista',
+  queSignifica: 'Qué significa',
+  fuente: 'Fuente',
+  elDicho: 'La palabra que faltaba era',
+  compartirTodo: 'Compartir los tres',
+  fuentesDichos:
+    'Dichos: cada uno cita la publicación donde aparece (Señal Colombia, Radio Nacional, Instituto Caro y Cuervo y medios colombianos). Los significados y pistas los escribimos nosotros.',
   fuentesMapa:
     'Mapa: Natural Earth 1:10m (dominio público), simplificado. Es un dibujo de referencia, no un límite oficial.',
 };
@@ -144,11 +152,6 @@ const en: Textos = {
   modoPalabra: 'Word',
   modoMunicipio: 'Town',
   modoDicho: 'Saying',
-  pronto: 'Coming soon',
-  prontoCorto: 'Soon',
-  prontoMunicipio:
-    "Guess today's Colombian town with distance and direction hints. Data will come from DANE's DIVIPOLA.",
-  prontoDicho: 'Fill in the missing word of a Colombian saying and learn what it means.',
   tablero: 'Board',
   intento: 'Guess {n} of {total}',
   teclado: 'Keyboard',
@@ -197,7 +200,6 @@ const en: Textos = {
   ayudaAusente: 'O is not in the word.',
   ayudaTildes: 'Accents do not matter; Ñ is a separate letter.',
   ayudaDiario: 'A new challenge arrives every day at midnight, Colombia time.',
-  ayudaPronto: 'Coming soon: the saying of the day.',
   fuentesPalabras:
     'Valid words: RLA-ES es_CO dictionary (LibreOffice/Hunspell), redistributed under LGPL-3.0-or-later.',
   fuentesCodigo: 'Code: MIT license.',
@@ -215,6 +217,7 @@ const en: Textos = {
   municipioNoEncontrado: 'Pick a town from the list',
   elegirDpto: 'Several towns share that name: pick the department from the list',
   yaIntentado: 'You already tried that town',
+  elegirDeLista: 'Several towns match: pick one from the list',
   mismoDpto: 'Same department',
   otroDpto: 'Different department',
   ahiEs: 'That is it!',
@@ -255,6 +258,19 @@ const en: Textos = {
     "Guess today's Colombian town in 6 tries. For now it is always a department capital (or Bogotá). Each guess tells you how many kilometers away it is, in which direction, how close you are, and whether it is in the same department. On the map you can tap a dot to see which town it is; the dotted circle shows the distance of your last guess.",
   fuentesMunicipios:
     'Towns and coordinates: DANE, DIVIPOLA - Códigos municipios (datos.gov.co, gdxc-w37w), CC BY-SA 4.0 license. Names were converted from uppercase to title case.',
+  ayudaDichoTitulo: 'Saying',
+  ayudaDicho:
+    'Fill in the missing word of a Colombian saying, with the same colors as Word mode. The length changes every day (4 to 8 letters). From the third guess you can see a hint; if you use it, a 💡 shows when you share. At the end you will see what the saying means and where we found it.',
+  instruccionDicho: 'Guess the missing word (in Spanish).',
+  palabraOculta: 'hidden word, {n} letters',
+  verPista: 'Show hint',
+  pista: 'Hint',
+  queSignifica: 'What it means',
+  fuente: 'Source',
+  elDicho: 'The missing word was',
+  compartirTodo: 'Share all three',
+  fuentesDichos:
+    'Sayings: each one cites the publication where it appears (Señal Colombia, Radio Nacional, Instituto Caro y Cuervo and Colombian media). Meanings and hints are written by us.',
   fuentesMapa:
     'Map: Natural Earth 1:10m (public domain), simplified. It is a reference drawing, not an official boundary.',
 };

@@ -22,9 +22,9 @@ test('gana con el teclado físico y ve sus estadísticas', async ({ page }) => {
 test('gana con el teclado en pantalla', async ({ page }) => {
   await abrir(page);
   for (const letra of RESPUESTA) {
-    await page.locator(`.tecla[data-tecla="${letra}"]`).click();
+    await page.locator(`#teclado .tecla[data-tecla="${letra}"]`).click();
   }
-  await page.locator('.tecla[data-tecla="ENVIAR"]').click();
+  await page.locator('#teclado .tecla[data-tecla="ENVIAR"]').click();
   await expect(page.getByRole('dialog', { name: 'Estadísticas' })).toBeVisible();
 });
 

@@ -59,6 +59,10 @@
 }
 
 /* ---------- Base ---------- */
+/* Algunas clases (ja-btn) fijan display; hidden siempre debe ocultar. */
+[hidden] {
+  display: none !important;
+}
 *,
 *::before,
 *::after {
@@ -202,14 +206,6 @@ h3 {
   color: var(--color-fg);
   border-bottom-color: var(--route-f);
 }
-.pronto {
-  padding: 2px var(--space-2);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface-2);
-  color: var(--color-fg-muted);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-regular);
-}
 
 .modos [role='tab'].jugado::after {
   content: '✓';
@@ -235,21 +231,15 @@ main:focus {
 .panel[hidden] {
   display: none;
 }
-.panel--pronto {
-  align-items: flex-start;
-  padding: var(--space-6) var(--space-4);
-  background: var(--texture-topo), var(--color-surface);
-  border-radius: var(--radius-lg);
-}
 
 .tablero {
   display: grid;
   gap: var(--space-2);
-  width: min(100%, 20rem);
+  width: min(100%, calc(var(--largo, 5) * 4rem));
 }
 .fila {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(var(--largo, 5), 1fr);
   gap: var(--space-2);
 }
 .ficha {
@@ -1055,4 +1045,85 @@ main:focus {
 .mapa__leyenda {
   margin: 0;
   font-size: var(--text-sm);
+}
+
+/* ---------- Modo Dicho ---------- */
+.dicho {
+  width: min(100%, 30rem);
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border: var(--border-1) solid var(--color-border-strong);
+  border-left: 6px solid var(--route-f);
+  border-radius: var(--radius-md);
+  background: var(--texture-topo), var(--color-surface);
+}
+.dicho__texto {
+  margin: 0;
+  font: var(--weight-bold) var(--text-xl) / 1.35 var(--font-body);
+  text-wrap: balance;
+}
+.dicho__texto::before {
+  content: '«';
+}
+.dicho__texto::after {
+  content: '»';
+}
+.dicho__hueco {
+  display: inline-flex;
+  gap: 3px;
+  vertical-align: middle;
+  margin-inline: 2px;
+}
+.dicho__casilla {
+  display: inline-block;
+  width: 0.9em;
+  height: 1.1em;
+  border-bottom: 3px solid var(--route-f);
+  background: color-mix(in srgb, var(--route-f) 12%, transparent);
+  border-radius: 2px 2px 0 0;
+}
+.dicho__palabra {
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  background: var(--ficha-correcta);
+  color: var(--tinta-correcta);
+}
+.dicho__fuente {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+  overflow-wrap: anywhere;
+}
+.dicho__fuente[hidden],
+.dicho__pista[hidden],
+.dicho__significado[hidden] {
+  display: none;
+}
+.dicho__instruccion {
+  margin: calc(var(--space-3) * -1) 0 0;
+  font-size: var(--text-sm);
+}
+.dicho__pista {
+  width: min(100%, 30rem);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--status-warn-bg);
+  color: var(--color-fg);
+}
+.dicho__significado {
+  width: min(100%, 30rem);
+}
+.dicho__significado h3 {
+  margin-bottom: var(--space-1);
+}
+.dicho__significado p {
+  margin: 0;
+}
+.compartir__todo {
+  width: 100%;
+  margin-top: var(--space-2);
+}
+.compartir__todo[hidden] {
+  display: none;
 }

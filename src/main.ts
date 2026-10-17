@@ -3,7 +3,7 @@ import './estilos/components.css';
 import './estilos/juego.css';
 
 import calendarioJson from '../data/contenido/calendario.json';
-import { cargar, borrar, guardar, type Datos, type Partida } from './almacen';
+import { CLAVE, cargar, borrar, guardar, type Datos, type Partida } from './almacen';
 import {
   LARGO_PALABRA,
   MAX_INTENTOS,
@@ -15,11 +15,18 @@ import {
 } from './config';
 import { idiomaInicial, t, traducirDocumento, usarIdioma, idioma, type Idioma } from './i18n';
 import { retoDelDia, type Calendario } from './juego/calendario';
-import { enlaceWhatsApp, textoCompartir, textoConFilas } from './juego/compartir';
+import {
+  enlaceWhatsApp,
+  filaEmoji,
+  textoConFilas,
+  textoTodo,
+  type BloqueModo,
+} from './juego/compartir';
 import { formatoCuentaRegresiva, hoyEnColombia, msHastaManana } from './juego/dia';
 import { porcentajeVictorias, rachaVigente, registrarPartida } from './juego/estadisticas';
 import type { DatosMapa } from './juego/mapa';
 import type { DatosMunicipios } from './juego/municipios';
+import { JuegoDicho } from './modos/dicho';
 import { JuegoMunicipio } from './modos/municipio';
 import { JuegoPalabra } from './modos/palabra';
 import { avisar } from './ui/aviso';
@@ -37,11 +44,25 @@ usarIdioma(idiomaInicial(datos.ajustes.idioma, navigator.language));
 /** El calendario guarda la forma con tildes (ÁRBOL) para mostrarla al final. */
 const formaVisible = reto.palabra;
 
-type IdModo = 'palabra' | 'municipio';
+type IdModo = 'palabra' | 'municipio' | 'dicho';
+const MODOS: IdModo[] = ['palabra', 'municipio', 'dicho'];
+
+/** Qué se responde hoy en cada modo (para no reutilizar una partida con otra respuesta). */
+function claveDeHoy(modo: IdModo): string {
+  if (modo === 'municipio') return reto.municipio ?? '';
+  if (modo === 'dicho') return reto.dicho?.id ?? '';
+  return reto.palabra;
+}
 
 function partidaDeHoy(modo: IdModo = 'palabra'): Partida {
   const dia = (datos.partidas[hoy] ??= {});
-  return (dia[modo] ??= { intentos: [], estado: 'jugando' });
+  const clave = claveDeHoy(modo);
+  const actual = dia[modo];
+  // Si el calendario cambió y hoy toca otra respuesta, se empieza de cero.
+  if (actual && actual.clave !== undefined && actual.clave !== clave) delete dia[modo];
+  const p = (dia[modo] ??= { intentos: [], estado: 'jugando' });
+  p.clave = clave;
+  return p;
 }
 
 function guardarDatos(): void {
@@ -57,8 +78,8 @@ function aplicarAjustes(): void {
 }
 
 // ---------- Palabras válidas ----------
-async function cargarValidas(): Promise<Set<string>> {
-  const r = await fetch(`${import.meta.env.BASE_URL}palabras/${LARGO_PALABRA}.txt`);
+async function cargarValidas(largo: number = LARGO_PALABRA): Promise<Set<string>> {
+  const r = await fetch(`${import.meta.env.BASE_URL}palabras/${largo}.txt`);
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return new Set((await r.text()).split('\n').filter(Boolean));
 }
@@ -78,33 +99,62 @@ async function cargarMapa(): Promise<DatosMapa> {
 // ---------- Estadísticas y resultado ----------
 let juego: JuegoPalabra;
 let juegoMunicipio: JuegoMunicipio | null = null;
+let juegoDicho: JuegoDicho | null = null;
 /** Modo cuyas estadísticas muestra el diálogo. */
 let modoEstadisticas: IdModo = 'palabra';
 
-function textoResultado(): string {
-  if (modoEstadisticas === 'municipio' && juegoMunicipio) {
-    const p = partidaDeHoy('municipio');
-    return textoConFilas({
-      nombre: NOMBRE,
-      numero: reto.numero,
+/** Encabezado y filas de emojis de un modo terminado (o null si no aplica). */
+function bloque(modo: IdModo): BloqueModo | null {
+  const p = partidaDeHoy(modo);
+  const comun = { ganado: p.estado === 'ganada', maxIntentos: MAX_INTENTOS };
+  const contraste = datos.ajustes.altoContraste;
+  if (modo === 'municipio') {
+    if (!juegoMunicipio) return null;
+    return {
+      ...comun,
       icono: '📍',
       etiquetaModo: 'Municipio',
-      filas: juegoMunicipio.filasCompartir(datos.ajustes.altoContraste),
-      ganado: p.estado === 'ganada',
-      maxIntentos: MAX_INTENTOS,
-      url: URL_PUBLICA,
-    });
+      filas: juegoMunicipio.filasCompartir(contraste),
+    };
   }
-  const p = partidaDeHoy();
-  return textoCompartir({
+  if (modo === 'dicho') {
+    if (!juegoDicho) return null;
+    return {
+      ...comun,
+      icono: '💬',
+      etiquetaModo: 'Dicho',
+      filas: juegoDicho.intentosEvaluados.map((f) => filaEmoji(f, contraste)),
+      extra: juegoDicho.usoPista ? '💡' : undefined,
+    };
+  }
+  return {
+    ...comun,
+    icono: '🔤',
+    etiquetaModo: 'Palabra',
+    filas: juego.intentosEvaluados.map((f) => filaEmoji(f, contraste)),
+  };
+}
+
+function textoResultado(modo: IdModo = modoEstadisticas): string {
+  const b = bloque(modo) ?? (bloque('palabra') as BloqueModo);
+  return textoConFilas({ ...b, nombre: NOMBRE, numero: reto.numero, url: URL_PUBLICA });
+}
+
+/** Modos de hoy que existen en el calendario. */
+function modosDeHoy(): IdModo[] {
+  return MODOS.filter((m) => m === 'palabra' || bloque(m) !== null);
+}
+
+function todosTerminados(): boolean {
+  return modosDeHoy().every((m) => partidaDeHoy(m).estado !== 'jugando');
+}
+
+function textoDeTodos(): string {
+  return textoTodo({
     nombre: NOMBRE,
     numero: reto.numero,
-    intentos: juego.intentosEvaluados,
-    ganado: p.estado === 'ganada',
-    maxIntentos: MAX_INTENTOS,
-    altoContraste: datos.ajustes.altoContraste,
     url: URL_PUBLICA,
-    etiquetaModo: 'Palabra',
+    bloques: modosDeHoy().map((m) => bloque(m) as BloqueModo),
   });
 }
 
@@ -114,7 +164,7 @@ function pintarEstadisticas(): void {
   const p = partidaDeHoy(modo);
   const terminado = p.estado !== 'jugando';
   $('estadisticas-modo').textContent = t('statsDe', {
-    modo: t(modo === 'palabra' ? 'modoPalabra' : 'modoMunicipio'),
+    modo: t(NOMBRE_MODO[modo]),
   });
 
   const numeros: [string, number][] = [
@@ -159,24 +209,41 @@ function pintarEstadisticas(): void {
   $('compartir').hidden = !terminado;
   if (terminado) {
     $('resultado-titulo').textContent = p.estado === 'ganada' ? t('ganaste') : t('perdiste');
-    $('resultado-etiqueta').textContent = t(modo === 'palabra' ? 'laRespuesta' : 'elMunicipio');
+    $('resultado-etiqueta').textContent = t(ETIQUETA_RESPUESTA[modo]);
     $('resultado-palabra').textContent =
-      modo === 'palabra' ? formaVisible : (juegoMunicipio?.respuestaVisible() ?? '');
+      modo === 'palabra'
+        ? formaVisible
+        : modo === 'municipio'
+          ? (juegoMunicipio?.respuestaVisible() ?? '')
+          : (juegoDicho?.respuestaVisible() ?? '');
     $<HTMLAnchorElement>('btn-whatsapp').href = enlaceWhatsApp(textoResultado());
   }
+  $('btn-compartir-todo').hidden = !terminado || modosDeHoy().length < 2 || !todosTerminados();
 }
+
+const NOMBRE_MODO = {
+  palabra: 'modoPalabra',
+  municipio: 'modoMunicipio',
+  dicho: 'modoDicho',
+} as const;
+const ETIQUETA_RESPUESTA = {
+  palabra: 'laRespuesta',
+  municipio: 'elMunicipio',
+  dicho: 'elDicho',
+} as const;
 
 let reloj: number | undefined;
 function iniciarCuentaRegresiva(): void {
-  const pintar = () =>
-    ($('cuenta-regresiva').textContent = formatoCuentaRegresiva(msHastaManana()));
+  const pintar = () => {
+    if (hoyEnColombia() !== hoy) location.reload();
+    else $('cuenta-regresiva').textContent = formatoCuentaRegresiva(msHastaManana());
+  };
   pintar();
   window.clearInterval(reloj);
   reloj = window.setInterval(pintar, 1000);
 }
 
-async function compartir(): Promise<void> {
-  const texto = textoResultado();
+async function compartir(texto = textoResultado()): Promise<void> {
   if (navigator.share && matchMedia('(pointer: coarse)').matches) {
     try {
       await navigator.share({ text: texto });
@@ -214,7 +281,7 @@ function iniciarPestanas(): void {
     }
     if (enfocar) tab.focus();
     const id = tab.id.replace('tab-', '');
-    if (id === 'palabra' || id === 'municipio') modoEstadisticas = id;
+    if ((MODOS as string[]).includes(id)) modoEstadisticas = id as IdModo;
     history.replaceState(null, '', id === 'palabra' ? location.pathname : `#${id}`);
   };
   const inicial = tabs.find((tab) => `#${tab.id.replace('tab-', '')}` === location.hash);
@@ -230,8 +297,15 @@ function iniciarPestanas(): void {
   });
 }
 
-function palabraActiva(): boolean {
-  return !$('panel-palabra').hidden;
+/** Juego de letras de la pestaña visible (Palabra o Dicho), si hay. */
+function juegoDeLetras(): { pulsar: (tecla: string) => void } | null {
+  if (!$('panel-palabra').hidden) return juego;
+  if (!$('panel-dicho').hidden) return juegoDicho;
+  return null;
+}
+
+function modoVisible(): IdModo {
+  return MODOS.find((m) => !$(`panel-${m}`).hidden) ?? 'palabra';
 }
 
 function alCambiar(modo: IdModo, p: Partida): void {
@@ -254,7 +328,7 @@ function mostrarEstadisticas(modo: IdModo): void {
 
 /** Marca con ✓ las pestañas de los modos ya terminados hoy. */
 function marcarPestanas(): void {
-  for (const modo of ['palabra', 'municipio'] as const) {
+  for (const modo of MODOS) {
     $(`tab-${modo}`).classList.toggle('jugado', partidaDeHoy(modo).estado !== 'jugando');
   }
 }
@@ -308,27 +382,61 @@ function iniciar(): void {
     });
   }
 
+  if (reto.dicho) {
+    juegoDicho = new JuegoDicho({
+      dicho: reto.dicho,
+      maxIntentos: MAX_INTENTOS,
+      partida: partidaDeHoy('dicho'),
+      validas: cargarValidas,
+      texto: $('dicho-texto'),
+      fuente: $('dicho-fuente'),
+      botonPista: $<HTMLButtonElement>('btn-pista'),
+      pista: $('dicho-pista'),
+      significado: $('dicho-significado'),
+      tablero: $('tablero-dicho'),
+      teclado: $('teclado-dicho'),
+      alCambiar: (p) => alCambiar('dicho', p),
+      alTerminar: (_p, animado) => {
+        if (animado) window.setTimeout(() => mostrarEstadisticas('dicho'), 900);
+      },
+    });
+  }
+
   // Teclado físico.
+  // ¿La persona navega con teclado (Tab) o con mouse/dedo? Tras un clic, Enter
+  // debe enviar el intento aunque el foco haya quedado en un botón.
+  let navegaConTeclado = false;
+  document.addEventListener('pointerdown', () => (navegaConTeclado = false), true);
+  document.addEventListener(
+    'keydown',
+    (e) => {
+      if (e.key === 'Tab') navegaConTeclado = true;
+    },
+    true,
+  );
   document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey || e.metaKey || e.altKey || hayDialogoAbierto() || !palabraActiva()) return;
-    const destino = e.target as HTMLElement;
-    if (destino.closest('input, textarea, select')) return;
-    // Enter o espacio sobre un control enfocado con teclado lo activan normalmente.
-    // Tras un clic (sin :focus-visible), Enter envía el intento.
-    const control = destino.closest('button, a, [role="tab"]');
-    if (control && (e.key === ' ' || (e.key === 'Enter' && control.matches(':focus-visible'))))
-      return;
-    if (e.key === 'Enter') juego.pulsar('ENVIAR');
-    else if (e.key === 'Backspace') juego.pulsar('BORRAR');
-    else if (/^[a-zñáéíóúü]$/i.test(e.key)) juego.pulsar(e.key);
-    else return;
+    // AltGr (Ctrl+Alt en Windows) se usa para escribir la ñ en algunos teclados.
+    const altGr = e.getModifierState?.('AltGraph') || (e.ctrlKey && e.altKey);
+    if (e.metaKey || ((e.ctrlKey || e.altKey) && !altGr)) return;
+    const destino = juegoDeLetras();
+    if (!destino || hayDialogoAbierto()) return;
+    const objetivo = e.target as HTMLElement;
+    if (objetivo.closest('input, textarea, select')) return;
+    const control = objetivo.closest('button, a, [role="tab"], svg');
+    if (control && navegaConTeclado && (e.key === 'Enter' || e.key === ' ')) return;
+    if (e.key === 'Enter') destino.pulsar('ENVIAR');
+    else if (e.key === 'Backspace') destino.pulsar('BORRAR');
+    else if (/^[a-zñáéíóúü]$/i.test(e.key)) destino.pulsar(e.key);
+    else if (e.key === ' ' && control) {
+      // Espacio tras un clic en una tecla no debe repetirla.
+    } else return;
     e.preventDefault();
   });
 
   document.querySelector('[data-abrir="dlg-estadisticas"]')?.addEventListener(
     'click',
     () => {
-      modoEstadisticas = $('panel-municipio').hidden ? 'palabra' : 'municipio';
+      modoEstadisticas = modoVisible();
     },
     { capture: true },
   );
@@ -340,6 +448,7 @@ function iniciar(): void {
   $('dlg-estadisticas').addEventListener('close', () => window.clearInterval(reloj));
   $('btn-compartir').addEventListener('click', () => void compartir());
   $('btn-copiar').addEventListener('click', () => void copiar());
+  $('btn-compartir-todo').addEventListener('click', () => void compartir(textoDeTodos()));
 
   // Ajustes.
   const radios = document.querySelectorAll<HTMLInputElement>('input[name="tema"]');
@@ -373,11 +482,22 @@ function iniciar(): void {
     $('numero-reto').textContent = `· ${t('reto', { n: reto.numero })}`;
     juego.retraducir();
     juegoMunicipio?.retraducir();
+    juegoDicho?.retraducir();
   });
 
-  // Si el día cambia con la página abierta, recargar al volver.
+  // Si el día cambia con la página abierta, recargar (al volver a la pestaña o
+  // en el minuto en que cambia, aunque la pestaña siga visible).
+  const revisarDia = () => {
+    if (hoyEnColombia() !== hoy) location.reload();
+  };
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && hoyEnColombia() !== hoy) location.reload();
+    if (document.visibilityState === 'visible') revisarDia();
+  });
+  window.setInterval(revisarDia, 30_000);
+
+  // Otra pestaña guardó cambios: recargar para no pisar su partida con datos viejos.
+  window.addEventListener('storage', (e) => {
+    if (e.key === CLAVE || e.key === null) location.reload();
   });
 
   if (!datos.ajustes.vioInstrucciones) {

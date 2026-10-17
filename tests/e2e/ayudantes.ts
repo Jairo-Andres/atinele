@@ -4,6 +4,14 @@ import { expect, type Page } from '@playwright/test';
 const calendario = JSON.parse(readFileSync('data/contenido/calendario.json', 'utf8')) as {
   inicio: string;
   dias: { n: number; palabra: string }[];
+  dichos: {
+    id: string;
+    texto: string;
+    oculta: string;
+    pista: { es: string };
+    significado: { es: string };
+    fuente: { url: string };
+  }[];
 };
 
 /** Día 1 del calendario a las 3 p. m. de Colombia. */
@@ -33,16 +41,49 @@ export async function abrir(page: Page, opciones: { conAyuda?: boolean } = {}): 
 
 const REVELADA = '[data-estado="correcta"], [data-estado="presente"], [data-estado="ausente"]';
 
-export async function escribir(page: Page, palabra: string): Promise<void> {
-  const filas = page.locator('#tablero .fila');
+export async function escribir(page: Page, palabra: string, tablero = '#tablero'): Promise<void> {
+  const filas = page.locator(`${tablero} .fila`);
   const antes = await filas.filter({ has: page.locator(REVELADA) }).count();
   await page.keyboard.type(palabra.toLowerCase(), { delay: 20 });
   await expect(filas.nth(antes).locator('[data-estado="escrita"]')).toHaveCount(palabra.length);
   await page.keyboard.press('Enter');
   // Esperar a que la fila quede revelada, como haría una persona.
   await expect(filas.nth(antes).locator(REVELADA)).toHaveCount(palabra.length);
-  await expect(page.locator('#tablero .revelando')).toHaveCount(0);
+  await expect(page.locator(`${tablero} .revelando`)).toHaveCount(0);
 }
+
+// ---------- Modo Dicho ----------
+const normal = (t: string) =>
+  t
+    .toUpperCase()
+    .replaceAll('Ñ', '\u0000')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replaceAll('\u0000', 'Ñ');
+
+/** Dicho del día 1 y su respuesta normalizada. */
+export const DICHO = calendario.dichos[0] as (typeof calendario.dichos)[number];
+export const RESPUESTA_DICHO = normal(DICHO.oculta);
+export const LARGO_DICHO = Array.from(RESPUESTA_DICHO).length;
+
+/** Palabras válidas del largo del dicho, distintas de la respuesta y sin Ñ. */
+export function palabrasDichoQueNoSon(n: number): string[] {
+  return readFileSync(`public/palabras/${LARGO_DICHO}.txt`, 'utf8')
+    .split('\n')
+    .filter((w) => w && w !== RESPUESTA_DICHO && !w.includes('Ñ'))
+    .slice(50, 50 + n);
+}
+
+export async function abrirDicho(page: Page): Promise<void> {
+  await page.clock.setFixedTime(FECHA);
+  await page.goto('/#dicho');
+  await page.locator('#dlg-ayuda').waitFor();
+  await page.keyboard.press('Escape');
+  await page.locator('#tablero-dicho[data-listo="true"]').waitFor({ state: 'attached' });
+}
+
+export const escribirDicho = (page: Page, palabra: string) =>
+  escribir(page, palabra, '#tablero-dicho');
 
 // ---------- Modo Municipio ----------
 // Usa public/datos/municipios.json (lo genera `npm run municipios` desde DIVIPOLA).

@@ -9,6 +9,14 @@ export type EstadoPartida = 'jugando' | 'ganada' | 'perdida';
 export interface Partida {
   intentos: string[];
   estado: EstadoPartida;
+  /** Modo Dicho: si pidió la pista (se marca con 💡 al compartir). */
+  pista?: boolean;
+  /**
+   * Respuesta con la que se jugó (palabra, código o id del dicho). Si el
+   * calendario cambia y el reto de hoy ya no es el mismo, la partida no se
+   * reutiliza contra otra respuesta.
+   */
+  clave?: string;
 }
 
 export interface Ajustes {
@@ -20,15 +28,19 @@ export interface Ajustes {
 
 export interface Datos {
   ajustes: Ajustes;
-  partidas: Record<string, { palabra?: Partida; municipio?: Partida }>;
-  estadisticas: { palabra: Estadisticas; municipio: Estadisticas };
+  partidas: Record<string, { palabra?: Partida; municipio?: Partida; dicho?: Partida }>;
+  estadisticas: { palabra: Estadisticas; municipio: Estadisticas; dicho: Estadisticas };
 }
 
 export function datosVacios(): Datos {
   return {
     ajustes: { tema: 'sistema', altoContraste: false, idioma: null, vioInstrucciones: false },
     partidas: {},
-    estadisticas: { palabra: estadisticasVacias(), municipio: estadisticasVacias() },
+    estadisticas: {
+      palabra: estadisticasVacias(),
+      municipio: estadisticasVacias(),
+      dicho: estadisticasVacias(),
+    },
   };
 }
 
@@ -50,6 +62,7 @@ export function cargar(hoy: string, almacen: Storage | null = obtenerAlmacen()):
       estadisticas: {
         palabra: { ...base.estadisticas.palabra, ...leido.estadisticas?.palabra },
         municipio: { ...base.estadisticas.municipio, ...leido.estadisticas?.municipio },
+        dicho: { ...base.estadisticas.dicho, ...leido.estadisticas?.dicho },
       },
     };
     for (const dia of Object.keys(datos.partidas)) {
