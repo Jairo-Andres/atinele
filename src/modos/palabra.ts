@@ -26,6 +26,8 @@ export class JuegoPalabra {
   private ocupado = false;
   /** Enter pulsado mientras se revelaba la fila anterior. */
   private enviarPendiente = false;
+  /** Cambio de idioma durante la animación: se repinta al terminar. */
+  private retraducirPendiente = false;
   private readonly respuestaNorm: string;
 
   constructor(private readonly o: OpcionesPalabra) {
@@ -52,7 +54,8 @@ export class JuegoPalabra {
 
   /** Vuelve a pintar textos traducidos (al cambiar de idioma). */
   retraducir(): void {
-    this.dibujar();
+    if (this.ocupado) this.retraducirPendiente = true;
+    else this.dibujar();
   }
 
   pulsar(tecla: Tecla): void {
@@ -111,6 +114,10 @@ export class JuegoPalabra {
     await new Promise((r) => window.setTimeout(r, espera));
     fila?.classList.remove('revelando');
     this.ocupado = false;
+    if (this.retraducirPendiente) {
+      this.retraducirPendiente = false;
+      this.dibujar();
+    }
     if (this.terminado) {
       if (p.estado === 'ganada')
         this.o.tablero.children[p.intentos.length - 1]?.classList.add('ganadora');

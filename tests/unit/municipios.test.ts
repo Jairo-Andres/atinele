@@ -5,6 +5,7 @@ import {
   evaluarMunicipio,
   jugables,
   type Municipio,
+  unicaPorPalabra,
 } from '../../src/juego/municipios';
 
 // Municipios inventados para la prueba (no son datos reales).
@@ -24,6 +25,15 @@ const m = (
   lat,
   lon,
 });
+
+const conCiudad = [
+  m('05001', 'Santiago de Cali', 'Valle', 3, -76),
+  m('05002', 'Calima', 'Valle', 4, -76),
+  m('06001', 'San Luis', 'Tolima', 4, -75),
+  m('07001', 'San Luis', 'Antioquia', 6, -75),
+  m('08001', 'Bogotá, D.C.', 'Bogotá, D.C.', 4.6, -74),
+  m('09001', 'Puerto Carreño', 'Vichada', 6, -67),
+];
 
 const lista = [
   m('01001', 'San Pedro', 'Uno', 0, 0),
@@ -47,6 +57,28 @@ describe('buscar', () => {
   it('respeta el máximo y la consulta vacía', () => {
     expect(buscar(lista, 'e', 2)).toHaveLength(2);
     expect(buscar(lista, '  ')).toEqual([]);
+  });
+});
+
+describe('búsqueda con formas comunes de escribir', () => {
+  it('sin comas, sin puntos y con N en vez de Ñ', () => {
+    expect(buscar(conCiudad, 'Bogota DC').map((x) => x.cod)).toEqual(['08001']);
+    expect(buscar(conCiudad, 'Bogotá D.C.').map((x) => x.cod)).toEqual(['08001']);
+    expect(buscar(conCiudad, 'puerto carreno').map((x) => x.cod)).toEqual(['09001']);
+    expect(coincidenciasExactas(conCiudad, 'Bogota DC').map((x) => x.cod)).toEqual(['08001']);
+  });
+
+  it('nombre y departamento sin coma', () => {
+    expect(coincidenciasExactas(conCiudad, 'San Luis Tolima').map((x) => x.cod)).toEqual(['06001']);
+    expect(buscar(conCiudad, 'san luis tol').map((x) => x.cod)).toEqual(['06001']);
+  });
+
+  it('elige la única sugerencia con la palabra completa', () => {
+    const opciones = buscar(conCiudad, 'Cali');
+    expect(opciones.length).toBeGreaterThan(1);
+    expect(unicaPorPalabra(opciones, 'Cali')?.cod).toBe('05001');
+    expect(unicaPorPalabra(buscar(conCiudad, 'San Luis'), 'Luis')).toBeNull();
+    expect(unicaPorPalabra(opciones, '')).toBeNull();
   });
 });
 

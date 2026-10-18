@@ -24,7 +24,9 @@ describe('normalizar', () => {
 
   it('compara nombres sin espacios, guiones ni puntos', () => {
     expect(normalizarNombre('San Andrés de Tumaco')).toBe(normalizarNombre('san andres de-tumaco'));
-    expect(normalizarNombre('Bogotá, D.C.')).toBe('BOGOTA,DC');
+    expect(normalizarNombre('Bogotá, D.C.')).toBe('BOGOTADC');
+    expect(normalizarNombre('Bogota DC')).toBe('BOGOTADC');
+    expect(normalizarNombre('Puerto Carreño')).toBe(normalizarNombre('puerto carreno'));
   });
 
   it('valida forma y largo', () => {

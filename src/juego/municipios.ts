@@ -45,7 +45,8 @@ export function buscar(lista: Municipio[], consulta: string, max = 8): Municipio
   const contiene: Municipio[] = [];
   for (const m of lista) {
     const nombre = normalizarNombre(m.nombre);
-    if (nombre.startsWith(q)) empieza.push(m);
+    // "San Luis Tol" también encuentra San Luis, Tolima.
+    if (nombre.startsWith(q) || normalizarNombre(m.nombre + m.dpto).startsWith(q)) empieza.push(m);
     else if (m.nombre.split(/[\s-]+/).some((p) => normalizarNombre(p).startsWith(q)))
       palabra.push(m);
     else if (nombre.includes(q)) contiene.push(m);
@@ -59,8 +60,21 @@ export function buscar(lista: Municipio[], consulta: string, max = 8): Municipio
 export function coincidenciasExactas(lista: Municipio[], texto: string): Municipio[] {
   const q = normalizarNombre(texto);
   return lista.filter(
-    (m) => normalizarNombre(m.nombre) === q || normalizarNombre(`${m.nombre}, ${m.dpto}`) === q,
+    (m) => normalizarNombre(m.nombre) === q || normalizarNombre(m.nombre + m.dpto) === q,
   );
+}
+
+/**
+ * Entre varias sugerencias, la única cuyo nombre tiene la consulta como palabra
+ * completa ("Cali" → Santiago de Cali, no Calima). null si no hay una sola.
+ */
+export function unicaPorPalabra(opciones: Municipio[], texto: string): Municipio | null {
+  const q = normalizarNombre(texto);
+  if (!q) return null;
+  const con = opciones.filter((m) =>
+    m.nombre.split(/[\s,-]+/).some((p) => normalizarNombre(p) === q),
+  );
+  return con.length === 1 ? (con[0] as Municipio) : null;
 }
 
 export function evaluarMunicipio(

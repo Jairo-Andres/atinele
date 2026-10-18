@@ -13,9 +13,15 @@ export function normalizar(texto: string): string {
     .replaceAll(MARCA_Ñ, 'Ñ');
 }
 
-/** Para comparar nombres de municipios: además quita espacios, guiones y puntos. */
+/**
+ * Para buscar nombres de municipios: además quita espacios y signos (puntos,
+ * comas, guiones, apóstrofos) y trata la Ñ como N, porque mucha gente escribe
+ * "Narino" o "Bogota DC".
+ */
 export function normalizarNombre(texto: string): string {
-  return normalizar(texto).replace(/[\s.-]/g, '');
+  return normalizar(texto)
+    .replaceAll('Ñ', 'N')
+    .replace(/[^A-Z0-9]/g, '');
 }
 
 export const LETRAS = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';

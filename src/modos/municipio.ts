@@ -10,6 +10,7 @@ import {
   type DatosMunicipios,
   type Municipio,
   type Pista,
+  unicaPorPalabra,
 } from '../juego/municipios';
 import type { DatosMapa } from '../juego/mapa';
 import { anunciar, avisar } from '../ui/aviso';
@@ -234,6 +235,13 @@ export class JuegoMunicipio {
     // Sin coincidencia exacta pero una sola sugerencia (p. ej. "Bogotá" → "Bogotá, D.C.").
     const parecidas = buscar(this.candidatos, texto);
     if (parecidas.length === 1) return this.enviar(parecidas[0] as Municipio);
+    const unica = unicaPorPalabra(parecidas, texto);
+    if (unica) return this.enviar(unica);
+    if (parecidas.length > 1) {
+      avisar(t('elegirDeLista'), 3500);
+      this.actualizarSugerencias();
+      return;
+    }
     avisar(t('municipioNoEncontrado'), 3000);
   }
 

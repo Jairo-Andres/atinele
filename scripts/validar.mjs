@@ -1,7 +1,17 @@
 // Valida el contenido del juego. Corre en CI: si algo está mal, sale con código 1.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { LARGOS, LETRAS, RAIZ, dentro, largo, leerJson, leerValidas, normalizar } from './lib.mjs';
+import {
+  LARGOS,
+  LETRAS,
+  RAIZ,
+  contienePalabra,
+  dentro,
+  largo,
+  leerJson,
+  leerValidas,
+  normalizar,
+} from './lib.mjs';
 
 const errores = [];
 const avisos = [];
@@ -80,6 +90,53 @@ if (!existsSync(join(RAIZ, RUTA_MUNICIPIOS))) {
 }
 if (!(calendario.municipios ?? []).length) errores.push('calendario.json: no tiene municipios');
 
+// ---------- Dichos ----------
+const dichos = leerJson('data/contenido/dichos.json');
+const idsDichos = new Set();
+for (const d of dichos) {
+  const donde = `dichos.json ${d.id ?? '(sin id)'}`;
+  if (!/^d\d{3,}$/.test(d.id ?? '')) errores.push(`${donde}: id inválido (formato d001)`);
+  if (idsDichos.has(d.id)) errores.push(`${donde}: id repetido`);
+  idsDichos.add(d.id);
+  if (!['listo', 'pendiente'].includes(d.estado)) errores.push(`${donde}: estado inválido`);
+  if (!d.texto || !d.oculta) {
+    errores.push(`${donde}: falta texto u oculta`);
+    continue;
+  }
+  if (!contienePalabra(d.texto, d.oculta)) {
+    errores.push(`${donde}: "${d.oculta}" no aparece como palabra en el texto`);
+  }
+  const n = largo(normalizar(d.oculta));
+  if (n < 4 || n > 8) errores.push(`${donde}: la palabra oculta debe tener entre 4 y 8 letras`);
+  else if (!leerValidas(n).has(normalizar(d.oculta))) {
+    avisos.push(
+      `${donde}: "${d.oculta}" no está en public/palabras/${n}.txt (igual se acepta como respuesta)`,
+    );
+  }
+  if (![...normalizar(d.oculta)].every((c) => LETRAS.includes(c))) {
+    errores.push(`${donde}: la palabra oculta tiene caracteres fuera del teclado`);
+  }
+  for (const campo of ['significado', 'pista']) {
+    if (!d[campo]?.es || !d[campo]?.en) errores.push(`${donde}: falta ${campo} en ES o EN`);
+  }
+  if (d.estado === 'listo' && !(d.fuente?.nombre && /^https:\/\//.test(d.fuente?.url ?? ''))) {
+    errores.push(`${donde}: está "listo" sin fuente (nombre y url https)`);
+  }
+}
+const dichosCalendario = calendario.dichos ?? [];
+if (!dichosCalendario.length) errores.push('calendario.json: no tiene dichos');
+for (const d of dichosCalendario) {
+  const original = dichos.find((x) => x.id === d.id);
+  if (!original) errores.push(`calendario.json: el dicho ${d.id} no está en dichos.json`);
+  else if (original.estado !== 'listo')
+    errores.push(`calendario.json: el dicho ${d.id} está pendiente`);
+  else if (original.texto !== d.texto || original.oculta !== d.oculta) {
+    errores.push(
+      `calendario.json: el dicho ${d.id} está desactualizado; corre "npm run calendario"`,
+    );
+  }
+}
+
 // ---------- Mapa ----------
 const RUTA_MAPA = 'public/datos/mapa.json';
 if (!existsSync(join(RAIZ, RUTA_MAPA))) {
@@ -118,10 +175,20 @@ for (const n of LARGOS) {
   }
 }
 
-const hoy = new Date().toISOString().slice(0, 10);
+// Fecha de Colombia (no UTC): el reto cambia a la medianoche de Bogotá.
+const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota' }).format(new Date());
 const transcurridos = Math.round((Date.parse(hoy) - Date.parse(calendario.inicio)) / 86_400_000);
-const quedan = calendario.dias.length - transcurridos - 1;
-if (quedan < 30) avisos.push(`Quedan ${Math.max(0, quedan)} días de calendario: agrega palabras.`);
+// Cuando una lista se acaba, el juego repite su ciclo; si después se agrega
+// contenido, cambia el reto del día. Por eso se avisa con un mes de margen.
+for (const [cuantos, que] of [
+  [calendario.dias.length, 'palabras (npm run calendario tras agregarlas)'],
+  [(calendario.municipios ?? []).length, 'municipios a respuestas-municipio.json'],
+  [(calendario.dichos ?? []).length, 'dichos a dichos.json'],
+]) {
+  const quedan = cuantos - transcurridos - 1;
+  if (quedan < 30)
+    avisos.push(`Quedan ${Math.max(0, quedan)} días de ${que.split(' ')[0]}: agrega ${que}.`);
+}
 
 for (const a of avisos) console.warn(`Aviso: ${a}`);
 if (errores.length) {
@@ -129,5 +196,5 @@ if (errores.length) {
   process.exit(1);
 }
 console.log(
-  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días y ${(calendario.municipios ?? []).length} municipios.`,
+  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días, ${(calendario.municipios ?? []).length} municipios y ${dichosCalendario.length} dichos.`,
 );
