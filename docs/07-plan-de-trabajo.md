@@ -21,12 +21,14 @@ Ver [Decisiones pendientes](#decisiones-pendientes).
 - [x] `geo` con pruebas, autocompletado accesible, filas de pistas.
 - [x] `respuestas-municipio.json` con capitales (códigos tomados de DIVIPOLA). Ojo: 25001 es Agua de Dios, no la capital de Cundinamarca; Bogotá (11001) la reemplaza.
 
-## Fase 3 · Modo Dicho y contenido
+## Fase 3 · Modo Dicho y contenido (hecha 2026-10-15)
 
-- [ ] Esquema y validación de `dichos.json`.
-- [ ] Lista inicial de dichos con fuente, en estado `pendiente`, para que Jairo la revise.
-- [ ] Significados ES/EN escritos con palabras propias.
-- [ ] `generar-calendario` con lo que esté `listo`.
+- [x] Esquema y validación de `dichos.json`.
+- [x] Lista inicial de 35 dichos, cada uno revisado contra su fuente. Quedaron en `listo` para que el modo salga ya; Jairo los revisa y pasa a `pendiente` los que no le gusten antes de su día.
+- [x] Significados y pistas ES/EN escritos con palabras propias.
+- [x] `generar-calendario` con lo que esté `listo`.
+- [x] Revisión a fondo: 8 errores corregidos con prueba de regresión (`tests/e2e/regresiones.spec.ts`).
+- [ ] Más contenido antes de mediados de noviembre: municipios se repiten desde 2026-11-13, dichos desde 2026-11-16 y palabras desde 2026-11-17 (`npm run validar` avisa).
 
 ## Fase 4 · Pulido, accesibilidad y publicación
 
