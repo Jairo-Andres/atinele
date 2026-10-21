@@ -137,6 +137,52 @@ for (const d of dichosCalendario) {
   }
 }
 
+// ---------- Categorías ----------
+const contenidoCategorias = leerJson('data/contenido/categorias.json');
+const nombresCategorias = contenidoCategorias.categorias ?? {};
+for (const [clave, c] of Object.entries(nombresCategorias)) {
+  if (!c.es || !c.en || !c.icono) errores.push(`categorias.json ${clave}: falta es, en o icono`);
+}
+const idsCategorias = new Set();
+const palabrasCategorias = new Set();
+for (const p of contenidoCategorias.palabras ?? []) {
+  const donde = `categorias.json ${p.id ?? '(sin id)'} (${p.palabra})`;
+  if (!/^c\d{3,}$/.test(p.id ?? '')) errores.push(`${donde}: id inválido (formato c001)`);
+  if (idsCategorias.has(p.id)) errores.push(`${donde}: id repetido`);
+  idsCategorias.add(p.id);
+  if (!nombresCategorias[p.categoria])
+    errores.push(`${donde}: categoría "${p.categoria}" no existe`);
+  if (!['listo', 'pendiente'].includes(p.estado)) errores.push(`${donde}: estado inválido`);
+  if (!p.pista?.es || !p.pista?.en) errores.push(`${donde}: falta pista en ES o EN`);
+  const n = normalizar(p.palabra ?? '');
+  if (palabrasCategorias.has(n)) errores.push(`${donde}: palabra repetida`);
+  palabrasCategorias.add(n);
+  if (p.palabra !== p.palabra?.toLocaleLowerCase('es-CO'))
+    errores.push(`${donde}: va en minúsculas (con tildes)`);
+  if (![...n].every((c) => LETRAS.includes(c)))
+    errores.push(`${donde}: tiene caracteres fuera del teclado`);
+  if (largo(n) < 4 || largo(n) > 8) errores.push(`${donde}: debe tener entre 4 y 8 letras`);
+  else if (!leerValidas(largo(n)).has(n)) {
+    errores.push(`${donde}: no está en public/palabras/${largo(n)}.txt`);
+  }
+}
+const categoriasCalendario = calendario.categorias ?? [];
+if (!categoriasCalendario.length) errores.push('calendario.json: no tiene categorías');
+for (const c of categoriasCalendario) {
+  const original = (contenidoCategorias.palabras ?? []).find((x) => x.id === c.id);
+  if (!original) errores.push(`calendario.json: la palabra ${c.id} no está en categorias.json`);
+  else if (original.estado !== 'listo')
+    errores.push(`calendario.json: la palabra ${c.id} está pendiente`);
+  else if (
+    original.palabra !== c.palabra ||
+    nombresCategorias[original.categoria]?.es !== c.categoria?.es
+  ) {
+    errores.push(
+      `calendario.json: la palabra ${c.id} está desactualizada; corre "npm run calendario"`,
+    );
+  }
+}
+
 // ---------- Mapa ----------
 const RUTA_MAPA = 'public/datos/mapa.json';
 if (!existsSync(join(RAIZ, RUTA_MAPA))) {
@@ -184,6 +230,7 @@ for (const [cuantos, que] of [
   [calendario.dias.length, 'palabras (npm run calendario tras agregarlas)'],
   [(calendario.municipios ?? []).length, 'municipios a respuestas-municipio.json'],
   [(calendario.dichos ?? []).length, 'dichos a dichos.json'],
+  [categoriasCalendario.length, 'categorías a categorias.json'],
 ]) {
   const quedan = cuantos - transcurridos - 1;
   if (quedan < 30)
@@ -196,5 +243,5 @@ if (errores.length) {
   process.exit(1);
 }
 console.log(
-  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días, ${(calendario.municipios ?? []).length} municipios y ${dichosCalendario.length} dichos.`,
+  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días, ${(calendario.municipios ?? []).length} municipios, ${dichosCalendario.length} dichos y ${categoriasCalendario.length} palabras por categoría.`,
 );

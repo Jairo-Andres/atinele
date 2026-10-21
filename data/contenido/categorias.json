@@ -1,0 +1,506 @@
+{
+  "categorias": {
+    "aseo": {
+      "es": "Aseo",
+      "en": "Cleaning",
+      "icono": "🧽"
+    },
+    "hogar": {
+      "es": "Hogar",
+      "en": "Home",
+      "icono": "🏠"
+    },
+    "cocina": {
+      "es": "Cocina",
+      "en": "Kitchen",
+      "icono": "🍳"
+    },
+    "frutas": {
+      "es": "Frutas",
+      "en": "Fruits",
+      "icono": "🥭"
+    },
+    "comida": {
+      "es": "Comida típica",
+      "en": "Traditional food",
+      "icono": "🍲"
+    },
+    "animales": {
+      "es": "Animales de Colombia",
+      "en": "Colombian animals",
+      "icono": "🦜"
+    },
+    "ropa": {
+      "es": "Ropa",
+      "en": "Clothing",
+      "icono": "👕"
+    },
+    "transporte": {
+      "es": "Transporte",
+      "en": "Transportation",
+      "icono": "🚌"
+    },
+    "musica": {
+      "es": "Música",
+      "en": "Music",
+      "icono": "🎶"
+    },
+    "escuela": {
+      "es": "Útiles escolares",
+      "en": "School supplies",
+      "icono": "✏️"
+    }
+  },
+  "palabras": [
+    {
+      "id": "c001",
+      "categoria": "aseo",
+      "palabra": "escoba",
+      "pista": {
+        "es": "Mango largo con cerdas para barrer el piso.",
+        "en": "A long handle with bristles to sweep the floor."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c002",
+      "categoria": "aseo",
+      "palabra": "trapero",
+      "pista": {
+        "es": "Se moja en el balde para trapear el piso.",
+        "en": "Dipped in the bucket to mop the floor."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c003",
+      "categoria": "aseo",
+      "palabra": "jabón",
+      "pista": {
+        "es": "Hace espuma y se usa para lavar las manos o la ropa.",
+        "en": "It lathers; used to wash hands or clothes."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c004",
+      "categoria": "aseo",
+      "palabra": "esponja",
+      "pista": {
+        "es": "Suave y llena de huecos, se usa para lavar la loza.",
+        "en": "Soft and full of holes; used to wash the dishes."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c005",
+      "categoria": "aseo",
+      "palabra": "balde",
+      "pista": {
+        "es": "Recipiente con asa para cargar agua.",
+        "en": "A container with a handle to carry water."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c006",
+      "categoria": "hogar",
+      "palabra": "nevera",
+      "pista": {
+        "es": "Electrodoméstico que mantiene la comida fría.",
+        "en": "Appliance that keeps food cold."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c007",
+      "categoria": "hogar",
+      "palabra": "cobija",
+      "pista": {
+        "es": "Tela gruesa para abrigarse en la cama.",
+        "en": "Thick cloth to keep warm in bed."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c008",
+      "categoria": "hogar",
+      "palabra": "almohada",
+      "pista": {
+        "es": "Donde se apoya la cabeza para dormir.",
+        "en": "Where you rest your head to sleep."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c009",
+      "categoria": "hogar",
+      "palabra": "cortina",
+      "pista": {
+        "es": "Tela que cubre la ventana.",
+        "en": "Cloth that covers the window."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c010",
+      "categoria": "hogar",
+      "palabra": "hamaca",
+      "pista": {
+        "es": "Red o tela colgada entre dos puntos para descansar.",
+        "en": "Net or cloth hung between two points to rest in."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c011",
+      "categoria": "cocina",
+      "palabra": "sartén",
+      "pista": {
+        "es": "Recipiente plano con mango para freír.",
+        "en": "Flat pan with a handle for frying."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c012",
+      "categoria": "cocina",
+      "palabra": "cuchara",
+      "pista": {
+        "es": "Cubierto para tomar sopa.",
+        "en": "Utensil for eating soup."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c013",
+      "categoria": "cocina",
+      "palabra": "colador",
+      "pista": {
+        "es": "Deja pasar el líquido y atrapa lo sólido; sirve para el café o el jugo.",
+        "en": "Lets liquid through and catches solids; used for coffee or juice."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c014",
+      "categoria": "cocina",
+      "palabra": "caldero",
+      "pista": {
+        "es": "Olla pesada, ideal para hacer arroz.",
+        "en": "Heavy pot, ideal for cooking rice."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c015",
+      "categoria": "frutas",
+      "palabra": "guayaba",
+      "pista": {
+        "es": "Fruta rosada por dentro con la que se hace el bocadillo.",
+        "en": "Fruit, pink inside, used to make bocadillo paste."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c016",
+      "categoria": "frutas",
+      "palabra": "papaya",
+      "pista": {
+        "es": "Fruta grande, anaranjada por dentro y con semillas negras.",
+        "en": "Large fruit, orange inside with black seeds."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c017",
+      "categoria": "frutas",
+      "palabra": "zapote",
+      "pista": {
+        "es": "Fruta de pulpa anaranjada y dulce con semillas grandes.",
+        "en": "Fruit with sweet orange flesh and large seeds."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c018",
+      "categoria": "frutas",
+      "palabra": "mango",
+      "pista": {
+        "es": "Fruta tropical que se come verde con sal o madura.",
+        "en": "Tropical fruit eaten green with salt or ripe."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c019",
+      "categoria": "comida",
+      "palabra": "arepa",
+      "pista": {
+        "es": "Masa redonda de maíz, asada o frita.",
+        "en": "Round corn cake, grilled or fried."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c020",
+      "categoria": "comida",
+      "palabra": "ajiaco",
+      "pista": {
+        "es": "Sopa bogotana de papas, pollo y guascas.",
+        "en": "Bogotá soup with potatoes, chicken and guascas herb."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c021",
+      "categoria": "comida",
+      "palabra": "empanada",
+      "pista": {
+        "es": "Masa frita rellena, a veces de papa y carne.",
+        "en": "Fried turnover, often filled with potato and meat."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c022",
+      "categoria": "comida",
+      "palabra": "sancocho",
+      "pista": {
+        "es": "Sopa espesa de plátano, yuca y carne o pescado.",
+        "en": "Thick soup with plantain, cassava and meat or fish."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c023",
+      "categoria": "comida",
+      "palabra": "lechona",
+      "pista": {
+        "es": "Cerdo relleno de arroz y arveja, típico del Tolima.",
+        "en": "Pork stuffed with rice and peas, typical of Tolima."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c024",
+      "categoria": "animales",
+      "palabra": "cóndor",
+      "pista": {
+        "es": "Ave grande de los Andes que está en el escudo de Colombia.",
+        "en": "Large Andean bird on Colombia's coat of arms."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c025",
+      "categoria": "animales",
+      "palabra": "iguana",
+      "pista": {
+        "es": "Reptil verde que trepa árboles.",
+        "en": "Green reptile that climbs trees."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c026",
+      "categoria": "animales",
+      "palabra": "jaguar",
+      "pista": {
+        "es": "El felino más grande de América.",
+        "en": "The largest cat in the Americas."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c027",
+      "categoria": "animales",
+      "palabra": "perezoso",
+      "pista": {
+        "es": "Mamífero que se mueve muy despacio y cuelga de los árboles.",
+        "en": "Mammal that moves very slowly and hangs from trees."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c028",
+      "categoria": "animales",
+      "palabra": "babilla",
+      "pista": {
+        "es": "Reptil parecido al caimán, de ríos y ciénagas.",
+        "en": "Caiman-like reptile of rivers and swamps."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c029",
+      "categoria": "ropa",
+      "palabra": "ruana",
+      "pista": {
+        "es": "Prenda de lana con abertura para la cabeza, de tierra fría.",
+        "en": "Wool garment with a head opening, from the cold highlands."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c030",
+      "categoria": "ropa",
+      "palabra": "sombrero",
+      "pista": {
+        "es": "El vueltiao es un símbolo de Colombia.",
+        "en": "The vueltiao one is a symbol of Colombia."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c031",
+      "categoria": "ropa",
+      "palabra": "mochila",
+      "pista": {
+        "es": "Bolso tejido; las wayuu son famosas.",
+        "en": "Woven bag; the Wayuu ones are famous."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c032",
+      "categoria": "ropa",
+      "palabra": "poncho",
+      "pista": {
+        "es": "Tela que se lleva al hombro, típica de los arrieros.",
+        "en": "Cloth worn over the shoulder, typical of muleteers."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c033",
+      "categoria": "transporte",
+      "palabra": "chiva",
+      "pista": {
+        "es": "Bus de madera pintado de colores, típico del campo.",
+        "en": "Colorful wooden bus, typical of rural areas."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c034",
+      "categoria": "transporte",
+      "palabra": "lancha",
+      "pista": {
+        "es": "Bote con motor para ríos y mar.",
+        "en": "Motorboat for rivers and sea."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c035",
+      "categoria": "transporte",
+      "palabra": "metro",
+      "pista": {
+        "es": "Tren urbano; Medellín tiene uno desde 1995.",
+        "en": "Urban train; Medellín has had one since 1995."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c036",
+      "categoria": "transporte",
+      "palabra": "camión",
+      "pista": {
+        "es": "Vehículo grande para llevar carga.",
+        "en": "Large vehicle for carrying cargo."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c037",
+      "categoria": "musica",
+      "palabra": "tiple",
+      "pista": {
+        "es": "Instrumento de cuerdas colombiano, parecido a una guitarra pequeña.",
+        "en": "Colombian string instrument, like a small guitar."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c038",
+      "categoria": "musica",
+      "palabra": "gaita",
+      "pista": {
+        "es": "Flauta larga de los Montes de María.",
+        "en": "Long flute from the Montes de María region."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c039",
+      "categoria": "musica",
+      "palabra": "acordeón",
+      "pista": {
+        "es": "Instrumento de fuelle protagonista del vallenato.",
+        "en": "Bellows instrument at the heart of vallenato."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c040",
+      "categoria": "musica",
+      "palabra": "bambuco",
+      "pista": {
+        "es": "Ritmo tradicional de la región andina.",
+        "en": "Traditional rhythm of the Andean region."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c041",
+      "categoria": "musica",
+      "palabra": "tambora",
+      "pista": {
+        "es": "Tambor de dos parches de la música del Caribe.",
+        "en": "Two-headed drum of Caribbean music."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c042",
+      "categoria": "escuela",
+      "palabra": "cuaderno",
+      "pista": {
+        "es": "Hojas cosidas para tomar apuntes.",
+        "en": "Bound sheets for taking notes."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c043",
+      "categoria": "escuela",
+      "palabra": "borrador",
+      "pista": {
+        "es": "Quita lo que se escribió con lápiz.",
+        "en": "Removes what was written in pencil."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c044",
+      "categoria": "escuela",
+      "palabra": "tijeras",
+      "pista": {
+        "es": "Dos hojas de metal para cortar papel.",
+        "en": "Two metal blades to cut paper."
+      },
+      "estado": "listo"
+    },
+    {
+      "id": "c045",
+      "categoria": "escuela",
+      "palabra": "lápiz",
+      "pista": {
+        "es": "Sirve para escribir y se puede borrar.",
+        "en": "Used to write; it can be erased."
+      },
+      "estado": "listo"
+    }
+  ]
+}

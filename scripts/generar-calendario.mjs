@@ -1,4 +1,4 @@
-// Agrega al final de data/contenido/calendario.json las palabras, municipios y dichos "listo" que
+// Agrega al final de data/contenido/calendario.json las palabras, municipios, dichos y categorías "listo" que
 // aún no están, mezcladas con una semilla fija (resultado reproducible).
 // Nunca reordena días ya publicados, para no cambiar retos pasados.
 //
@@ -78,7 +78,28 @@ calendario.dichos.push(
   ...mezclar(nuevosDichos, SEMILLA + 13 + calendario.dichos.length).map(publico),
 );
 
+// Categorías: como los dichos, van completas (con el nombre de la categoría y la pista).
+calendario.categorias ??= [];
+const contenidoCategorias = leerJson('data/contenido/categorias.json');
+const publicoCategoria = ({ id, categoria, palabra, pista }) => ({
+  id,
+  categoria: contenidoCategorias.categorias[categoria],
+  palabra,
+  pista,
+});
+const porIdCategoria = new Map(contenidoCategorias.palabras.map((p) => [p.id, p]));
+calendario.categorias = calendario.categorias.map((c) =>
+  porIdCategoria.has(c.id) ? publicoCategoria(porIdCategoria.get(c.id)) : c,
+);
+const usadasCategorias = new Set(calendario.categorias.map((c) => c.id));
+const nuevasCategorias = contenidoCategorias.palabras.filter(
+  (p) => p.estado === 'listo' && !usadasCategorias.has(p.id),
+);
+calendario.categorias.push(
+  ...mezclar(nuevasCategorias, SEMILLA + 17 + calendario.categorias.length).map(publicoCategoria),
+);
+
 escribirJson(RUTA, calendario);
 console.log(
-  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) y ${calendario.dichos.length} dichos (+${nuevosDichos.length}) desde ${calendario.inicio}.`,
+  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) ${calendario.dichos.length} dichos (+${nuevosDichos.length}) y ${calendario.categorias.length} palabras por categoría (+${nuevasCategorias.length}) desde ${calendario.inicio}.`,
 );

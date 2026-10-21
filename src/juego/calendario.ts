@@ -1,3 +1,4 @@
+import type { RetoCategoria } from './categorias';
 import type { Dicho } from './dichos';
 import { numeroReto } from './dia';
 
@@ -13,6 +14,8 @@ export interface Calendario {
   municipios?: string[];
   /** Dichos completos en orden (van ofuscados con el calendario); ciclo propio. */
   dichos?: Dicho[];
+  /** Palabras por categoría en orden (con su categoría y pista); ciclo propio. */
+  categorias?: RetoCategoria[];
 }
 
 export interface RetoDelDia {
@@ -22,6 +25,8 @@ export interface RetoDelDia {
   municipio: string | null;
   /** Dicho del día, si el calendario tiene dichos. */
   dicho: Dicho | null;
+  /** Palabra por categoría del día, si el calendario tiene categorías. */
+  categoria: RetoCategoria | null;
   /** true si el calendario se acabó y se está repitiendo el ciclo. */
   repetido: boolean;
 }
@@ -37,11 +42,16 @@ export function retoDelDia(calendario: Calendario, hoy: string): RetoDelDia {
     : null;
   const dichos = calendario.dichos ?? [];
   const dicho = dichos.length ? (dichos[(numero - 1) % dichos.length] as Dicho) : null;
+  const categorias = calendario.categorias ?? [];
+  const categoria = categorias.length
+    ? (categorias[(numero - 1) % categorias.length] as RetoCategoria)
+    : null;
   return {
     numero,
     palabra: dia.palabra,
     municipio,
     dicho,
+    categoria,
     repetido: numero > calendario.dias.length,
   };
 }

@@ -63,3 +63,12 @@ español e inglés, son textos propios del proyecto (MIT), no copias de las fuen
 appears in the publication cited in `fuente` and was checked against it on
 2026-10-15. Meanings and hints (Spanish and English) are the project's own text
 (MIT), not copied from the sources.
+
+## data/contenido/categorias.json
+
+**ES** · Lista propia. Cada palabra está en las listas derivadas de RLA-ES
+(`public/palabras/`); los nombres de las categorías y las pistas en español e
+inglés son textos propios del proyecto (MIT).
+
+**EN** · Own list. Every word is in the RLA-ES-derived lists; category names and
+hints (Spanish and English) are the project's own text (MIT).

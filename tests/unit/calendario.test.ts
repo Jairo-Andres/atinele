@@ -18,6 +18,7 @@ describe('retoDelDia', () => {
       palabra: 'PERRO',
       municipio: null,
       dicho: null,
+      categoria: null,
       repetido: false,
     });
     expect(retoDelDia(cal, '2026-10-13')).toEqual({
@@ -25,6 +26,7 @@ describe('retoDelDia', () => {
       palabra: 'SUEÑO',
       municipio: null,
       dicho: null,
+      categoria: null,
       repetido: false,
     });
   });
@@ -35,6 +37,7 @@ describe('retoDelDia', () => {
       palabra: 'PERRO',
       municipio: null,
       dicho: null,
+      categoria: null,
       repetido: true,
     });
   });
@@ -61,6 +64,19 @@ describe('retoDelDia', () => {
     expect(retoDelDia(conDichos, '2026-10-15').dicho?.id).toBe('d001');
   });
 
+  it('la categoría tiene su propio ciclo', () => {
+    const cat = (id: string) => ({
+      id,
+      categoria: { es: 'Aseo', en: 'Cleaning', icono: '🧽' },
+      palabra: 'escoba',
+      pista: { es: 'x', en: 'x' },
+    });
+    const conCategorias = { ...cal, categorias: [cat('c001'), cat('c002')] };
+    expect(retoDelDia(conCategorias, '2026-10-12').categoria?.id).toBe('c001');
+    expect(retoDelDia(conCategorias, '2026-10-13').categoria?.id).toBe('c002');
+    expect(retoDelDia(conCategorias, '2026-10-14').categoria?.id).toBe('c001');
+  });
+
   it('falla con calendario vacío', () => {
     expect(() => retoDelDia({ inicio: '2026-10-12', dias: [] }, '2026-10-12')).toThrow();
   });
@@ -70,6 +86,7 @@ describe('retoDelDia', () => {
     expect(real.dias.length).toBeGreaterThan(0);
     expect(retoDelDia(real, real.inicio).numero).toBe(1);
     expect(retoDelDia(real, real.inicio).dicho).not.toBeNull();
+    expect(retoDelDia(real, real.inicio).categoria).not.toBeNull();
   });
 });
 
