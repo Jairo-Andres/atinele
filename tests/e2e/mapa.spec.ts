@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { ALTO, ANCHO, proyectar } from '../../src/juego/mapa';
-import { abrirMunicipio, adivinar, municipiosQueNoSon } from './ayudantes';
+import { abrirMunicipio, adivinar, municipiosQueNoSon, todosLosMunicipios } from './ayudantes';
 
 test.use({ locale: 'es-CO' });
 
@@ -65,4 +65,39 @@ test('los botones acercan, alejan y vuelven a todo el país', async ({ page }) =
   expect(await svg(page).getAttribute('viewBox')).not.toBe(completo);
   await page.keyboard.press('0');
   await expect(svg(page)).toHaveAttribute('viewBox', completo!);
+});
+
+/** Posición en pantalla de un municipio con la vista actual del mapa. */
+async function enPantalla(page: Page, lat: number, lon: number) {
+  const caja = (await svg(page).boundingBox())!;
+  const [x, y, w, h] = (await svg(page).getAttribute('viewBox'))!.split(' ').map(Number) as [
+    number,
+    number,
+    number,
+    number,
+  ];
+  const p = proyectar(lat, lon);
+  return { x: ((p.x - x) / w) * caja.width, y: ((p.y - y) / h) * caja.height };
+}
+
+test('con mucho zoom se ven los nombres y se elige bien entre municipios vecinos', async ({
+  page,
+}) => {
+  await abrirMunicipio(page);
+  // Un municipio con un vecino a menos de 5 km: con el zoom de antes no se distinguían.
+  const todos = todosLosMunicipios();
+  const km = (a: { lat: number; lon: number }, b: { lat: number; lon: number }) =>
+    Math.hypot((a.lat - b.lat) * 111, (a.lon - b.lon) * 111 * Math.cos((a.lat * Math.PI) / 180));
+  const objetivo = todos.find((m) =>
+    todos.some((o) => o.cod !== m.cod && km(m, o) > 2.5 && km(m, o) < 5),
+  )!;
+  for (let i = 0; i < 5; i++) {
+    await svg(page).dblclick({ position: await enPantalla(page, objetivo.lat, objetivo.lon) });
+  }
+  await expect(page.locator('#mapa-municipio')).toHaveClass(/mapa--cerca/);
+  await expect(
+    page.locator('#mapa-svg .mapa__nombre', { hasText: objetivo.nombre }),
+  ).not.toHaveCount(0);
+  await svg(page).click({ position: await enPantalla(page, objetivo.lat, objetivo.lon) });
+  await expect(page.locator('#mapa-pie')).toContainText(`${objetivo.nombre}, ${objetivo.dpto}`);
 });

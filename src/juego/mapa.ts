@@ -78,7 +78,7 @@ export interface Vista {
   h: number;
 }
 
-export const ZOOM_MAX = 8;
+export const ZOOM_MAX = 40;
 
 /**
  * Acerca o aleja la vista manteniendo fijo el punto (cx, cy) y sin salirse del

@@ -4,6 +4,12 @@ import { expect, type Page } from '@playwright/test';
 const calendario = JSON.parse(readFileSync('data/contenido/calendario.json', 'utf8')) as {
   inicio: string;
   dias: { n: number; palabra: string }[];
+  categorias: {
+    id: string;
+    categoria: { es: string; en: string; icono: string };
+    palabra: string;
+    pista: { es: string };
+  }[];
   dichos: {
     id: string;
     texto: string;
@@ -85,6 +91,29 @@ export async function abrirDicho(page: Page): Promise<void> {
 export const escribirDicho = (page: Page, palabra: string) =>
   escribir(page, palabra, '#tablero-dicho');
 
+// ---------- Modo Categoría ----------
+export const CATEGORIA = calendario.categorias[0] as (typeof calendario.categorias)[number];
+export const RESPUESTA_CATEGORIA = normal(CATEGORIA.palabra);
+export const LARGO_CATEGORIA = Array.from(RESPUESTA_CATEGORIA).length;
+
+export function palabrasCategoriaQueNoSon(n: number): string[] {
+  return readFileSync(`public/palabras/${LARGO_CATEGORIA}.txt`, 'utf8')
+    .split('\n')
+    .filter((w) => w && w !== RESPUESTA_CATEGORIA && !w.includes('Ñ'))
+    .slice(50, 50 + n);
+}
+
+export async function abrirCategoria(page: Page): Promise<void> {
+  await page.clock.setFixedTime(FECHA);
+  await page.goto('/#categoria');
+  await page.locator('#dlg-ayuda').waitFor();
+  await page.keyboard.press('Escape');
+  await page.locator('#tablero-categoria[data-listo="true"]').waitFor({ state: 'attached' });
+}
+
+export const escribirCategoria = (page: Page, palabra: string) =>
+  escribir(page, palabra, '#tablero-categoria');
+
 // ---------- Modo Municipio ----------
 // Usa public/datos/municipios.json (lo genera `npm run municipios` desde DIVIPOLA).
 interface MunicipioE2E {
@@ -109,6 +138,8 @@ function porCodigo(cod: string): MunicipioE2E {
 }
 
 /** Respuesta del día 1 del modo Municipio. */
+export const todosLosMunicipios = (): MunicipioE2E[] => datosMunicipios.municipios;
+
 export const MUNICIPIO = porCodigo(codigosCalendario[0] as string);
 
 /** Otras capitales (siempre están en DIVIPOLA) para fallar a propósito. */

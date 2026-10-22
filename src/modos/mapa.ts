@@ -19,6 +19,9 @@ import type { Municipio, Pista } from '../juego/municipios';
 const SVG = 'http://www.w3.org/2000/svg';
 const TOQUE_PX = 22; // radio para elegir el municipio más cercano al dedo
 const ZOOM_ETIQUETAS_CHICAS = 2.2;
+/** Desde este zoom se escriben los nombres de los municipios que se ven. */
+const ZOOM_NOMBRES = 6;
+const MAX_NOMBRES = 150;
 
 // Nombres cortos para que quepan en el mapa (el nombre completo sale al tocar).
 const CORTOS: Record<string, string> = {
@@ -60,6 +63,7 @@ export class MapaMunicipios {
   private readonly tamanos = new Map<string, number>();
   private readonly capaPistas = el('g', { class: 'mapa__pistas' });
   private readonly capaEtiquetas = el('g', { class: 'mapa__etiquetas', 'aria-hidden': 'true' });
+  private readonly capaNombres = el('g', { class: 'mapa__nombres', 'aria-hidden': 'true' });
   private readonly seleccion = el('circle', { class: 'mapa__sel', r: 0 });
   private elegido: Municipio | null = null;
   private pistas: Pista[] = [];
@@ -134,7 +138,7 @@ export class MapaMunicipios {
     svg.append(el('path', { class: 'mapa__puntos', d }));
 
     this.etiquetas();
-    svg.append(this.capaEtiquetas, this.capaPistas, this.seleccion);
+    svg.append(this.capaEtiquetas, this.capaNombres, this.capaPistas, this.seleccion);
   }
 
   private etiquetas(): void {
@@ -275,7 +279,37 @@ export class MapaMunicipios {
     );
     figura.classList.toggle('mapa--acercado', this.nivelZoom > 1.01);
     figura.classList.toggle('mapa--detalle', this.nivelZoom >= ZOOM_ETIQUETAS_CHICAS);
+    figura.classList.toggle('mapa--cerca', this.nivelZoom >= ZOOM_NOMBRES);
+    this.nombres();
     this.escalarMarcas();
+  }
+
+  /** Con mucho zoom, escribe el nombre de cada municipio que queda a la vista. */
+  private nombres(): void {
+    const capa = this.capaNombres;
+    const v = this.vista;
+    const visibles =
+      this.nivelZoom < ZOOM_NOMBRES
+        ? []
+        : this.puntos.filter(
+            (p) => p.x >= v.x && p.x <= v.x + v.w && p.y >= v.y && p.y <= v.y + v.h,
+          );
+    if (visibles.length > MAX_NOMBRES) {
+      capa.replaceChildren();
+      return;
+    }
+    capa.replaceChildren(
+      ...visibles.map((p) => {
+        const texto = el('text', {
+          x: p.x.toFixed(1),
+          y: p.y.toFixed(1),
+          class: 'mapa__nombre',
+          'text-anchor': 'middle',
+        });
+        texto.textContent = p.m.nombre;
+        return texto;
+      }),
+    );
   }
 
   /** Mantiene textos y marcas del mismo tamaño en pantalla al hacer zoom. */
@@ -283,6 +317,10 @@ export class MapaMunicipios {
     const u = this.unidadesPorPx;
     this.capaEtiquetas.setAttribute('font-size', (10 * u).toFixed(2));
     this.capaPistas.setAttribute('font-size', (10 * u).toFixed(2));
+    this.capaNombres.setAttribute('font-size', (11 * u).toFixed(2));
+    for (const n of this.capaNombres.querySelectorAll('text')) {
+      n.setAttribute('dy', (-6 * u).toFixed(2));
+    }
     for (const c of this.capaPistas.querySelectorAll('.mapa__intento circle')) {
       c.setAttribute('r', (9 * u).toFixed(2));
     }
