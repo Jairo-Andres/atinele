@@ -65,6 +65,19 @@
         <button
           class="icono"
           type="button"
+          data-abrir="dlg-clasificacion"
+          data-i18n-aria="clasificacion"
+          data-i18n-title="clasificacion"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8"
+            />
+          </svg>
+        </button>
+        <button
+          class="icono"
+          type="button"
           data-abrir="dlg-ajustes"
           data-i18n-aria="ajustes"
           data-i18n-title="ajustes"
@@ -115,6 +128,16 @@
         type="button"
       >
         <span data-i18n="modoDicho">Dicho</span>
+      </button>
+      <button
+        role="tab"
+        id="tab-categoria"
+        aria-controls="panel-categoria"
+        aria-selected="false"
+        tabindex="-1"
+        type="button"
+      >
+        <span data-i18n="modoCategoria">Categoría</span>
       </button>
     </div>
 
@@ -211,6 +234,33 @@
         </section>
         <div id="teclado-dicho" class="teclado" role="group" data-i18n-aria="teclado"></div>
       </section>
+      <section
+        id="panel-categoria"
+        role="tabpanel"
+        aria-labelledby="tab-categoria"
+        class="panel"
+        hidden
+      >
+        <div class="categoria">
+          <p class="categoria__etiqueta" data-i18n="laCategoria">Categoría</p>
+          <p class="categoria__nombre">
+            <span id="categoria-icono" aria-hidden="true"></span>
+            <strong id="categoria-nombre"></strong>
+          </p>
+          <p id="categoria-largo" class="categoria__largo texto-suave"></p>
+        </div>
+        <button type="button" id="btn-pista-categoria" class="ja-btn" data-i18n="verPista" hidden>
+          Ver pista
+        </button>
+        <p id="categoria-pista" class="dicho__pista" tabindex="-1" hidden></p>
+        <div
+          id="tablero-categoria"
+          class="tablero tablero--dicho"
+          role="group"
+          data-i18n-aria="tablero"
+        ></div>
+        <div id="teclado-categoria" class="teclado" role="group" data-i18n-aria="teclado"></div>
+      </section>
     </main>
 
     <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
@@ -268,6 +318,8 @@
       <p data-i18n="ayudaMunicipio"></p>
       <h3 data-i18n="ayudaDichoTitulo">Dicho</h3>
       <p data-i18n="ayudaDicho"></p>
+      <h3 data-i18n="ayudaCategoriaTitulo">Categoría</h3>
+      <p data-i18n="ayudaCategoria"></p>
       <p data-i18n="ayudaDiario"></p>
     </dialog>
 
@@ -312,13 +364,43 @@
           data-i18n="compartirTodo"
           hidden
         >
-          Compartir los tres
+          Compartir todos
         </button>
         <div id="copia-manual" hidden>
           <label for="texto-manual" data-i18n="copiarManual">Copia el resultado:</label>
           <textarea id="texto-manual" rows="9" readonly></textarea>
         </div>
       </section>
+    </dialog>
+
+    <dialog id="dlg-clasificacion" class="dialogo" aria-labelledby="clasificacion-titulo">
+      <div class="dialogo__cabeza">
+        <h2 id="clasificacion-titulo" data-i18n="clasificacion">Clasificación</h2>
+        <button type="button" class="icono cerrar" data-cerrar data-i18n-aria="cerrar">×</button>
+      </div>
+      <p class="texto-suave" data-i18n="clasificacionNota"></p>
+      <div class="clasificacion__marco">
+        <table class="clasificacion">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" data-i18n="jugador">Jugador</th>
+              <th scope="col" data-i18n="puntos">Puntos</th>
+              <th scope="col" data-i18n="ganadasCorto">Ganadas</th>
+              <th scope="col" data-i18n="racha">Racha</th>
+            </tr>
+          </thead>
+          <tbody id="clasificacion-filas"></tbody>
+        </table>
+      </div>
+      <p class="texto-suave" data-i18n="puntosExplicacion"></p>
+      <form id="form-jugador" class="form-jugador">
+        <label for="nombre-jugador" data-i18n="nuevoJugador">Agregar jugador</label>
+        <div class="form-jugador__fila">
+          <input id="nombre-jugador" type="text" maxlength="20" autocomplete="off" required />
+          <button type="submit" class="ja-btn" data-i18n="agregar">Agregar</button>
+        </div>
+      </form>
     </dialog>
 
     <dialog id="dlg-ajustes" class="dialogo" aria-labelledby="ajustes-titulo">
@@ -357,6 +439,7 @@
         <li data-i18n="fuentesMunicipios"></li>
         <li data-i18n="fuentesMapa"></li>
         <li data-i18n="fuentesDichos"></li>
+        <li data-i18n="fuentesCategorias"></li>
         <li data-i18n="fuentesCodigo"></li>
         <li data-i18n="fuentesWordle"></li>
       </ul>

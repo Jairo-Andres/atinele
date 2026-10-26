@@ -5,12 +5,15 @@ import {
   RESPUESTA,
   RESPUESTA_DICHO,
   abrir,
+  abrirCategoria,
   abrirDicho,
   abrirMunicipio,
   adivinar,
   escribir,
+  escribirCategoria,
   escribirDicho,
   municipiosQueNoSon,
+  palabrasCategoriaQueNoSon,
   palabrasDichoQueNoSon,
   palabrasQueNoSon,
 } from './ayudantes';
@@ -95,6 +98,24 @@ for (const tema of ['light', 'dark'] as const) {
         await revisar(page);
         await page.keyboard.press('Escape');
         await expect(page.locator('#dicho-significado')).toBeVisible();
+        await revisar(page);
+      });
+
+      test('categoría con pista', async ({ page }) => {
+        await abrirCategoria(page);
+        for (const p of palabrasCategoriaQueNoSon(3)) await escribirCategoria(page, p);
+        await page.locator('#btn-pista-categoria').click();
+        await revisar(page);
+      });
+
+      test('clasificación con dos jugadores', async ({ page }) => {
+        await abrir(page);
+        await page.locator('[data-abrir="dlg-clasificacion"]').click();
+        await page.locator('#nombre-jugador').fill('Ana');
+        await page.locator('#form-jugador button[type="submit"]').click();
+        await expect(
+          page.locator('#clasificacion-filas tr:not(.clasificacion__fila-acciones)'),
+        ).toHaveCount(2);
         await revisar(page);
       });
 

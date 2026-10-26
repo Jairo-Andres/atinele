@@ -4,12 +4,14 @@ import {
   FECHA,
   MUNICIPIO,
   RESPUESTA,
+  RESPUESTA_CATEGORIA,
   RESPUESTA_DICHO,
   abrir,
   abrirDicho,
   abrirMunicipio,
   adivinar,
   escribir,
+  escribirCategoria,
   escribirDicho,
   palabrasQueNoSon,
 } from './ayudantes';
@@ -111,7 +113,7 @@ test('municipio: "Cali" y "Bogota DC" se entienden sin elegir de la lista', asyn
   }
 });
 
-test('con los tres modos terminados se pueden compartir juntos', async ({ page, context }) => {
+test('con todos los modos terminados se pueden compartir juntos', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await abrir(page);
   await escribir(page, RESPUESTA);
@@ -125,12 +127,18 @@ test('con los tres modos terminados se pueden compartir juntos', async ({ page, 
   await page.locator('#tab-dicho').click();
   await escribirDicho(page, RESPUESTA_DICHO);
   const dialogo = page.getByRole('dialog', { name: 'Estadísticas' });
-  await dialogo.getByRole('button', { name: 'Compartir los tres' }).click();
+  await dialogo.waitFor();
+  await expect(page.locator('#btn-compartir-todo')).toBeHidden();
+  await page.keyboard.press('Escape');
+  await page.locator('#tab-categoria').click();
+  await escribirCategoria(page, RESPUESTA_CATEGORIA);
+  await dialogo.getByRole('button', { name: 'Compartir todos' }).click();
   const texto = await page.evaluate(() => navigator.clipboard.readText());
   expect(texto.match(/🇨🇴/g)).toHaveLength(1);
   expect(texto).toContain('🔤 Palabra 1/6');
   expect(texto).toContain('📍 Municipio 1/6');
   expect(texto).toContain('💬 Dicho 1/6');
+  expect(texto).toContain('🗂️ Categoría 1/6');
 });
 
 test('el dicho se juega con el teclado físico', async ({ page }) => {

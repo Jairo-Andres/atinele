@@ -3,7 +3,21 @@ import './estilos/components.css';
 import './estilos/juego.css';
 
 import calendarioJson from '../data/contenido/calendario.json';
-import { CLAVE, cargar, borrar, guardar, type Datos, type Partida } from './almacen';
+import {
+  CLAVE,
+  MODOS,
+  agregarJugador,
+  borrar,
+  cambiarJugador,
+  cargar,
+  guardar,
+  perfiles,
+  quitarJugador,
+  renombrarJugador,
+  type Datos,
+  type IdModo,
+  type Partida,
+} from './almacen';
 import {
   LARGO_PALABRA,
   MAX_INTENTOS,
@@ -15,6 +29,7 @@ import {
 } from './config';
 import { idiomaInicial, t, traducirDocumento, usarIdioma, idioma, type Idioma } from './i18n';
 import { retoDelDia, type Calendario } from './juego/calendario';
+import { clasificacion } from './juego/clasificacion';
 import {
   enlaceWhatsApp,
   filaEmoji,
@@ -26,6 +41,7 @@ import { formatoCuentaRegresiva, hoyEnColombia, msHastaManana } from './juego/di
 import { porcentajeVictorias, rachaVigente, registrarPartida } from './juego/estadisticas';
 import type { DatosMapa } from './juego/mapa';
 import type { DatosMunicipios } from './juego/municipios';
+import { JuegoCategoria } from './modos/categoria';
 import { JuegoDicho } from './modos/dicho';
 import { JuegoMunicipio } from './modos/municipio';
 import { JuegoPalabra } from './modos/palabra';
@@ -44,13 +60,11 @@ usarIdioma(idiomaInicial(datos.ajustes.idioma, navigator.language));
 /** El calendario guarda la forma con tildes (ÁRBOL) para mostrarla al final. */
 const formaVisible = reto.palabra;
 
-type IdModo = 'palabra' | 'municipio' | 'dicho';
-const MODOS: IdModo[] = ['palabra', 'municipio', 'dicho'];
-
 /** Qué se responde hoy en cada modo (para no reutilizar una partida con otra respuesta). */
 function claveDeHoy(modo: IdModo): string {
   if (modo === 'municipio') return reto.municipio ?? '';
   if (modo === 'dicho') return reto.dicho?.id ?? '';
+  if (modo === 'categoria') return reto.categoria?.id ?? '';
   return reto.palabra;
 }
 
@@ -100,6 +114,7 @@ async function cargarMapa(): Promise<DatosMapa> {
 let juego: JuegoPalabra;
 let juegoMunicipio: JuegoMunicipio | null = null;
 let juegoDicho: JuegoDicho | null = null;
+let juegoCategoria: JuegoCategoria | null = null;
 /** Modo cuyas estadísticas muestra el diálogo. */
 let modoEstadisticas: IdModo = 'palabra';
 
@@ -125,6 +140,16 @@ function bloque(modo: IdModo): BloqueModo | null {
       etiquetaModo: 'Dicho',
       filas: juegoDicho.intentosEvaluados.map((f) => filaEmoji(f, contraste)),
       extra: juegoDicho.usoPista ? '💡' : undefined,
+    };
+  }
+  if (modo === 'categoria') {
+    if (!juegoCategoria) return null;
+    return {
+      ...comun,
+      icono: '🗂️',
+      etiquetaModo: 'Categoría',
+      filas: juegoCategoria.intentosEvaluados.map((f) => filaEmoji(f, contraste)),
+      extra: juegoCategoria.usoPista ? '💡' : undefined,
     };
   }
   return {
@@ -163,9 +188,11 @@ function pintarEstadisticas(): void {
   const e = datos.estadisticas[modo];
   const p = partidaDeHoy(modo);
   const terminado = p.estado !== 'jugando';
-  $('estadisticas-modo').textContent = t('statsDe', {
-    modo: t(NOMBRE_MODO[modo]),
-  });
+  const deModo = t('statsDe', { modo: t(NOMBRE_MODO[modo]) });
+  $('estadisticas-modo').textContent =
+    datos.jugadores.lista.length > 1
+      ? `${deModo} · ${nombreJugador(datos.jugadores.actual)}`
+      : deModo;
 
   const numeros: [string, number][] = [
     [t('jugadas'), e.jugadas],
@@ -215,7 +242,9 @@ function pintarEstadisticas(): void {
         ? formaVisible
         : modo === 'municipio'
           ? (juegoMunicipio?.respuestaVisible() ?? '')
-          : (juegoDicho?.respuestaVisible() ?? '');
+          : modo === 'dicho'
+            ? (juegoDicho?.respuestaVisible() ?? '')
+            : (juegoCategoria?.respuestaVisible() ?? '');
     $<HTMLAnchorElement>('btn-whatsapp').href = enlaceWhatsApp(textoResultado());
   }
   $('btn-compartir-todo').hidden = !terminado || modosDeHoy().length < 2 || !todosTerminados();
@@ -225,12 +254,113 @@ const NOMBRE_MODO = {
   palabra: 'modoPalabra',
   municipio: 'modoMunicipio',
   dicho: 'modoDicho',
+  categoria: 'modoCategoria',
 } as const;
 const ETIQUETA_RESPUESTA = {
   palabra: 'laRespuesta',
   municipio: 'elMunicipio',
   dicho: 'elDicho',
+  categoria: 'laPalabraCategoria',
 } as const;
+
+// ---------- Clasificación ----------
+function nombreJugador(id: string): string {
+  const lista = datos.jugadores.lista;
+  const i = lista.findIndex((p) => p.id === id);
+  return lista[i]?.nombre || t('jugadorSinNombre', { n: i + 1 });
+}
+
+function nombreLibre(nombre: string, salvo?: string): boolean {
+  const n = nombre.trim().toLocaleLowerCase('es-CO');
+  return !datos.jugadores.lista.some(
+    (p) => p.id !== salvo && nombreJugador(p.id).toLocaleLowerCase('es-CO') === n,
+  );
+}
+
+function boton(texto: string, alClic: () => void, aria?: string): HTMLButtonElement {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'ja-btn clasificacion__accion';
+  b.textContent = texto;
+  if (aria) b.setAttribute('aria-label', aria);
+  b.addEventListener('click', alClic);
+  return b;
+}
+
+function pintarClasificacion(): void {
+  const actual = datos.jugadores.actual;
+  const filas = clasificacion(perfiles(datos), hoy);
+  $('clasificacion-filas').replaceChildren(
+    ...filas
+      .map((f, i) => {
+        const tr = document.createElement('tr');
+        if (f.id === actual) tr.className = 'clasificacion__actual';
+        const nombre = nombreJugador(f.id);
+        const celdaNombre = document.createElement('th');
+        celdaNombre.scope = 'row';
+        const texto = document.createElement('span');
+        texto.className = 'clasificacion__nombre';
+        texto.textContent = nombre;
+        celdaNombre.append(texto);
+        const acciones = document.createElement('span');
+        acciones.className = 'clasificacion__acciones';
+        if (f.id === actual) {
+          const etiqueta = document.createElement('span');
+          etiqueta.className = 'clasificacion__jugando';
+          etiqueta.textContent = t('jugando');
+          acciones.append(
+            etiqueta,
+            boton(t('renombrar'), () => {
+              const nuevo = prompt(t('nombreNuevo'), nombre)?.trim().slice(0, 20);
+              if (!nuevo) return;
+              if (!nombreLibre(nuevo, f.id)) return avisar(t('nombreRepetido'));
+              renombrarJugador(datos, f.id, nuevo);
+              guardarDatos();
+              pintarClasificacion();
+            }),
+          );
+        } else {
+          acciones.append(
+            boton(
+              t('jugarComo'),
+              () => {
+                cambiarJugador(datos, f.id);
+                guardarDatos();
+                location.reload();
+              },
+              t('jugarComoAria', { nombre }),
+            ),
+            boton(
+              t('quitar'),
+              () => {
+                if (!confirm(t('confirmarQuitar', { nombre }))) return;
+                quitarJugador(datos, f.id);
+                guardarDatos();
+                pintarClasificacion();
+              },
+              t('quitarAria', { nombre }),
+            ),
+          );
+        }
+        // Los botones van en una fila propia para que quepan en el celular.
+        const filaAcciones = document.createElement('tr');
+        filaAcciones.className = 'clasificacion__fila-acciones';
+        if (f.id === actual) filaAcciones.classList.add('clasificacion__actual');
+        const celdaAcciones = document.createElement('td');
+        celdaAcciones.colSpan = 5;
+        celdaAcciones.append(acciones);
+        filaAcciones.append(celdaAcciones);
+        const celda = (v: number | string) => {
+          const td = document.createElement('td');
+          td.textContent = String(v);
+          return td;
+        };
+        tr.append(celda(i + 1), celdaNombre, celda(f.puntos), celda(f.ganadas), celda(f.racha));
+        return [tr, filaAcciones];
+      })
+      .flat(),
+  );
+}
 
 let reloj: number | undefined;
 function iniciarCuentaRegresiva(): void {
@@ -301,6 +431,7 @@ function iniciarPestanas(): void {
 function juegoDeLetras(): { pulsar: (tecla: string) => void } | null {
   if (!$('panel-palabra').hidden) return juego;
   if (!$('panel-dicho').hidden) return juegoDicho;
+  if (!$('panel-categoria').hidden) return juegoCategoria;
   return null;
 }
 
@@ -402,6 +533,26 @@ function iniciar(): void {
     });
   }
 
+  if (reto.categoria) {
+    juegoCategoria = new JuegoCategoria({
+      reto: reto.categoria,
+      maxIntentos: MAX_INTENTOS,
+      partida: partidaDeHoy('categoria'),
+      validas: cargarValidas,
+      icono: $('categoria-icono'),
+      nombre: $('categoria-nombre'),
+      largoTexto: $('categoria-largo'),
+      botonPista: $<HTMLButtonElement>('btn-pista-categoria'),
+      pista: $('categoria-pista'),
+      tablero: $('tablero-categoria'),
+      teclado: $('teclado-categoria'),
+      alCambiar: (p) => alCambiar('categoria', p),
+      alTerminar: (_p, animado) => {
+        if (animado) window.setTimeout(() => mostrarEstadisticas('categoria'), 900);
+      },
+    });
+  }
+
   // Teclado físico.
   // ¿La persona navega con teclado (Tab) o con mouse/dedo? Tras un clic, Enter
   // debe enviar el intento aunque el foco haya quedado en un botón.
@@ -450,6 +601,20 @@ function iniciar(): void {
   $('btn-copiar').addEventListener('click', () => void copiar());
   $('btn-compartir-todo').addEventListener('click', () => void compartir(textoDeTodos()));
 
+  // Clasificación.
+  $('dlg-clasificacion').addEventListener('abierto', pintarClasificacion);
+  $<HTMLFormElement>('form-jugador').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const entrada = $<HTMLInputElement>('nombre-jugador');
+    const nombre = entrada.value.trim().slice(0, 20);
+    if (!nombre) return;
+    if (!nombreLibre(nombre)) return avisar(t('nombreRepetido'));
+    agregarJugador(datos, nombre);
+    guardarDatos();
+    entrada.value = '';
+    pintarClasificacion();
+  });
+
   // Ajustes.
   const radios = document.querySelectorAll<HTMLInputElement>('input[name="tema"]');
   radios.forEach((r) => {
@@ -483,6 +648,8 @@ function iniciar(): void {
     juego.retraducir();
     juegoMunicipio?.retraducir();
     juegoDicho?.retraducir();
+    juegoCategoria?.retraducir();
+    if ($<HTMLDialogElement>('dlg-clasificacion').open) pintarClasificacion();
   });
 
   // Si el día cambia con la página abierta, recargar (al volver a la pestaña o
