@@ -30,6 +30,13 @@ Ver [Decisiones pendientes](#decisiones-pendientes).
 - [x] Revisión a fondo: 8 errores corregidos con prueba de regresión (`tests/e2e/regresiones.spec.ts`).
 - [ ] Más contenido antes de mediados de noviembre: municipios se repiten desde 2026-11-13, dichos desde 2026-11-16 y palabras desde 2026-11-17 (`npm run validar` avisa).
 
+## Fase 3.1 · Pedidos de Jairo (hecha 2026-10-19)
+
+- [x] Tabla de clasificación local: varios jugadores en el mismo navegador, cada uno con sus partidas y estadísticas, ordenados por puntos.
+- [x] Mapa del modo Municipio: zoom hasta ×40 y nombres de los municipios a la vista.
+- [x] Modo Categoría: 45 palabras en 10 categorías con pista propia.
+- [ ] Clasificación entre celulares distintos: necesitaría un servidor (por ejemplo Supabase gratis); pendiente de decisión de Jairo.
+
 ## Fase 4 · Pulido, accesibilidad y publicación
 
 - [ ] Alto contraste, modo oscuro, animaciones con reduced-motion.
