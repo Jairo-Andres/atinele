@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   cuadrosCercania,
+  cuadrosPalabras,
   enlaceWhatsApp,
   filaEmoji,
   filaMunicipio,
@@ -127,5 +128,38 @@ describe('compartir varios modos', () => {
       '',
       'https://atinele.vercel.app',
     ]);
+  });
+});
+
+describe('compartir sopa y crucigrama', () => {
+  it('cuenta palabras en vez de intentos', () => {
+    expect(cuadrosPalabras(3, 5)).toBe('🟩🟩🟩⬜⬜');
+    expect(cuadrosPalabras(2, 2, true)).toBe('🟧🟧');
+    const texto = textoTodo({
+      nombre: 'Atínele',
+      numero: 20,
+      url: 'https://atinele.vercel.app',
+      bloques: [
+        {
+          icono: '🔎',
+          etiquetaModo: 'Sopa de letras',
+          marcador: '8/8',
+          filas: [cuadrosPalabras(8, 8)],
+          ganado: true,
+          maxIntentos: 6,
+        },
+        {
+          icono: '🧩',
+          etiquetaModo: 'Crucigrama',
+          marcador: 'X/6',
+          filas: [cuadrosPalabras(4, 6)],
+          ganado: false,
+          maxIntentos: 6,
+          extra: '🔍',
+        },
+      ],
+    });
+    expect(texto).toContain('🔎 Sopa de letras 8/8\n🟩🟩🟩🟩🟩🟩🟩🟩');
+    expect(texto).toContain('🧩 Crucigrama X/6 🔍\n🟩🟩🟩🟩⬜⬜');
   });
 });

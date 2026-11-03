@@ -44,6 +44,8 @@ export interface BloqueModo {
   maxIntentos: number;
   /** Marca al final del encabezado del modo, p. ej. 💡 si usó la pista. */
   extra?: string;
+  /** Reemplaza el "n/6" (sopa y crucigrama cuentan palabras, no intentos). */
+  marcador?: string;
 }
 
 export interface OpcionesFilas extends BloqueModo {
@@ -53,7 +55,8 @@ export interface OpcionesFilas extends BloqueModo {
 }
 
 function lineasModo(b: BloqueModo): string[] {
-  const marcador = b.ganado ? `${b.filas.length}/${b.maxIntentos}` : `X/${b.maxIntentos}`;
+  const marcador =
+    b.marcador ?? (b.ganado ? `${b.filas.length}/${b.maxIntentos}` : `X/${b.maxIntentos}`);
   const extra = b.extra ? ` ${b.extra}` : '';
   return [`${b.icono} ${b.etiquetaModo} ${marcador}${extra}`, ...b.filas];
 }
@@ -99,4 +102,10 @@ export function filaMunicipio(i: IntentoMunicipio, altoContraste = false): strin
 
 export function enlaceWhatsApp(texto: string): string {
   return `https://wa.me/?text=${encodeURIComponent(texto)}`;
+}
+
+/** Un cuadro por palabra: 🟩 encontrada, ⬜ no (sopa de letras y crucigrama). */
+export function cuadrosPalabras(resueltas: number, total: number, altoContraste = false): string {
+  const si = altoContraste ? '🟧' : '🟩';
+  return si.repeat(resueltas) + '⬜'.repeat(Math.max(0, total - resueltas));
 }

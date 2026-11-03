@@ -12,6 +12,7 @@ import {
   leerValidas,
   normalizar,
 } from './lib.mjs';
+import { LADO_CRUCIGRAMA, LADO_SOPA, letrasEntre, problemasCrucigrama } from './rejillas.mjs';
 
 const errores = [];
 const avisos = [];
@@ -183,6 +184,77 @@ for (const c of categoriasCalendario) {
   }
 }
 
+// ---------- Sopas de letras ----------
+const contenidoSopas = leerJson('data/contenido/sopas.json');
+const idsSopas = new Set();
+for (const t of contenidoSopas) {
+  const donde = `sopas.json ${t.id ?? '(sin id)'}`;
+  if (!/^s\d{3,}$/.test(t.id ?? '')) errores.push(`${donde}: id inválido (formato s001)`);
+  if (idsSopas.has(t.id)) errores.push(`${donde}: id repetido`);
+  idsSopas.add(t.id);
+  if (!t.tema?.es || !t.tema?.en || !t.tema?.icono)
+    errores.push(`${donde}: falta tema es, en o icono`);
+  if (!['listo', 'pendiente'].includes(t.estado)) errores.push(`${donde}: estado inválido`);
+  const palabras = t.palabras ?? [];
+  if (palabras.length < 6 || palabras.length > 10)
+    errores.push(`${donde}: debe tener de 6 a 10 palabras`);
+  const vistasTema = new Set();
+  for (const p of palabras) {
+    const n = normalizar(p);
+    if (largo(n) < 3 || largo(n) > LADO_SOPA)
+      errores.push(`${donde}: "${p}" debe tener de 3 a ${LADO_SOPA} letras`);
+    if (![...n].every((c) => LETRAS.includes(c)))
+      errores.push(`${donde}: "${p}" tiene caracteres fuera del teclado`);
+    if (vistasTema.has(n)) errores.push(`${donde}: "${p}" repetida`);
+    vistasTema.add(n);
+  }
+}
+const sopasCalendario = calendario.sopas ?? [];
+if (!sopasCalendario.length) errores.push('calendario.json: no tiene sopas de letras');
+for (const s of sopasCalendario) {
+  const original = contenidoSopas.find((x) => x.id === s.id);
+  if (!original) errores.push(`calendario.json: la sopa ${s.id} no está en sopas.json`);
+  else if (original.estado !== 'listo')
+    errores.push(`calendario.json: la sopa ${s.id} está pendiente`);
+  else if (original.palabras.join() !== s.palabras.map((p) => p.palabra).join())
+    errores.push(
+      `calendario.json: la sopa ${s.id} está desactualizada; corre "npm run calendario"`,
+    );
+  if (s.filas?.length !== LADO_SOPA || s.filas.some((f) => largo(f) !== LADO_SOPA))
+    errores.push(`calendario.json: la sopa ${s.id} no es de ${LADO_SOPA}×${LADO_SOPA}`);
+  for (const p of s.palabras ?? []) {
+    if (letrasEntre(s.filas ?? [], p.inicio, p.fin) !== normalizar(p.palabra))
+      errores.push(`calendario.json: en la sopa ${s.id}, "${p.palabra}" no está donde dice`);
+  }
+}
+
+// ---------- Crucigramas ----------
+const grupoCrucigrama = leerJson('data/contenido/crucigramas.json');
+const vistasCrucigrama = new Set();
+for (const e of grupoCrucigrama) {
+  const donde = `crucigramas.json ${e.id ?? '(sin id)'} (${e.palabra})`;
+  if (!/^x\d{3,}$/.test(e.id ?? '')) errores.push(`${donde}: id inválido (formato x001)`);
+  if (!['listo', 'pendiente'].includes(e.estado)) errores.push(`${donde}: estado inválido`);
+  if (!e.pista?.es || !e.pista?.en) errores.push(`${donde}: falta pista en ES o EN`);
+  const n = normalizar(e.palabra ?? '');
+  if (largo(n) < 3 || largo(n) > LADO_CRUCIGRAMA)
+    errores.push(`${donde}: debe tener de 3 a ${LADO_CRUCIGRAMA} letras`);
+  if (![...n].every((c) => LETRAS.includes(c)))
+    errores.push(`${donde}: tiene caracteres fuera del teclado`);
+  if (vistasCrucigrama.has(n)) errores.push(`${donde}: palabra repetida`);
+  vistasCrucigrama.add(n);
+}
+const crucigramasCalendario = calendario.crucigramas ?? [];
+if (!crucigramasCalendario.length) errores.push('calendario.json: no tiene crucigramas');
+for (const x of crucigramasCalendario) {
+  if ((x.palabras ?? []).length < 5)
+    errores.push(`calendario.json: el crucigrama ${x.id} tiene menos de 5 palabras`);
+  if (x.ancho > LADO_CRUCIGRAMA || x.alto > LADO_CRUCIGRAMA)
+    errores.push(`calendario.json: el crucigrama ${x.id} es muy grande`);
+  for (const pr of problemasCrucigrama(x))
+    errores.push(`calendario.json: crucigrama ${x.id}: ${pr}`);
+}
+
 // ---------- Mapa ----------
 const RUTA_MAPA = 'public/datos/mapa.json';
 if (!existsSync(join(RAIZ, RUTA_MAPA))) {
@@ -226,13 +298,19 @@ const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota' }).for
 const transcurridos = Math.round((Date.parse(hoy) - Date.parse(calendario.inicio)) / 86_400_000);
 // Cuando una lista se acaba, el juego repite su ciclo; si después se agrega
 // contenido, cambia el reto del día. Por eso se avisa con un mes de margen.
-for (const [cuantos, que] of [
+const transcurridosDesde = (desde) =>
+  desde
+    ? Math.max(0, Math.round((Date.parse(hoy) - Date.parse(desde)) / 86_400_000))
+    : transcurridos;
+for (const [cuantos, que, desde] of [
   [calendario.dias.length, 'palabras (npm run calendario tras agregarlas)'],
   [(calendario.municipios ?? []).length, 'municipios a respuestas-municipio.json'],
   [(calendario.dichos ?? []).length, 'dichos a dichos.json'],
   [categoriasCalendario.length, 'categorías a categorias.json'],
+  [sopasCalendario.length, 'sopas a sopas.json', calendario.desde?.sopas],
+  [crucigramasCalendario.length, 'crucigramas a crucigramas.json', calendario.desde?.crucigramas],
 ]) {
-  const quedan = cuantos - transcurridos - 1;
+  const quedan = cuantos - transcurridosDesde(desde) - 1;
   if (quedan < 30)
     avisos.push(`Quedan ${Math.max(0, quedan)} días de ${que.split(' ')[0]}: agrega ${que}.`);
 }
@@ -243,5 +321,5 @@ if (errores.length) {
   process.exit(1);
 }
 console.log(
-  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días, ${(calendario.municipios ?? []).length} municipios, ${dichosCalendario.length} dichos y ${categoriasCalendario.length} palabras por categoría.`,
+  `Contenido válido: ${respuestas.length} palabras, ${calendario.dias.length} días, ${(calendario.municipios ?? []).length} municipios, ${dichosCalendario.length} dichos, ${categoriasCalendario.length} palabras por categoría, ${sopasCalendario.length} sopas y ${crucigramasCalendario.length} crucigramas.`,
 );

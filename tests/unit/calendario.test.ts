@@ -19,6 +19,8 @@ describe('retoDelDia', () => {
       municipio: null,
       dicho: null,
       categoria: null,
+      sopa: null,
+      crucigrama: null,
       repetido: false,
     });
     expect(retoDelDia(cal, '2026-10-13')).toEqual({
@@ -27,6 +29,8 @@ describe('retoDelDia', () => {
       municipio: null,
       dicho: null,
       categoria: null,
+      sopa: null,
+      crucigrama: null,
       repetido: false,
     });
   });
@@ -38,6 +42,8 @@ describe('retoDelDia', () => {
       municipio: null,
       dicho: null,
       categoria: null,
+      sopa: null,
+      crucigrama: null,
       repetido: true,
     });
   });
@@ -77,6 +83,28 @@ describe('retoDelDia', () => {
     expect(retoDelDia(conCategorias, '2026-10-14').categoria?.id).toBe('c001');
   });
 
+  it('sopa y crucigrama cuentan su ciclo desde su propia fecha', () => {
+    const sopa = (id: string) => ({
+      id,
+      tema: { es: 'x', en: 'x', icono: 'x' },
+      filas: [],
+      palabras: [],
+    });
+    const cruci = (id: string) => ({ id, ancho: 1, alto: 1, palabras: [] });
+    const c = {
+      ...cal,
+      sopas: [sopa('s001'), sopa('s002'), sopa('s003')],
+      crucigramas: [cruci('k001'), cruci('k002')],
+      desde: { sopas: '2026-10-14' },
+    };
+    expect(retoDelDia(c, '2026-10-14').sopa?.id).toBe('s001');
+    expect(retoDelDia(c, '2026-10-17').sopa?.id).toBe('s001');
+    expect(retoDelDia(c, '2026-10-13').sopa?.id).toBe('s003'); // antes de empezar
+    // Sin fecha propia, el crucigrama sigue al número del reto.
+    expect(retoDelDia(c, '2026-10-12').crucigrama?.id).toBe('k001');
+    expect(retoDelDia(c, '2026-10-13').crucigrama?.id).toBe('k002');
+  });
+
   it('falla con calendario vacío', () => {
     expect(() => retoDelDia({ inicio: '2026-10-12', dias: [] }, '2026-10-12')).toThrow();
   });
@@ -87,6 +115,8 @@ describe('retoDelDia', () => {
     expect(retoDelDia(real, real.inicio).numero).toBe(1);
     expect(retoDelDia(real, real.inicio).dicho).not.toBeNull();
     expect(retoDelDia(real, real.inicio).categoria).not.toBeNull();
+    expect(retoDelDia(real, real.inicio).sopa).not.toBeNull();
+    expect(retoDelDia(real, real.inicio).crucigrama).not.toBeNull();
   });
 });
 

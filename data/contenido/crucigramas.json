@@ -1,0 +1,641 @@
+[
+  {
+    "id": "x001",
+    "palabra": "café",
+    "pista": {
+      "es": "Grano que Colombia exporta y que se toma en tinto.",
+      "en": "Bean Colombia exports; drunk as a 'tinto'."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x002",
+    "palabra": "andes",
+    "pista": {
+      "es": "Cordillera que atraviesa Colombia en tres ramales.",
+      "en": "Mountain range that crosses Colombia in three branches."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x003",
+    "palabra": "caribe",
+    "pista": {
+      "es": "Mar al norte de Colombia.",
+      "en": "Sea to the north of Colombia."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x004",
+    "palabra": "pacífico",
+    "pista": {
+      "es": "Océano al occidente de Colombia.",
+      "en": "Ocean to the west of Colombia."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x005",
+    "palabra": "llanos",
+    "pista": {
+      "es": "Región de grandes sabanas del oriente, tierra del joropo.",
+      "en": "Region of vast eastern plains, home of joropo music."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x006",
+    "palabra": "bogotá",
+    "pista": {
+      "es": "Capital de Colombia.",
+      "en": "Capital of Colombia."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x007",
+    "palabra": "cali",
+    "pista": {
+      "es": "Ciudad conocida como la capital mundial de la salsa.",
+      "en": "City known as the world capital of salsa."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x008",
+    "palabra": "medellín",
+    "pista": {
+      "es": "La ciudad de la eterna primavera.",
+      "en": "The city of eternal spring."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x009",
+    "palabra": "cartagena",
+    "pista": {
+      "es": "Ciudad amurallada del Caribe.",
+      "en": "Walled city on the Caribbean."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x010",
+    "palabra": "amazonas",
+    "pista": {
+      "es": "El departamento más grande de Colombia.",
+      "en": "Colombia's largest department."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x011",
+    "palabra": "guajira",
+    "pista": {
+      "es": "Península del extremo norte, tierra de los wayuu.",
+      "en": "Northernmost peninsula, land of the Wayuu."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x012",
+    "palabra": "orquídea",
+    "pista": {
+      "es": "Flor nacional de Colombia.",
+      "en": "Colombia's national flower."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x013",
+    "palabra": "cóndor",
+    "pista": {
+      "es": "Ave nacional de Colombia.",
+      "en": "Colombia's national bird."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x014",
+    "palabra": "palma",
+    "pista": {
+      "es": "La de cera es el árbol nacional.",
+      "en": "The wax one is the national tree."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x015",
+    "palabra": "bandera",
+    "pista": {
+      "es": "Amarillo, azul y rojo.",
+      "en": "Yellow, blue and red."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x016",
+    "palabra": "escudo",
+    "pista": {
+      "es": "Emblema nacional con un cóndor y el istmo de Panamá.",
+      "en": "National emblem with a condor and the Isthmus of Panama."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x017",
+    "palabra": "himno",
+    "pista": {
+      "es": "Su coro empieza con «¡Oh gloria inmarcesible!».",
+      "en": "Its chorus begins '¡Oh gloria inmarcesible!'."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x018",
+    "palabra": "peso",
+    "pista": {
+      "es": "Moneda de Colombia.",
+      "en": "Colombia's currency."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x019",
+    "palabra": "arepa",
+    "pista": {
+      "es": "Masa de maíz redonda, asada o frita.",
+      "en": "Round corn cake, grilled or fried."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x020",
+    "palabra": "tinto",
+    "pista": {
+      "es": "Café negro, en Colombia.",
+      "en": "Black coffee, in Colombia."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x021",
+    "palabra": "panela",
+    "pista": {
+      "es": "Bloque de azúcar de caña sin refinar.",
+      "en": "Block of unrefined cane sugar."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x022",
+    "palabra": "ruana",
+    "pista": {
+      "es": "Prenda de lana de tierra fría.",
+      "en": "Wool garment from the cold highlands."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x023",
+    "palabra": "cumbia",
+    "pista": {
+      "es": "Ritmo del Caribe colombiano que se baila con velas.",
+      "en": "Colombian Caribbean rhythm danced with candles."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x024",
+    "palabra": "vallenato",
+    "pista": {
+      "es": "Música de acordeón, caja y guacharaca.",
+      "en": "Music played with accordion, caja drum and guacharaca."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x025",
+    "palabra": "salsa",
+    "pista": {
+      "es": "Ritmo que se baila con fuerza en Cali.",
+      "en": "Rhythm danced with passion in Cali."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x026",
+    "palabra": "tejo",
+    "pista": {
+      "es": "Deporte nacional: lanzar un disco a una cancha con mecha.",
+      "en": "National sport: throwing a disc at a target with gunpowder."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x027",
+    "palabra": "ciclismo",
+    "pista": {
+      "es": "Deporte de Egan Bernal y Nairo Quintana.",
+      "en": "Sport of Egan Bernal and Nairo Quintana."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x028",
+    "palabra": "fútbol",
+    "pista": {
+      "es": "Deporte que juega la Selección Colombia.",
+      "en": "Sport played by the Colombian national team."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x029",
+    "palabra": "esmeralda",
+    "pista": {
+      "es": "Piedra preciosa verde por la que Colombia es famosa.",
+      "en": "Green gemstone Colombia is famous for."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x030",
+    "palabra": "oro",
+    "pista": {
+      "es": "Metal que da nombre a un museo famoso de Bogotá.",
+      "en": "Metal that names a famous museum in Bogotá."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x031",
+    "palabra": "sal",
+    "pista": {
+      "es": "La catedral de Zipaquirá está en una mina de…",
+      "en": "Zipaquirá's cathedral is inside a mine of…"
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x032",
+    "palabra": "guatapé",
+    "pista": {
+      "es": "Pueblo antioqueño de zócalos de colores, junto a la piedra del Peñol.",
+      "en": "Antioquia town with colorful wall panels, next to El Peñol rock."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x033",
+    "palabra": "tayrona",
+    "pista": {
+      "es": "Parque nacional en la costa, cerca de Santa Marta.",
+      "en": "National park on the coast near Santa Marta."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x034",
+    "palabra": "cocora",
+    "pista": {
+      "es": "Valle de las palmas de cera, en el Quindío.",
+      "en": "Valley of the wax palms, in Quindío."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x035",
+    "palabra": "cañón",
+    "pista": {
+      "es": "El del Chicamocha está en Santander.",
+      "en": "The Chicamocha one is in Santander."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x036",
+    "palabra": "volcán",
+    "pista": {
+      "es": "El Nevado del Ruiz es uno.",
+      "en": "The Nevado del Ruiz is one."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x037",
+    "palabra": "nevado",
+    "pista": {
+      "es": "Montaña con nieve, como el del Huila.",
+      "en": "Snow-capped mountain, like the one in Huila."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x038",
+    "palabra": "páramo",
+    "pista": {
+      "es": "Ecosistema de alta montaña con frailejones.",
+      "en": "High-mountain ecosystem with frailejones."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x039",
+    "palabra": "selva",
+    "pista": {
+      "es": "Bosque tropical espeso.",
+      "en": "Dense tropical forest."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x040",
+    "palabra": "río",
+    "pista": {
+      "es": "El Magdalena es el más importante del país.",
+      "en": "The Magdalena is the country's most important one."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x041",
+    "palabra": "isla",
+    "pista": {
+      "es": "San Andrés es una.",
+      "en": "San Andrés is one."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x042",
+    "palabra": "playa",
+    "pista": {
+      "es": "Arena junto al mar.",
+      "en": "Sand next to the sea."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x043",
+    "palabra": "ballena",
+    "pista": {
+      "es": "La jorobada llega al Pacífico colombiano a tener sus crías.",
+      "en": "The humpback one comes to Colombia's Pacific to give birth."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x044",
+    "palabra": "delfín",
+    "pista": {
+      "es": "El rosado vive en el Amazonas.",
+      "en": "The pink one lives in the Amazon."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x045",
+    "palabra": "mono",
+    "pista": {
+      "es": "El tití cabeciblanco es uno.",
+      "en": "The cotton-top tamarin is one."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x046",
+    "palabra": "rana",
+    "pista": {
+      "es": "La dorada del Chocó es muy venenosa.",
+      "en": "The golden one from Chocó is very poisonous."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x047",
+    "palabra": "colibrí",
+    "pista": {
+      "es": "Ave diminuta que puede volar hacia atrás.",
+      "en": "Tiny bird that can fly backwards."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x048",
+    "palabra": "mariposa",
+    "pista": {
+      "es": "Insecto de alas de colores.",
+      "en": "Insect with colorful wings."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x049",
+    "palabra": "parcero",
+    "pista": {
+      "es": "Amigo, en Medellín.",
+      "en": "Friend, in Medellín slang."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x050",
+    "palabra": "chévere",
+    "pista": {
+      "es": "Algo muy bueno o agradable.",
+      "en": "Something very good or nice."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x051",
+    "palabra": "bacano",
+    "pista": {
+      "es": "Sinónimo coloquial de chévere.",
+      "en": "Colloquial synonym of 'chévere' (cool)."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x052",
+    "palabra": "guayabo",
+    "pista": {
+      "es": "Malestar del día siguiente a la fiesta.",
+      "en": "How you feel the day after the party (hangover)."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x053",
+    "palabra": "pola",
+    "pista": {
+      "es": "Cerveza, en lenguaje coloquial.",
+      "en": "Beer, colloquially."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x054",
+    "palabra": "mecato",
+    "pista": {
+      "es": "Comida ligera entre comidas.",
+      "en": "Snack between meals."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x055",
+    "palabra": "flota",
+    "pista": {
+      "es": "Bus intermunicipal, en Colombia.",
+      "en": "Intercity bus, in Colombia."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x056",
+    "palabra": "tienda",
+    "pista": {
+      "es": "Negocio de barrio donde se compra de todo.",
+      "en": "Neighborhood shop that sells a bit of everything."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x057",
+    "palabra": "lluvia",
+    "pista": {
+      "es": "Agua que cae de las nubes.",
+      "en": "Water that falls from clouds."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x058",
+    "palabra": "sol",
+    "pista": {
+      "es": "Estrella que nos da luz.",
+      "en": "Star that gives us light."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x059",
+    "palabra": "luna",
+    "pista": {
+      "es": "Satélite natural de la Tierra.",
+      "en": "Earth's natural satellite."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x060",
+    "palabra": "mar",
+    "pista": {
+      "es": "Gran masa de agua salada.",
+      "en": "Large body of salt water."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x061",
+    "palabra": "libro",
+    "pista": {
+      "es": "«Cien años de soledad» es uno famoso.",
+      "en": "'One Hundred Years of Solitude' is a famous one."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x062",
+    "palabra": "gabo",
+    "pista": {
+      "es": "Apodo de Gabriel García Márquez.",
+      "en": "Gabriel García Márquez's nickname."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x063",
+    "palabra": "macondo",
+    "pista": {
+      "es": "Pueblo inventado de «Cien años de soledad».",
+      "en": "Fictional town of 'One Hundred Years of Solitude'."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x064",
+    "palabra": "nobel",
+    "pista": {
+      "es": "Premio que ganó García Márquez en 1982.",
+      "en": "Prize García Márquez won in 1982."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x065",
+    "palabra": "botero",
+    "pista": {
+      "es": "Pintor y escultor de figuras voluminosas.",
+      "en": "Painter and sculptor of voluminous figures."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x066",
+    "palabra": "shakira",
+    "pista": {
+      "es": "Cantante barranquillera de «Hips Don't Lie».",
+      "en": "Singer from Barranquilla, of 'Hips Don't Lie'."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x067",
+    "palabra": "carnaval",
+    "pista": {
+      "es": "El de Barranquilla es patrimonio de la Unesco.",
+      "en": "Barranquilla's is UNESCO heritage."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x068",
+    "palabra": "feria",
+    "pista": {
+      "es": "La de las Flores es en Medellín.",
+      "en": "The Flower one is in Medellín."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x069",
+    "palabra": "silleta",
+    "pista": {
+      "es": "Estructura con flores que se carga a la espalda en Medellín.",
+      "en": "Flower structure carried on the back in Medellín."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x070",
+    "palabra": "marimba",
+    "pista": {
+      "es": "Instrumento de madera de la música del Pacífico.",
+      "en": "Wooden instrument of Pacific music."
+    },
+    "estado": "listo"
+  },
+  {
+    "id": "x071",
+    "palabra": "abuela",
+    "pista": {
+      "es": "La mamá de tu mamá.",
+      "en": "Your mother's mother."
+    },
+    "estado": "listo"
+  }
+]

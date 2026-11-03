@@ -1,0 +1,306 @@
+[
+  {
+    "id": "s001",
+    "tema": {
+      "es": "Ríos de Colombia",
+      "en": "Colombian rivers",
+      "icono": "🏞️"
+    },
+    "palabras": [
+      "magdalena",
+      "cauca",
+      "atrato",
+      "meta",
+      "guaviare",
+      "putumayo",
+      "caquetá",
+      "sinú"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s002",
+    "tema": {
+      "es": "Departamentos",
+      "en": "Departments",
+      "icono": "🗺️"
+    },
+    "palabras": [
+      "antioquia",
+      "boyacá",
+      "nariño",
+      "caldas",
+      "huila",
+      "cesar",
+      "sucre",
+      "chocó"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s003",
+    "tema": {
+      "es": "Frutas",
+      "en": "Fruits",
+      "icono": "🍍"
+    },
+    "palabras": [
+      "guanábana",
+      "lulo",
+      "mora",
+      "curuba",
+      "pitahaya",
+      "maracuyá",
+      "feijoa",
+      "uchuva"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s004",
+    "tema": {
+      "es": "Comida típica",
+      "en": "Traditional food",
+      "icono": "🫓"
+    },
+    "palabras": [
+      "arepa",
+      "tamal",
+      "ajiaco",
+      "changua",
+      "bandeja",
+      "mute",
+      "sancocho",
+      "buñuelo"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s005",
+    "tema": {
+      "es": "Ritmos musicales",
+      "en": "Music genres",
+      "icono": "🎶"
+    },
+    "palabras": [
+      "cumbia",
+      "vallenato",
+      "bambuco",
+      "porro",
+      "joropo",
+      "currulao",
+      "champeta",
+      "salsa"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s006",
+    "tema": {
+      "es": "Animales",
+      "en": "Animals",
+      "icono": "🐆"
+    },
+    "palabras": [
+      "jaguar",
+      "cóndor",
+      "danta",
+      "tucán",
+      "chigüiro",
+      "babilla",
+      "oso",
+      "manatí"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s007",
+    "tema": {
+      "es": "Ciudades",
+      "en": "Cities",
+      "icono": "🏙️"
+    },
+    "palabras": [
+      "bogotá",
+      "medellín",
+      "cali",
+      "cartagena",
+      "pasto",
+      "tunja",
+      "leticia",
+      "popayán"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s008",
+    "tema": {
+      "es": "Deportes",
+      "en": "Sports",
+      "icono": "⚽"
+    },
+    "palabras": [
+      "fútbol",
+      "ciclismo",
+      "tejo",
+      "béisbol",
+      "boxeo",
+      "patinaje",
+      "natación",
+      "atletismo"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s009",
+    "tema": {
+      "es": "Bebidas",
+      "en": "Drinks",
+      "icono": "☕"
+    },
+    "palabras": [
+      "tinto",
+      "aguapanela",
+      "chicha",
+      "guarapo",
+      "avena",
+      "jugo",
+      "masato",
+      "refajo"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s010",
+    "tema": {
+      "es": "Cocina",
+      "en": "Kitchen",
+      "icono": "🍳"
+    },
+    "palabras": [
+      "olla",
+      "sartén",
+      "cuchara",
+      "colador",
+      "caldero",
+      "molinillo",
+      "rallador",
+      "tabla"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s011",
+    "tema": {
+      "es": "Hogar",
+      "en": "Home",
+      "icono": "🏠"
+    },
+    "palabras": [
+      "nevera",
+      "estufa",
+      "cobija",
+      "almohada",
+      "cortina",
+      "hamaca",
+      "butaco",
+      "ventana"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s012",
+    "tema": {
+      "es": "Aseo",
+      "en": "Cleaning",
+      "icono": "🧽"
+    },
+    "palabras": [
+      "escoba",
+      "trapero",
+      "jabón",
+      "balde",
+      "esponja",
+      "cepillo",
+      "recogedor",
+      "cloro"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s013",
+    "tema": {
+      "es": "Ropa",
+      "en": "Clothing",
+      "icono": "👕"
+    },
+    "palabras": [
+      "ruana",
+      "poncho",
+      "sombrero",
+      "mochila",
+      "camisa",
+      "chaqueta",
+      "bufanda",
+      "alpargatas"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s014",
+    "tema": {
+      "es": "Flores y plantas",
+      "en": "Flowers and plants",
+      "icono": "🌸"
+    },
+    "palabras": [
+      "orquídea",
+      "girasol",
+      "rosa",
+      "clavel",
+      "palma",
+      "frailejón",
+      "helecho",
+      "cafeto"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s015",
+    "tema": {
+      "es": "Profesiones",
+      "en": "Jobs",
+      "icono": "🧑‍🔧"
+    },
+    "palabras": [
+      "médico",
+      "maestro",
+      "cocinero",
+      "ingeniero",
+      "abogado",
+      "enfermero",
+      "piloto",
+      "panadero"
+    ],
+    "estado": "listo"
+  },
+  {
+    "id": "s016",
+    "tema": {
+      "es": "Útiles escolares",
+      "en": "School supplies",
+      "icono": "✏️"
+    },
+    "palabras": [
+      "lápiz",
+      "cuaderno",
+      "borrador",
+      "regla",
+      "tijeras",
+      "colores",
+      "cartuchera",
+      "pegante"
+    ],
+    "estado": "listo"
+  }
+]

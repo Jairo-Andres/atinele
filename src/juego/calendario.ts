@@ -1,6 +1,8 @@
 import type { RetoCategoria } from './categorias';
+import type { Crucigrama } from './crucigrama';
+import type { Sopa } from './sopa';
 import type { Dicho } from './dichos';
-import { numeroReto } from './dia';
+import { diasEntre, numeroReto } from './dia';
 
 export interface DiaCalendario {
   n: number;
@@ -16,6 +18,10 @@ export interface Calendario {
   dichos?: Dicho[];
   /** Palabras por categoría en orden (con su categoría y pista); ciclo propio. */
   categorias?: RetoCategoria[];
+  sopas?: Sopa[];
+  crucigramas?: Crucigrama[];
+  /** Fecha desde la que cuenta el ciclo de las listas que se agregaron después. */
+  desde?: { sopas?: string; crucigramas?: string };
 }
 
 export interface RetoDelDia {
@@ -27,6 +33,8 @@ export interface RetoDelDia {
   dicho: Dicho | null;
   /** Palabra por categoría del día, si el calendario tiene categorías. */
   categoria: RetoCategoria | null;
+  sopa: Sopa | null;
+  crucigrama: Crucigrama | null;
   /** true si el calendario se acabó y se está repitiendo el ciclo. */
   repetido: boolean;
 }
@@ -46,8 +54,16 @@ export function retoDelDia(calendario: Calendario, hoy: string): RetoDelDia {
   const categoria = categorias.length
     ? (categorias[(numero - 1) % categorias.length] as RetoCategoria)
     : null;
+  /** Elemento del día en una lista con ciclo propio que empieza en `desde`. */
+  const delDia = <T>(lista: T[] | undefined, desde?: string): T | null => {
+    if (!lista?.length) return null;
+    const n = desde ? diasEntre(desde, hoy) : numero - 1;
+    return lista[((n % lista.length) + lista.length) % lista.length] as T;
+  };
   return {
     numero,
+    sopa: delDia(calendario.sopas, calendario.desde?.sopas),
+    crucigrama: delDia(calendario.crucigramas, calendario.desde?.crucigramas),
     palabra: dia.palabra,
     municipio,
     dicho,

@@ -1,36 +1,15 @@
-// Agrega al final de data/contenido/calendario.json las palabras, municipios, dichos y categorías "listo" que
+// Agrega al final de data/contenido/calendario.json las palabras, municipios, dichos, categorías, sopas y crucigramas "listo" que
 // aún no están, mezcladas con una semilla fija (resultado reproducible).
 // Nunca reordena días ya publicados, para no cambiar retos pasados.
 //
 // Uso: node scripts/generar-calendario.mjs [--inicio AAAA-MM-DD]
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { RAIZ, escribirJson, leerJson } from './lib.mjs';
+import { RAIZ, escribirJson, leerJson, normalizar } from './lib.mjs';
+import { generarCrucigrama, generarSopa, mezclar } from './rejillas.mjs';
 
 const RUTA = 'data/contenido/calendario.json';
 const SEMILLA = 20261011;
-
-// Generador pseudoaleatorio mulberry32.
-function aleatorio(semilla) {
-  let a = semilla >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function mezclar(lista, semilla) {
-  const r = aleatorio(semilla);
-  const copia = [...lista];
-  for (let i = copia.length - 1; i > 0; i--) {
-    const j = Math.floor(r() * (i + 1));
-    [copia[i], copia[j]] = [copia[j], copia[i]];
-  }
-  return copia;
-}
 
 const argInicio = process.argv.indexOf('--inicio');
 const calendario = existsSync(join(RAIZ, RUTA))
@@ -99,7 +78,71 @@ calendario.categorias.push(
   ...mezclar(nuevasCategorias, SEMILLA + 17 + calendario.categorias.length).map(publicoCategoria),
 );
 
+// Las listas que empezaron después del día 1 cuentan su ciclo desde su propia
+// fecha (la de Colombia del día en que se agregaron), así no arrancan repetidas.
+const hoyColombia = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Bogota' }).format(
+  new Date(),
+);
+calendario.desde ??= {};
+calendario.desde.sopas ??= hoyColombia;
+calendario.desde.crucigramas ??= hoyColombia;
+
+// Sopas de letras: la rejilla se genera aquí (determinista por id) y va lista.
+calendario.sopas ??= [];
+const sopas = leerJson('data/contenido/sopas.json');
+const publicoSopa = (s) => ({
+  id: s.id,
+  tema: s.tema,
+  ...generarSopa(s.palabras, SEMILLA + Number(s.id.slice(1))),
+});
+const porIdSopa = new Map(sopas.map((s) => [s.id, s]));
+// Si cambian las palabras de un tema ya publicado, se regenera su rejilla.
+calendario.sopas = calendario.sopas.map((s) => {
+  const original = porIdSopa.get(s.id);
+  const iguales = original && original.palabras.join() === s.palabras.map((p) => p.palabra).join();
+  return original && !iguales
+    ? publicoSopa(original)
+    : original
+      ? { ...s, tema: original.tema }
+      : s;
+});
+const usadasSopas = new Set(calendario.sopas.map((s) => s.id));
+const nuevasSopas = sopas.filter((s) => s.estado === 'listo' && !usadasSopas.has(s.id));
+calendario.sopas.push(
+  ...mezclar(nuevasSopas, SEMILLA + 19 + calendario.sopas.length).map(publicoSopa),
+);
+
+// Crucigramas: se arman con las palabras "listo" que aún no salieron en ninguno.
+// Las que no cruzan con otras esperan a que haya más palabras.
+calendario.crucigramas ??= [];
+const grupoCrucigrama = leerJson('data/contenido/crucigramas.json');
+const pistas = new Map(grupoCrucigrama.map((e) => [normalizar(e.palabra), e.pista]));
+for (const x of calendario.crucigramas) {
+  for (const p of x.palabras) p.pista = pistas.get(normalizar(p.palabra)) ?? p.pista;
+}
+const yaUsadas = new Set(
+  calendario.crucigramas.flatMap((x) => x.palabras.map((p) => normalizar(p.palabra))),
+);
+let libres = mezclar(
+  grupoCrucigrama.filter((e) => e.estado === 'listo' && !yaUsadas.has(normalizar(e.palabra))),
+  SEMILLA + 23 + calendario.crucigramas.length,
+);
+let nuevosCrucigramas = 0;
+while (libres.length >= 5) {
+  const n = calendario.crucigramas.length + 1;
+  const x = generarCrucigrama(libres, SEMILLA + 29 + n);
+  if (!x || x.palabras.length < 5) break;
+  calendario.crucigramas.push({
+    id: `k${String(n).padStart(3, '0')}`,
+    ancho: x.ancho,
+    alto: x.alto,
+    palabras: x.palabras,
+  });
+  libres = libres.filter((e) => !x.usadas.includes(e));
+  nuevosCrucigramas++;
+}
+
 escribirJson(RUTA, calendario);
 console.log(
-  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) ${calendario.dichos.length} dichos (+${nuevosDichos.length}) y ${calendario.categorias.length} palabras por categoría (+${nuevasCategorias.length}) desde ${calendario.inicio}.`,
+  `Calendario: ${calendario.dias.length} palabras (+${nuevas.length}) ${calendario.municipios.length} municipios (+${nuevosMunicipios.length}) ${calendario.dichos.length} dichos (+${nuevosDichos.length}) ${calendario.categorias.length} palabras por categoría (+${nuevasCategorias.length}), ${calendario.sopas.length} sopas (+${nuevasSopas.length}) y ${calendario.crucigramas.length} crucigramas (+${nuevosCrucigramas}; ${libres.length} palabras esperando) desde ${calendario.inicio}.`,
 );

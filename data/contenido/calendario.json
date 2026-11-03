@@ -1363,5 +1363,2510 @@
         "en": "It lathers; used to wash hands or clothes."
       }
     }
-  ]
+  ],
+  "sopas": [
+    {
+      "id": "s009",
+      "tema": {
+        "es": "Bebidas",
+        "en": "Drinks",
+        "icono": "☕"
+      },
+      "filas": [
+        "AAHBZOTNIT",
+        "DGOEUGRAIM",
+        "MUCOAUIJBQ",
+        "VAZZAAIUTV",
+        "ZPRAHRRGUO",
+        "OAEACAUOTL",
+        "NNFVIPEAEE",
+        "IEAEHOSMDN",
+        "ELJNCANILE",
+        "NAOAMTTIOI"
+      ],
+      "palabras": [
+        {
+          "palabra": "tinto",
+          "inicio": [
+            0,
+            9
+          ],
+          "fin": [
+            0,
+            5
+          ]
+        },
+        {
+          "palabra": "aguapanela",
+          "inicio": [
+            0,
+            1
+          ],
+          "fin": [
+            9,
+            1
+          ]
+        },
+        {
+          "palabra": "chicha",
+          "inicio": [
+            8,
+            4
+          ],
+          "fin": [
+            3,
+            4
+          ]
+        },
+        {
+          "palabra": "guarapo",
+          "inicio": [
+            1,
+            5
+          ],
+          "fin": [
+            7,
+            5
+          ]
+        },
+        {
+          "palabra": "avena",
+          "inicio": [
+            5,
+            3
+          ],
+          "fin": [
+            9,
+            3
+          ]
+        },
+        {
+          "palabra": "jugo",
+          "inicio": [
+            2,
+            7
+          ],
+          "fin": [
+            5,
+            7
+          ]
+        },
+        {
+          "palabra": "masato",
+          "inicio": [
+            9,
+            4
+          ],
+          "fin": [
+            4,
+            9
+          ]
+        },
+        {
+          "palabra": "refajo",
+          "inicio": [
+            4,
+            2
+          ],
+          "fin": [
+            9,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s004",
+      "tema": {
+        "es": "Comida típica",
+        "en": "Traditional food",
+        "icono": "🫓"
+      },
+      "filas": [
+        "QFSTTAMALB",
+        "OOÑACVASOU",
+        "CAUGNAHCNÑ",
+        "AANMNCEIEU",
+        "IYLTAEOFLE",
+        "JLYTMERCAL",
+        "AJEDNABSHO",
+        "DETDFDSOAO",
+        "ZAMUTERAOG",
+        "GAREPASOHT"
+      ],
+      "palabras": [
+        {
+          "palabra": "arepa",
+          "inicio": [
+            9,
+            1
+          ],
+          "fin": [
+            9,
+            5
+          ]
+        },
+        {
+          "palabra": "tamal",
+          "inicio": [
+            0,
+            4
+          ],
+          "fin": [
+            0,
+            8
+          ]
+        },
+        {
+          "palabra": "ajiaco",
+          "inicio": [
+            6,
+            0
+          ],
+          "fin": [
+            1,
+            0
+          ]
+        },
+        {
+          "palabra": "changua",
+          "inicio": [
+            2,
+            7
+          ],
+          "fin": [
+            2,
+            1
+          ]
+        },
+        {
+          "palabra": "bandeja",
+          "inicio": [
+            6,
+            6
+          ],
+          "fin": [
+            6,
+            0
+          ]
+        },
+        {
+          "palabra": "mute",
+          "inicio": [
+            8,
+            2
+          ],
+          "fin": [
+            8,
+            5
+          ]
+        },
+        {
+          "palabra": "sancocho",
+          "inicio": [
+            0,
+            2
+          ],
+          "fin": [
+            7,
+            9
+          ]
+        },
+        {
+          "palabra": "buñuelo",
+          "inicio": [
+            0,
+            9
+          ],
+          "fin": [
+            6,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s005",
+      "tema": {
+        "es": "Ritmos musicales",
+        "en": "Music genres",
+        "icono": "🎶"
+      },
+      "filas": [
+        "OALURRUCSD",
+        "JPCHAMPETA",
+        "OADORROPNG",
+        "RRIIJPEMIO",
+        "OERPOEUPAN",
+        "PDYBAMBUCO",
+        "OONRJGLLZU",
+        "RAIACUMBIA",
+        "IVALLENATO",
+        "JSASLASOOU"
+      ],
+      "palabras": [
+        {
+          "palabra": "cumbia",
+          "inicio": [
+            7,
+            4
+          ],
+          "fin": [
+            7,
+            9
+          ]
+        },
+        {
+          "palabra": "vallenato",
+          "inicio": [
+            8,
+            1
+          ],
+          "fin": [
+            8,
+            9
+          ]
+        },
+        {
+          "palabra": "bambuco",
+          "inicio": [
+            5,
+            3
+          ],
+          "fin": [
+            5,
+            9
+          ]
+        },
+        {
+          "palabra": "porro",
+          "inicio": [
+            2,
+            7
+          ],
+          "fin": [
+            2,
+            3
+          ]
+        },
+        {
+          "palabra": "joropo",
+          "inicio": [
+            1,
+            0
+          ],
+          "fin": [
+            6,
+            0
+          ]
+        },
+        {
+          "palabra": "currulao",
+          "inicio": [
+            0,
+            7
+          ],
+          "fin": [
+            0,
+            0
+          ]
+        },
+        {
+          "palabra": "champeta",
+          "inicio": [
+            1,
+            2
+          ],
+          "fin": [
+            1,
+            9
+          ]
+        },
+        {
+          "palabra": "salsa",
+          "inicio": [
+            9,
+            6
+          ],
+          "fin": [
+            9,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s010",
+      "tema": {
+        "es": "Cocina",
+        "en": "Kitchen",
+        "icono": "🍳"
+      },
+      "filas": [
+        "LRAZIRMLOP",
+        "RRRALLADOR",
+        "TTFSNETRAS",
+        "COLLINILOM",
+        "TURODALOCM",
+        "IOCEERNHTA",
+        "ELOHGCBDNA",
+        "SLANAGUODO",
+        "CALDEROMEU",
+        "LÑTABLASLO"
+      ],
+      "palabras": [
+        {
+          "palabra": "olla",
+          "inicio": [
+            5,
+            1
+          ],
+          "fin": [
+            8,
+            1
+          ]
+        },
+        {
+          "palabra": "sartén",
+          "inicio": [
+            2,
+            9
+          ],
+          "fin": [
+            2,
+            4
+          ]
+        },
+        {
+          "palabra": "cuchara",
+          "inicio": [
+            3,
+            0
+          ],
+          "fin": [
+            9,
+            6
+          ]
+        },
+        {
+          "palabra": "colador",
+          "inicio": [
+            4,
+            8
+          ],
+          "fin": [
+            4,
+            2
+          ]
+        },
+        {
+          "palabra": "caldero",
+          "inicio": [
+            8,
+            0
+          ],
+          "fin": [
+            8,
+            6
+          ]
+        },
+        {
+          "palabra": "molinillo",
+          "inicio": [
+            3,
+            9
+          ],
+          "fin": [
+            3,
+            1
+          ]
+        },
+        {
+          "palabra": "rallador",
+          "inicio": [
+            1,
+            2
+          ],
+          "fin": [
+            1,
+            9
+          ]
+        },
+        {
+          "palabra": "tabla",
+          "inicio": [
+            9,
+            2
+          ],
+          "fin": [
+            9,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s013",
+      "tema": {
+        "es": "Ropa",
+        "en": "Clothing",
+        "icono": "👕"
+      },
+      "filas": [
+        "OMALANSAOL",
+        "RHLISBTTHL",
+        "EDPLIQAECN",
+        "RQAAMDRUNM",
+        "BERDARRQOO",
+        "MTGNCPLAPC",
+        "OYAAZAAHZH",
+        "SETFPDACVI",
+        "OLAUANAURL",
+        "MDSBMVFFGA"
+      ],
+      "palabras": [
+        {
+          "palabra": "ruana",
+          "inicio": [
+            8,
+            8
+          ],
+          "fin": [
+            8,
+            4
+          ]
+        },
+        {
+          "palabra": "poncho",
+          "inicio": [
+            5,
+            8
+          ],
+          "fin": [
+            0,
+            8
+          ]
+        },
+        {
+          "palabra": "sombrero",
+          "inicio": [
+            7,
+            0
+          ],
+          "fin": [
+            0,
+            0
+          ]
+        },
+        {
+          "palabra": "mochila",
+          "inicio": [
+            3,
+            9
+          ],
+          "fin": [
+            9,
+            9
+          ]
+        },
+        {
+          "palabra": "camisa",
+          "inicio": [
+            5,
+            4
+          ],
+          "fin": [
+            0,
+            4
+          ]
+        },
+        {
+          "palabra": "chaqueta",
+          "inicio": [
+            7,
+            7
+          ],
+          "fin": [
+            0,
+            7
+          ]
+        },
+        {
+          "palabra": "bufanda",
+          "inicio": [
+            9,
+            3
+          ],
+          "fin": [
+            3,
+            3
+          ]
+        },
+        {
+          "palabra": "alpargatas",
+          "inicio": [
+            0,
+            2
+          ],
+          "fin": [
+            9,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s001",
+      "tema": {
+        "es": "Ríos de Colombia",
+        "en": "Colombian rivers",
+        "icono": "🏞️"
+      },
+      "filas": [
+        "RGUAVIAREN",
+        "MOMCAQUETA",
+        "EZAAASPLOL",
+        "RHGBCEUNTE",
+        "AEDIUPTGAH",
+        "BIAAAUUURU",
+        "MMLTCAMATN",
+        "AGEENTARAI",
+        "DINMOHYOAS",
+        "NEAMAEOAPP"
+      ],
+      "palabras": [
+        {
+          "palabra": "magdalena",
+          "inicio": [
+            1,
+            2
+          ],
+          "fin": [
+            9,
+            2
+          ]
+        },
+        {
+          "palabra": "cauca",
+          "inicio": [
+            6,
+            4
+          ],
+          "fin": [
+            2,
+            4
+          ]
+        },
+        {
+          "palabra": "atrato",
+          "inicio": [
+            7,
+            8
+          ],
+          "fin": [
+            2,
+            8
+          ]
+        },
+        {
+          "palabra": "meta",
+          "inicio": [
+            8,
+            3
+          ],
+          "fin": [
+            5,
+            3
+          ]
+        },
+        {
+          "palabra": "guaviare",
+          "inicio": [
+            0,
+            1
+          ],
+          "fin": [
+            0,
+            8
+          ]
+        },
+        {
+          "palabra": "putumayo",
+          "inicio": [
+            2,
+            6
+          ],
+          "fin": [
+            9,
+            6
+          ]
+        },
+        {
+          "palabra": "caquetá",
+          "inicio": [
+            1,
+            3
+          ],
+          "fin": [
+            1,
+            9
+          ]
+        },
+        {
+          "palabra": "sinú",
+          "inicio": [
+            8,
+            9
+          ],
+          "fin": [
+            5,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s003",
+      "tema": {
+        "es": "Frutas",
+        "en": "Fruits",
+        "icono": "🍍"
+      },
+      "filas": [
+        "AOLIUDLSMO",
+        "OYOROÑÑOMA",
+        "JGANRMTEOL",
+        "IUEHPSNIRB",
+        "EMARACUYAD",
+        "FLULOTRMLE",
+        "FRGGELIGZG",
+        "CURUBAPPYN",
+        "SPEUCHUVAI",
+        "GUANABANAR"
+      ],
+      "palabras": [
+        {
+          "palabra": "guanábana",
+          "inicio": [
+            9,
+            0
+          ],
+          "fin": [
+            9,
+            8
+          ]
+        },
+        {
+          "palabra": "lulo",
+          "inicio": [
+            5,
+            1
+          ],
+          "fin": [
+            5,
+            4
+          ]
+        },
+        {
+          "palabra": "mora",
+          "inicio": [
+            1,
+            8
+          ],
+          "fin": [
+            4,
+            8
+          ]
+        },
+        {
+          "palabra": "curuba",
+          "inicio": [
+            7,
+            0
+          ],
+          "fin": [
+            7,
+            5
+          ]
+        },
+        {
+          "palabra": "pitahaya",
+          "inicio": [
+            7,
+            7
+          ],
+          "fin": [
+            0,
+            0
+          ]
+        },
+        {
+          "palabra": "maracuyá",
+          "inicio": [
+            4,
+            1
+          ],
+          "fin": [
+            4,
+            8
+          ]
+        },
+        {
+          "palabra": "feijoa",
+          "inicio": [
+            5,
+            0
+          ],
+          "fin": [
+            0,
+            0
+          ]
+        },
+        {
+          "palabra": "uchuva",
+          "inicio": [
+            8,
+            3
+          ],
+          "fin": [
+            8,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s002",
+      "tema": {
+        "es": "Departamentos",
+        "en": "Departments",
+        "icono": "🗺️"
+      },
+      "filas": [
+        "ARTHUILAYM",
+        "CHOCOOÑEYE",
+        "YFSDTISLRS",
+        "OANTIOQUIA",
+        "HÑSADLACBG",
+        "USIMARIROE",
+        "PLSRZETAYA",
+        "SRIOAIASAN",
+        "EOAEVNTECD",
+        "SUCREUGCAF"
+      ],
+      "palabras": [
+        {
+          "palabra": "antioquia",
+          "inicio": [
+            3,
+            1
+          ],
+          "fin": [
+            3,
+            9
+          ]
+        },
+        {
+          "palabra": "boyacá",
+          "inicio": [
+            4,
+            8
+          ],
+          "fin": [
+            9,
+            8
+          ]
+        },
+        {
+          "palabra": "nariño",
+          "inicio": [
+            8,
+            5
+          ],
+          "fin": [
+            3,
+            0
+          ]
+        },
+        {
+          "palabra": "caldas",
+          "inicio": [
+            4,
+            7
+          ],
+          "fin": [
+            4,
+            2
+          ]
+        },
+        {
+          "palabra": "huila",
+          "inicio": [
+            0,
+            3
+          ],
+          "fin": [
+            0,
+            7
+          ]
+        },
+        {
+          "palabra": "cesar",
+          "inicio": [
+            9,
+            7
+          ],
+          "fin": [
+            5,
+            7
+          ]
+        },
+        {
+          "palabra": "sucre",
+          "inicio": [
+            9,
+            0
+          ],
+          "fin": [
+            9,
+            4
+          ]
+        },
+        {
+          "palabra": "chocó",
+          "inicio": [
+            1,
+            0
+          ],
+          "fin": [
+            1,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s016",
+      "tema": {
+        "es": "Útiles escolares",
+        "en": "School supplies",
+        "icono": "✏️"
+      },
+      "filas": [
+        "RLNOZPPJCN",
+        "OEAUEISOAE",
+        "DDLLECFNRT",
+        "ASGAGODRTN",
+        "RAEPALEEUA",
+        "RRRICOSDCG",
+        "OEDZFROAHE",
+        "BJPFLENUEP",
+        "TILDLSOCRC",
+        "ATUTOASDAM"
+      ],
+      "palabras": [
+        {
+          "palabra": "lápiz",
+          "inicio": [
+            2,
+            3
+          ],
+          "fin": [
+            6,
+            3
+          ]
+        },
+        {
+          "palabra": "cuaderno",
+          "inicio": [
+            8,
+            7
+          ],
+          "fin": [
+            1,
+            7
+          ]
+        },
+        {
+          "palabra": "borrador",
+          "inicio": [
+            7,
+            0
+          ],
+          "fin": [
+            0,
+            0
+          ]
+        },
+        {
+          "palabra": "regla",
+          "inicio": [
+            5,
+            2
+          ],
+          "fin": [
+            1,
+            2
+          ]
+        },
+        {
+          "palabra": "tijeras",
+          "inicio": [
+            9,
+            1
+          ],
+          "fin": [
+            3,
+            1
+          ]
+        },
+        {
+          "palabra": "colores",
+          "inicio": [
+            2,
+            5
+          ],
+          "fin": [
+            8,
+            5
+          ]
+        },
+        {
+          "palabra": "cartuchera",
+          "inicio": [
+            0,
+            8
+          ],
+          "fin": [
+            9,
+            8
+          ]
+        },
+        {
+          "palabra": "pegante",
+          "inicio": [
+            7,
+            9
+          ],
+          "fin": [
+            1,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s008",
+      "tema": {
+        "es": "Deportes",
+        "en": "Sports",
+        "icono": "⚽"
+      },
+      "filas": [
+        "OJEHSCSCOS",
+        "LOBTUFIPMP",
+        "IITYTCAASE",
+        "SENGLLBNIB",
+        "VPOILETITO",
+        "QNSRIETLEX",
+        "UMRSJTEYLE",
+        "OABOLQECTO",
+        "VONOICATAN",
+        "LEJANITAPA"
+      ],
+      "palabras": [
+        {
+          "palabra": "fútbol",
+          "inicio": [
+            1,
+            5
+          ],
+          "fin": [
+            1,
+            0
+          ]
+        },
+        {
+          "palabra": "ciclismo",
+          "inicio": [
+            0,
+            7
+          ],
+          "fin": [
+            7,
+            0
+          ]
+        },
+        {
+          "palabra": "tejo",
+          "inicio": [
+            4,
+            6
+          ],
+          "fin": [
+            7,
+            3
+          ]
+        },
+        {
+          "palabra": "béisbol",
+          "inicio": [
+            3,
+            6
+          ],
+          "fin": [
+            9,
+            0
+          ]
+        },
+        {
+          "palabra": "boxeo",
+          "inicio": [
+            3,
+            9
+          ],
+          "fin": [
+            7,
+            9
+          ]
+        },
+        {
+          "palabra": "patinaje",
+          "inicio": [
+            9,
+            8
+          ],
+          "fin": [
+            9,
+            1
+          ]
+        },
+        {
+          "palabra": "natación",
+          "inicio": [
+            8,
+            9
+          ],
+          "fin": [
+            8,
+            2
+          ]
+        },
+        {
+          "palabra": "atletismo",
+          "inicio": [
+            8,
+            8
+          ],
+          "fin": [
+            0,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s012",
+      "tema": {
+        "es": "Aseo",
+        "en": "Cleaning",
+        "icono": "🧽"
+      },
+      "filas": [
+        "NBCEPILLOO",
+        "AABOCSENEO",
+        "JRRFMTITTL",
+        "NONOBAJQHA",
+        "OFVDDSICLO",
+        "PRECOGEDOR",
+        "SASYBALDEN",
+        "EDNGAAZNAZ",
+        "HOREPARTAI",
+        "ODSDCLORON"
+      ],
+      "palabras": [
+        {
+          "palabra": "escoba",
+          "inicio": [
+            1,
+            6
+          ],
+          "fin": [
+            1,
+            1
+          ]
+        },
+        {
+          "palabra": "trapero",
+          "inicio": [
+            8,
+            7
+          ],
+          "fin": [
+            8,
+            1
+          ]
+        },
+        {
+          "palabra": "jabón",
+          "inicio": [
+            3,
+            6
+          ],
+          "fin": [
+            3,
+            2
+          ]
+        },
+        {
+          "palabra": "balde",
+          "inicio": [
+            6,
+            4
+          ],
+          "fin": [
+            6,
+            8
+          ]
+        },
+        {
+          "palabra": "esponja",
+          "inicio": [
+            7,
+            0
+          ],
+          "fin": [
+            1,
+            0
+          ]
+        },
+        {
+          "palabra": "cepillo",
+          "inicio": [
+            0,
+            2
+          ],
+          "fin": [
+            0,
+            8
+          ]
+        },
+        {
+          "palabra": "recogedor",
+          "inicio": [
+            5,
+            1
+          ],
+          "fin": [
+            5,
+            9
+          ]
+        },
+        {
+          "palabra": "cloro",
+          "inicio": [
+            9,
+            4
+          ],
+          "fin": [
+            9,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s014",
+      "tema": {
+        "es": "Flores y plantas",
+        "en": "Flowers and plants",
+        "icono": "🌸"
+      },
+      "filas": [
+        "DPONESOSSD",
+        "CAFETOSPIS",
+        "ÑRRQLEVALC",
+        "OLLOSARIGV",
+        "HRPTAYOHSE",
+        "CDNIEAMLAP",
+        "EFRAILEJON",
+        "LCMIADROSA",
+        "EORQUIDEAE",
+        "HPIORDREDO"
+      ],
+      "palabras": [
+        {
+          "palabra": "orquídea",
+          "inicio": [
+            8,
+            1
+          ],
+          "fin": [
+            8,
+            8
+          ]
+        },
+        {
+          "palabra": "girasol",
+          "inicio": [
+            3,
+            8
+          ],
+          "fin": [
+            3,
+            2
+          ]
+        },
+        {
+          "palabra": "rosa",
+          "inicio": [
+            7,
+            6
+          ],
+          "fin": [
+            7,
+            9
+          ]
+        },
+        {
+          "palabra": "clavel",
+          "inicio": [
+            2,
+            9
+          ],
+          "fin": [
+            2,
+            4
+          ]
+        },
+        {
+          "palabra": "palma",
+          "inicio": [
+            5,
+            9
+          ],
+          "fin": [
+            5,
+            5
+          ]
+        },
+        {
+          "palabra": "frailejón",
+          "inicio": [
+            6,
+            1
+          ],
+          "fin": [
+            6,
+            9
+          ]
+        },
+        {
+          "palabra": "helecho",
+          "inicio": [
+            9,
+            0
+          ],
+          "fin": [
+            3,
+            0
+          ]
+        },
+        {
+          "palabra": "cafeto",
+          "inicio": [
+            1,
+            0
+          ],
+          "fin": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s007",
+      "tema": {
+        "es": "Ciudades",
+        "en": "Cities",
+        "icono": "🏙️"
+      },
+      "filas": [
+        "OTNSMNCMAE",
+        "TIURCALINN",
+        "SESNELCARO",
+        "ADADJIASSC",
+        "PNIDTACOTB",
+        "EANEGATRAC",
+        "RALPHENACU",
+        "NILLEDEMET",
+        "LACPOPAYAN",
+        "CBOGOTAITE"
+      ],
+      "palabras": [
+        {
+          "palabra": "bogotá",
+          "inicio": [
+            9,
+            1
+          ],
+          "fin": [
+            9,
+            6
+          ]
+        },
+        {
+          "palabra": "medellín",
+          "inicio": [
+            7,
+            7
+          ],
+          "fin": [
+            7,
+            0
+          ]
+        },
+        {
+          "palabra": "cali",
+          "inicio": [
+            1,
+            4
+          ],
+          "fin": [
+            1,
+            7
+          ]
+        },
+        {
+          "palabra": "cartagena",
+          "inicio": [
+            5,
+            9
+          ],
+          "fin": [
+            5,
+            1
+          ]
+        },
+        {
+          "palabra": "pasto",
+          "inicio": [
+            4,
+            0
+          ],
+          "fin": [
+            0,
+            0
+          ]
+        },
+        {
+          "palabra": "tunja",
+          "inicio": [
+            0,
+            1
+          ],
+          "fin": [
+            4,
+            5
+          ]
+        },
+        {
+          "palabra": "leticia",
+          "inicio": [
+            6,
+            2
+          ],
+          "fin": [
+            0,
+            8
+          ]
+        },
+        {
+          "palabra": "popayán",
+          "inicio": [
+            8,
+            3
+          ],
+          "fin": [
+            8,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s006",
+      "tema": {
+        "es": "Animales",
+        "en": "Animals",
+        "icono": "🐆"
+      },
+      "filas": [
+        "AATNADARPU",
+        "BJAGUARÑZA",
+        "TAMOTUCANM",
+        "QYBAVLTBFL",
+        "NAIINRPDYE",
+        "ULZPLACTEI",
+        "CVOSMLTJOO",
+        "SDASBCAIEH",
+        "RODNOCEÑLA",
+        "CHIGUIROAL"
+      ],
+      "palabras": [
+        {
+          "palabra": "jaguar",
+          "inicio": [
+            1,
+            1
+          ],
+          "fin": [
+            1,
+            6
+          ]
+        },
+        {
+          "palabra": "cóndor",
+          "inicio": [
+            8,
+            5
+          ],
+          "fin": [
+            8,
+            0
+          ]
+        },
+        {
+          "palabra": "danta",
+          "inicio": [
+            0,
+            5
+          ],
+          "fin": [
+            0,
+            1
+          ]
+        },
+        {
+          "palabra": "tucán",
+          "inicio": [
+            2,
+            4
+          ],
+          "fin": [
+            2,
+            8
+          ]
+        },
+        {
+          "palabra": "chigüiro",
+          "inicio": [
+            9,
+            0
+          ],
+          "fin": [
+            9,
+            7
+          ]
+        },
+        {
+          "palabra": "babilla",
+          "inicio": [
+            1,
+            0
+          ],
+          "fin": [
+            7,
+            6
+          ]
+        },
+        {
+          "palabra": "oso",
+          "inicio": [
+            6,
+            2
+          ],
+          "fin": [
+            8,
+            4
+          ]
+        },
+        {
+          "palabra": "manatí",
+          "inicio": [
+            2,
+            2
+          ],
+          "fin": [
+            7,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s011",
+      "tema": {
+        "es": "Hogar",
+        "en": "Home",
+        "icono": "🏠"
+      },
+      "filas": [
+        "UUMRLSIEDA",
+        "IANATNEVJP",
+        "PUTYOCATUB",
+        "ADAHOMLATT",
+        "ESTUFAEOLY",
+        "OLVHAMACAU",
+        "EFCORTINAU",
+        "SLANCMAEJD",
+        "JTRCOBIJAV",
+        "EENEVERAIU"
+      ],
+      "palabras": [
+        {
+          "palabra": "nevera",
+          "inicio": [
+            9,
+            2
+          ],
+          "fin": [
+            9,
+            7
+          ]
+        },
+        {
+          "palabra": "estufa",
+          "inicio": [
+            4,
+            0
+          ],
+          "fin": [
+            4,
+            5
+          ]
+        },
+        {
+          "palabra": "cobija",
+          "inicio": [
+            8,
+            3
+          ],
+          "fin": [
+            8,
+            8
+          ]
+        },
+        {
+          "palabra": "almohada",
+          "inicio": [
+            3,
+            7
+          ],
+          "fin": [
+            3,
+            0
+          ]
+        },
+        {
+          "palabra": "cortina",
+          "inicio": [
+            6,
+            2
+          ],
+          "fin": [
+            6,
+            8
+          ]
+        },
+        {
+          "palabra": "hamaca",
+          "inicio": [
+            5,
+            3
+          ],
+          "fin": [
+            5,
+            8
+          ]
+        },
+        {
+          "palabra": "butaco",
+          "inicio": [
+            2,
+            9
+          ],
+          "fin": [
+            2,
+            4
+          ]
+        },
+        {
+          "palabra": "ventana",
+          "inicio": [
+            1,
+            7
+          ],
+          "fin": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s015",
+      "tema": {
+        "es": "Profesiones",
+        "en": "Jobs",
+        "icono": "🧑‍🔧"
+      },
+      "filas": [
+        "MEGVHGPONO",
+        "ALOOCIDEMR",
+        "EEITCEBCÑE",
+        "SPANADEROI",
+        "TOTOLIPEUN",
+        "RFOPCCOSEE",
+        "OORENICOCG",
+        "ENFERMERON",
+        "ODAGOBAAAI",
+        "ETMATFÑCSO"
+      ],
+      "palabras": [
+        {
+          "palabra": "médico",
+          "inicio": [
+            1,
+            8
+          ],
+          "fin": [
+            1,
+            3
+          ]
+        },
+        {
+          "palabra": "maestro",
+          "inicio": [
+            0,
+            0
+          ],
+          "fin": [
+            6,
+            0
+          ]
+        },
+        {
+          "palabra": "cocinero",
+          "inicio": [
+            6,
+            8
+          ],
+          "fin": [
+            6,
+            1
+          ]
+        },
+        {
+          "palabra": "ingeniero",
+          "inicio": [
+            8,
+            9
+          ],
+          "fin": [
+            0,
+            9
+          ]
+        },
+        {
+          "palabra": "abogado",
+          "inicio": [
+            8,
+            6
+          ],
+          "fin": [
+            8,
+            0
+          ]
+        },
+        {
+          "palabra": "enfermero",
+          "inicio": [
+            7,
+            0
+          ],
+          "fin": [
+            7,
+            8
+          ]
+        },
+        {
+          "palabra": "piloto",
+          "inicio": [
+            4,
+            6
+          ],
+          "fin": [
+            4,
+            1
+          ]
+        },
+        {
+          "palabra": "panadero",
+          "inicio": [
+            3,
+            1
+          ],
+          "fin": [
+            3,
+            8
+          ]
+        }
+      ]
+    }
+  ],
+  "crucigramas": [
+    {
+      "id": "k001",
+      "ancho": 9,
+      "alto": 7,
+      "palabras": [
+        {
+          "palabra": "cóndor",
+          "fila": 0,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "Ave nacional de Colombia.",
+            "en": "Colombia's national bird."
+          }
+        },
+        {
+          "palabra": "salsa",
+          "fila": 0,
+          "col": 8,
+          "dir": "v",
+          "pista": {
+            "es": "Ritmo que se baila con fuerza en Cali.",
+            "en": "Rhythm danced with passion in Cali."
+          }
+        },
+        {
+          "palabra": "cocora",
+          "fila": 1,
+          "col": 3,
+          "dir": "h",
+          "pista": {
+            "es": "Valle de las palmas de cera, en el Quindío.",
+            "en": "Valley of the wax palms, in Quindío."
+          }
+        },
+        {
+          "palabra": "mono",
+          "fila": 3,
+          "col": 4,
+          "dir": "v",
+          "pista": {
+            "es": "El tití cabeciblanco es uno.",
+            "en": "The cotton-top tamarin is one."
+          }
+        },
+        {
+          "palabra": "bogotá",
+          "fila": 4,
+          "col": 3,
+          "dir": "h",
+          "pista": {
+            "es": "Capital de Colombia.",
+            "en": "Capital of Colombia."
+          }
+        },
+        {
+          "palabra": "fútbol",
+          "fila": 6,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Deporte que juega la Selección Colombia.",
+            "en": "Sport played by the Colombian national team."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k002",
+      "ancho": 9,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "cartagena",
+          "fila": 0,
+          "col": 1,
+          "dir": "v",
+          "pista": {
+            "es": "Ciudad amurallada del Caribe.",
+            "en": "Walled city on the Caribbean."
+          }
+        },
+        {
+          "palabra": "vallenato",
+          "fila": 1,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Música de acordeón, caja y guacharaca.",
+            "en": "Music played with accordion, caja drum and guacharaca."
+          }
+        },
+        {
+          "palabra": "caribe",
+          "fila": 3,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "Mar al norte de Colombia.",
+            "en": "Sea to the north of Colombia."
+          }
+        },
+        {
+          "palabra": "marimba",
+          "fila": 4,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Instrumento de madera de la música del Pacífico.",
+            "en": "Wooden instrument of Pacific music."
+          }
+        },
+        {
+          "palabra": "isla",
+          "fila": 4,
+          "col": 3,
+          "dir": "v",
+          "pista": {
+            "es": "San Andrés es una.",
+            "en": "San Andrés is one."
+          }
+        },
+        {
+          "palabra": "río",
+          "fila": 6,
+          "col": 5,
+          "dir": "h",
+          "pista": {
+            "es": "El Magdalena es el más importante del país.",
+            "en": "The Magdalena is the country's most important one."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k003",
+      "ancho": 7,
+      "alto": 8,
+      "palabras": [
+        {
+          "palabra": "mar",
+          "fila": 0,
+          "col": 1,
+          "dir": "h",
+          "pista": {
+            "es": "Gran masa de agua salada.",
+            "en": "Large body of salt water."
+          }
+        },
+        {
+          "palabra": "amazonas",
+          "fila": 0,
+          "col": 2,
+          "dir": "v",
+          "pista": {
+            "es": "El departamento más grande de Colombia.",
+            "en": "Colombia's largest department."
+          }
+        },
+        {
+          "palabra": "shakira",
+          "fila": 2,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Cantante barranquillera de «Hips Don't Lie».",
+            "en": "Singer from Barranquilla, of 'Hips Don't Lie'."
+          }
+        },
+        {
+          "palabra": "pola",
+          "fila": 4,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "Cerveza, en lenguaje coloquial.",
+            "en": "Beer, colloquially."
+          }
+        },
+        {
+          "palabra": "sol",
+          "fila": 5,
+          "col": 4,
+          "dir": "v",
+          "pista": {
+            "es": "Estrella que nos da luz.",
+            "en": "Star that gives us light."
+          }
+        },
+        {
+          "palabra": "selva",
+          "fila": 7,
+          "col": 2,
+          "dir": "h",
+          "pista": {
+            "es": "Bosque tropical espeso.",
+            "en": "Dense tropical forest."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k004",
+      "ancho": 8,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "peso",
+          "fila": 0,
+          "col": 4,
+          "dir": "h",
+          "pista": {
+            "es": "Moneda de Colombia.",
+            "en": "Colombia's currency."
+          }
+        },
+        {
+          "palabra": "parcero",
+          "fila": 0,
+          "col": 4,
+          "dir": "v",
+          "pista": {
+            "es": "Amigo, en Medellín.",
+            "en": "Friend, in Medellín slang."
+          }
+        },
+        {
+          "palabra": "feria",
+          "fila": 1,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "La de las Flores es en Medellín.",
+            "en": "The Flower one is in Medellín."
+          }
+        },
+        {
+          "palabra": "cali",
+          "fila": 3,
+          "col": 4,
+          "dir": "h",
+          "pista": {
+            "es": "Ciudad conocida como la capital mundial de la salsa.",
+            "en": "City known as the world capital of salsa."
+          }
+        },
+        {
+          "palabra": "tejo",
+          "fila": 5,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "Deporte nacional: lanzar un disco a una cancha con mecha.",
+            "en": "National sport: throwing a disc at a target with gunpowder."
+          }
+        },
+        {
+          "palabra": "nobel",
+          "fila": 6,
+          "col": 3,
+          "dir": "h",
+          "pista": {
+            "es": "Premio que ganó García Márquez en 1982.",
+            "en": "Prize García Márquez won in 1982."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k005",
+      "ancho": 9,
+      "alto": 8,
+      "palabras": [
+        {
+          "palabra": "pacífico",
+          "fila": 0,
+          "col": 1,
+          "dir": "h",
+          "pista": {
+            "es": "Océano al occidente de Colombia.",
+            "en": "Ocean to the west of Colombia."
+          }
+        },
+        {
+          "palabra": "flota",
+          "fila": 0,
+          "col": 5,
+          "dir": "v",
+          "pista": {
+            "es": "Bus intermunicipal, en Colombia.",
+            "en": "Intercity bus, in Colombia."
+          }
+        },
+        {
+          "palabra": "oro",
+          "fila": 0,
+          "col": 8,
+          "dir": "v",
+          "pista": {
+            "es": "Metal que da nombre a un museo famoso de Bogotá.",
+            "en": "Metal that names a famous museum in Bogotá."
+          }
+        },
+        {
+          "palabra": "escudo",
+          "fila": 2,
+          "col": 0,
+          "dir": "v",
+          "pista": {
+            "es": "Emblema nacional con un cóndor y el istmo de Panamá.",
+            "en": "National emblem with a condor and the Isthmus of Panama."
+          }
+        },
+        {
+          "palabra": "cañón",
+          "fila": 2,
+          "col": 2,
+          "dir": "h",
+          "pista": {
+            "es": "El del Chicamocha está en Santander.",
+            "en": "The Chicamocha one is in Santander."
+          }
+        },
+        {
+          "palabra": "cumbia",
+          "fila": 4,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Ritmo del Caribe colombiano que se baila con velas.",
+            "en": "Colombian Caribbean rhythm danced with candles."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k006",
+      "ancho": 8,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "ballena",
+          "fila": 0,
+          "col": 3,
+          "dir": "v",
+          "pista": {
+            "es": "La jorobada llega al Pacífico colombiano a tener sus crías.",
+            "en": "The humpback one comes to Colombia's Pacific to give birth."
+          }
+        },
+        {
+          "palabra": "bacano",
+          "fila": 1,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Sinónimo coloquial de chévere.",
+            "en": "Colloquial synonym of 'chévere' (cool)."
+          }
+        },
+        {
+          "palabra": "arepa",
+          "fila": 1,
+          "col": 1,
+          "dir": "v",
+          "pista": {
+            "es": "Masa de maíz redonda, asada o frita.",
+            "en": "Round corn cake, grilled or fried."
+          }
+        },
+        {
+          "palabra": "panela",
+          "fila": 3,
+          "col": 5,
+          "dir": "v",
+          "pista": {
+            "es": "Bloque de azúcar de caña sin refinar.",
+            "en": "Block of unrefined cane sugar."
+          }
+        },
+        {
+          "palabra": "café",
+          "fila": 6,
+          "col": 2,
+          "dir": "h",
+          "pista": {
+            "es": "Grano que Colombia exporta y que se toma en tinto.",
+            "en": "Bean Colombia exports; drunk as a 'tinto'."
+          }
+        },
+        {
+          "palabra": "guayabo",
+          "fila": 8,
+          "col": 1,
+          "dir": "h",
+          "pista": {
+            "es": "Malestar del día siguiente a la fiesta.",
+            "en": "How you feel the day after the party (hangover)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k007",
+      "ancho": 7,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "bandera",
+          "fila": 0,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "Amarillo, azul y rojo.",
+            "en": "Yellow, blue and red."
+          }
+        },
+        {
+          "palabra": "guajira",
+          "fila": 1,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Península del extremo norte, tierra de los wayuu.",
+            "en": "Northernmost peninsula, land of the Wayuu."
+          }
+        },
+        {
+          "palabra": "playa",
+          "fila": 4,
+          "col": 1,
+          "dir": "v",
+          "pista": {
+            "es": "Arena junto al mar.",
+            "en": "Sand next to the sea."
+          }
+        },
+        {
+          "palabra": "palma",
+          "fila": 4,
+          "col": 3,
+          "dir": "v",
+          "pista": {
+            "es": "La de cera es el árbol nacional.",
+            "en": "The wax one is the national tree."
+          }
+        },
+        {
+          "palabra": "luna",
+          "fila": 6,
+          "col": 3,
+          "dir": "h",
+          "pista": {
+            "es": "Satélite natural de la Tierra.",
+            "en": "Earth's natural satellite."
+          }
+        },
+        {
+          "palabra": "páramo",
+          "fila": 8,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Ecosistema de alta montaña con frailejones.",
+            "en": "High-mountain ecosystem with frailejones."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k008",
+      "ancho": 9,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "rana",
+          "fila": 0,
+          "col": 4,
+          "dir": "v",
+          "pista": {
+            "es": "La dorada del Chocó es muy venenosa.",
+            "en": "The golden one from Chocó is very poisonous."
+          }
+        },
+        {
+          "palabra": "esmeralda",
+          "fila": 0,
+          "col": 8,
+          "dir": "v",
+          "pista": {
+            "es": "Piedra preciosa verde por la que Colombia es famosa.",
+            "en": "Green gemstone Colombia is famous for."
+          }
+        },
+        {
+          "palabra": "ruana",
+          "fila": 1,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Prenda de lana de tierra fría.",
+            "en": "Wool garment from the cold highlands."
+          }
+        },
+        {
+          "palabra": "sal",
+          "fila": 2,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "La catedral de Zipaquirá está en una mina de…",
+            "en": "Zipaquirá's cathedral is inside a mine of…"
+          }
+        },
+        {
+          "palabra": "guatapé",
+          "fila": 3,
+          "col": 2,
+          "dir": "h",
+          "pista": {
+            "es": "Pueblo antioqueño de zócalos de colores, junto a la piedra del Peñol.",
+            "en": "Antioquia town with colorful wall panels, next to El Peñol rock."
+          }
+        },
+        {
+          "palabra": "tienda",
+          "fila": 8,
+          "col": 3,
+          "dir": "h",
+          "pista": {
+            "es": "Negocio de barrio donde se compra de todo.",
+            "en": "Neighborhood shop that sells a bit of everything."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k009",
+      "ancho": 9,
+      "alto": 8,
+      "palabras": [
+        {
+          "palabra": "himno",
+          "fila": 0,
+          "col": 4,
+          "dir": "h",
+          "pista": {
+            "es": "Su coro empieza con «¡Oh gloria inmarcesible!».",
+            "en": "Its chorus begins '¡Oh gloria inmarcesible!'."
+          }
+        },
+        {
+          "palabra": "mariposa",
+          "fila": 0,
+          "col": 6,
+          "dir": "v",
+          "pista": {
+            "es": "Insecto de alas de colores.",
+            "en": "Insect with colorful wings."
+          }
+        },
+        {
+          "palabra": "orquídea",
+          "fila": 0,
+          "col": 8,
+          "dir": "v",
+          "pista": {
+            "es": "Flor nacional de Colombia.",
+            "en": "Colombia's national flower."
+          }
+        },
+        {
+          "palabra": "tayrona",
+          "fila": 1,
+          "col": 3,
+          "dir": "v",
+          "pista": {
+            "es": "Parque nacional en la costa, cerca de Santa Marta.",
+            "en": "National park on the coast near Santa Marta."
+          }
+        },
+        {
+          "palabra": "nevado",
+          "fila": 2,
+          "col": 1,
+          "dir": "v",
+          "pista": {
+            "es": "Montaña con nieve, como el del Huila.",
+            "en": "Snow-capped mountain, like the one in Huila."
+          }
+        },
+        {
+          "palabra": "macondo",
+          "fila": 5,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Pueblo inventado de «Cien años de soledad».",
+            "en": "Fictional town of 'One Hundred Years of Solitude'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k010",
+      "ancho": 9,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "volcán",
+          "fila": 0,
+          "col": 7,
+          "dir": "v",
+          "pista": {
+            "es": "El Nevado del Ruiz es uno.",
+            "en": "The Nevado del Ruiz is one."
+          }
+        },
+        {
+          "palabra": "abuela",
+          "fila": 2,
+          "col": 1,
+          "dir": "v",
+          "pista": {
+            "es": "La mamá de tu mamá.",
+            "en": "Your mother's mother."
+          }
+        },
+        {
+          "palabra": "andes",
+          "fila": 2,
+          "col": 3,
+          "dir": "v",
+          "pista": {
+            "es": "Cordillera que atraviesa Colombia en tres ramales.",
+            "en": "Mountain range that crosses Colombia in three branches."
+          }
+        },
+        {
+          "palabra": "delfín",
+          "fila": 3,
+          "col": 5,
+          "dir": "v",
+          "pista": {
+            "es": "El rosado vive en el Amazonas.",
+            "en": "The pink one lives in the Amazon."
+          }
+        },
+        {
+          "palabra": "medellín",
+          "fila": 5,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "La ciudad de la eterna primavera.",
+            "en": "The city of eternal spring."
+          }
+        },
+        {
+          "palabra": "libro",
+          "fila": 7,
+          "col": 4,
+          "dir": "h",
+          "pista": {
+            "es": "«Cien años de soledad» es uno famoso.",
+            "en": "'One Hundred Years of Solitude' is a famous one."
+          }
+        }
+      ]
+    },
+    {
+      "id": "k011",
+      "ancho": 8,
+      "alto": 9,
+      "palabras": [
+        {
+          "palabra": "llanos",
+          "fila": 0,
+          "col": 5,
+          "dir": "v",
+          "pista": {
+            "es": "Región de grandes sabanas del oriente, tierra del joropo.",
+            "en": "Region of vast eastern plains, home of joropo music."
+          }
+        },
+        {
+          "palabra": "botero",
+          "fila": 0,
+          "col": 7,
+          "dir": "v",
+          "pista": {
+            "es": "Pintor y escultor de figuras voluminosas.",
+            "en": "Painter and sculptor of voluminous figures."
+          }
+        },
+        {
+          "palabra": "silleta",
+          "fila": 2,
+          "col": 3,
+          "dir": "v",
+          "pista": {
+            "es": "Estructura con flores que se carga a la espalda en Medellín.",
+            "en": "Flower structure carried on the back in Medellín."
+          }
+        },
+        {
+          "palabra": "mecato",
+          "fila": 3,
+          "col": 0,
+          "dir": "v",
+          "pista": {
+            "es": "Comida ligera entre comidas.",
+            "en": "Snack between meals."
+          }
+        },
+        {
+          "palabra": "ciclismo",
+          "fila": 5,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Deporte de Egan Bernal y Nairo Quintana.",
+            "en": "Sport of Egan Bernal and Nairo Quintana."
+          }
+        },
+        {
+          "palabra": "tinto",
+          "fila": 7,
+          "col": 0,
+          "dir": "h",
+          "pista": {
+            "es": "Café negro, en Colombia.",
+            "en": "Black coffee, in Colombia."
+          }
+        }
+      ]
+    }
+  ],
+  "desde": {
+    "sopas": "2026-10-30",
+    "crucigramas": "2026-10-30"
+  }
 }
