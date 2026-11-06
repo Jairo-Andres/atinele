@@ -139,6 +139,26 @@
       >
         <span data-i18n="modoCategoria">Categoría</span>
       </button>
+      <button
+        role="tab"
+        id="tab-sopa"
+        aria-controls="panel-sopa"
+        aria-selected="false"
+        tabindex="-1"
+        type="button"
+      >
+        <span data-i18n="modoSopa">Sopa de letras</span>
+      </button>
+      <button
+        role="tab"
+        id="tab-crucigrama"
+        aria-controls="panel-crucigrama"
+        aria-selected="false"
+        tabindex="-1"
+        type="button"
+      >
+        <span data-i18n="modoCrucigrama">Crucigrama</span>
+      </button>
     </div>
 
     <main id="juego" tabindex="-1">
@@ -261,6 +281,49 @@
         ></div>
         <div id="teclado-categoria" class="teclado" role="group" data-i18n-aria="teclado"></div>
       </section>
+      <section id="panel-sopa" role="tabpanel" aria-labelledby="tab-sopa" class="panel" hidden>
+        <div class="categoria">
+          <p class="categoria__nombre"><strong id="sopa-tema"></strong></p>
+          <p id="sopa-progreso" class="categoria__largo texto-suave"></p>
+        </div>
+        <p class="dicho__instruccion texto-suave" data-i18n="sopaInstruccion"></p>
+        <div id="sopa-rejilla" class="sopa" role="grid"></div>
+        <section class="sopa__lista">
+          <h3 data-i18n="sopaPalabras">Palabras</h3>
+          <ul id="sopa-palabras"></ul>
+        </section>
+        <button type="button" id="btn-rendirse-sopa" class="ja-btn" data-i18n="rendirse">
+          Me rindo
+        </button>
+      </section>
+      <section
+        id="panel-crucigrama"
+        role="tabpanel"
+        aria-labelledby="tab-crucigrama"
+        class="panel"
+        hidden
+      >
+        <p class="dicho__instruccion texto-suave" data-i18n="cruciInstruccion"></p>
+        <p id="cruci-pista" class="cruci__actual" aria-live="polite"></p>
+        <div id="cruci-rejilla" class="cruci" role="grid"></div>
+        <div class="cruci__botones">
+          <button type="button" id="btn-revisar" class="ja-btn" data-i18n="revisar">Revisar</button>
+          <button type="button" id="btn-rendirse-cruci" class="ja-btn" data-i18n="rendirse">
+            Me rindo
+          </button>
+        </div>
+        <div id="teclado-cruci" class="teclado" role="group" data-i18n-aria="teclado"></div>
+        <div class="cruci__pistas">
+          <section>
+            <h3 data-i18n="horizontales">Horizontales</h3>
+            <ol id="cruci-horizontales"></ol>
+          </section>
+          <section>
+            <h3 data-i18n="verticales">Verticales</h3>
+            <ol id="cruci-verticales"></ol>
+          </section>
+        </div>
+      </section>
     </main>
 
     <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
@@ -320,6 +383,10 @@
       <p data-i18n="ayudaDicho"></p>
       <h3 data-i18n="ayudaCategoriaTitulo">Categoría</h3>
       <p data-i18n="ayudaCategoria"></p>
+      <h3 data-i18n="ayudaSopaTitulo">Sopa de letras</h3>
+      <p data-i18n="ayudaSopa"></p>
+      <h3 data-i18n="ayudaCrucigramaTitulo">Crucigrama</h3>
+      <p data-i18n="ayudaCrucigrama"></p>
       <p data-i18n="ayudaDiario"></p>
     </dialog>
 
@@ -337,8 +404,10 @@
         </p>
       </section>
       <dl class="numeros" id="numeros"></dl>
-      <h3 data-i18n="distribucion">Intentos para acertar</h3>
-      <ol class="distribucion" id="distribucion"></ol>
+      <section id="seccion-distribucion">
+        <h3 data-i18n="distribucion">Intentos para acertar</h3>
+        <ol class="distribucion" id="distribucion"></ol>
+      </section>
       <section id="compartir" class="compartir" hidden>
         <p class="cuenta">
           <span data-i18n="proximo">Próximo reto en</span> <time id="cuenta-regresiva"></time>
@@ -440,6 +509,7 @@
         <li data-i18n="fuentesMapa"></li>
         <li data-i18n="fuentesDichos"></li>
         <li data-i18n="fuentesCategorias"></li>
+        <li data-i18n="fuentesSopas"></li>
         <li data-i18n="fuentesCodigo"></li>
         <li data-i18n="fuentesWordle"></li>
       </ul>

@@ -41,7 +41,13 @@ export function actualizarTeclado(
   contenedor.querySelectorAll<HTMLButtonElement>('.tecla').forEach((b) => {
     const tecla = b.dataset.tecla as string;
     if (tecla === 'ENVIAR') {
-      b.textContent = t('enviar');
+      // El crucigrama usa esta tecla para pasar a la siguiente palabra.
+      if (contenedor.dataset.enviar === 'siguiente') {
+        b.textContent = '➜';
+        b.setAttribute('aria-label', t('siguiente'));
+      } else {
+        b.textContent = t('enviar');
+      }
       return;
     }
     if (tecla === 'BORRAR') {

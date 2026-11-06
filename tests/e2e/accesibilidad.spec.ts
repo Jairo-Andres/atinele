@@ -6,6 +6,12 @@ import {
   RESPUESTA_DICHO,
   abrir,
   abrirCategoria,
+  abrirCrucigrama,
+  abrirSopa,
+  CRUCIGRAMA,
+  SOPA,
+  escribirEnCrucigrama,
+  marcarEnSopa,
   abrirDicho,
   abrirMunicipio,
   adivinar,
@@ -116,6 +122,19 @@ for (const tema of ['light', 'dark'] as const) {
         await expect(
           page.locator('#clasificacion-filas tr:not(.clasificacion__fila-acciones)'),
         ).toHaveCount(2);
+        await revisar(page);
+      });
+
+      test('sopa de letras con una palabra encontrada', async ({ page }) => {
+        await abrirSopa(page);
+        await marcarEnSopa(page, SOPA.palabras[0]!);
+        await revisar(page);
+      });
+
+      test('crucigrama con letras y revisión', async ({ page }) => {
+        await abrirCrucigrama(page);
+        await escribirEnCrucigrama(page, CRUCIGRAMA.palabras[0]!, 'qq');
+        await page.locator('#btn-revisar').click();
         await revisar(page);
       });
 

@@ -10,6 +10,17 @@ const calendario = JSON.parse(readFileSync('data/contenido/calendario.json', 'ut
     palabra: string;
     pista: { es: string };
   }[];
+  sopas: {
+    id: string;
+    tema: { es: string };
+    palabras: { palabra: string; inicio: number[]; fin: number[] }[];
+  }[];
+  crucigramas: {
+    id: string;
+    ancho: number;
+    palabras: { palabra: string; fila: number; col: number; dir: 'h' | 'v' }[];
+  }[];
+  desde: { sopas: string; crucigramas: string };
   dichos: {
     id: string;
     texto: string;
@@ -113,6 +124,61 @@ export async function abrirCategoria(page: Page): Promise<void> {
 
 export const escribirCategoria = (page: Page, palabra: string) =>
   escribir(page, palabra, '#tablero-categoria');
+
+// ---------- Sopa de letras y crucigrama ----------
+// Tienen su propio ciclo desde calendario.desde (igual que retoDelDia).
+const dias = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000);
+function delDia<T>(lista: T[], desde: string): T {
+  const n = dias(desde, calendario.inicio);
+  return lista[((n % lista.length) + lista.length) % lista.length] as T;
+}
+export const SOPA = delDia(calendario.sopas, calendario.desde.sopas);
+export const CRUCIGRAMA = delDia(calendario.crucigramas, calendario.desde.crucigramas);
+
+async function abrirPanel(page: Page, modo: string): Promise<void> {
+  await page.clock.setFixedTime(FECHA);
+  await page.goto(`/#${modo}`);
+  await page.locator('#dlg-ayuda').waitFor();
+  await page.keyboard.press('Escape');
+}
+export const abrirSopa = (page: Page) => abrirPanel(page, 'sopa');
+export const abrirCrucigrama = (page: Page) => abrirPanel(page, 'crucigrama');
+
+/** Marca una palabra de la sopa tocando su primera y su última letra. */
+export async function marcarEnSopa(page: Page, p: (typeof SOPA.palabras)[number]): Promise<void> {
+  const casilla = ([f, c]: number[]) => page.locator(`.sopa__letra[data-f="${f}"][data-c="${c}"]`);
+  await casilla(p.inicio).click();
+  await casilla(p.fin).click();
+}
+
+/** Escribe una palabra del crucigrama tocando su primera casilla. */
+export async function escribirEnCrucigrama(
+  page: Page,
+  p: (typeof CRUCIGRAMA.palabras)[number],
+  texto = p.palabra,
+): Promise<void> {
+  const k = p.fila * CRUCIGRAMA.ancho + p.col;
+  const casilla = page.locator(`.cruci__casilla[data-k="${k}"]`);
+  await casilla.click();
+  // Si la casilla empieza dos palabras, tocar otra vez cambia de dirección.
+  const otra = p.dir === 'h' ? 'vertical' : 'horizontal';
+  if ((await page.locator('#cruci-pista').textContent())?.includes(otra)) await casilla.click();
+  // keyboard.type no dispara keydown con la ñ (no está en el teclado de EE. UU.),
+  // así que esa letra se toca en el teclado en pantalla.
+  for (const letra of normal(texto)) {
+    if (letra === 'Ñ') await page.locator('#teclado-cruci [data-tecla="Ñ"]').click();
+    else await page.keyboard.type(letra.toLowerCase());
+  }
+}
+
+/** Llena todo el crucigrama con la solución. */
+export async function resolverCrucigrama(page: Page): Promise<void> {
+  for (const p of CRUCIGRAMA.palabras) {
+    if (page.isClosed()) return;
+    if (await page.locator('#dlg-estadisticas[open]').count()) return;
+    await escribirEnCrucigrama(page, p);
+  }
+}
 
 // ---------- Modo Municipio ----------
 // Usa public/datos/municipios.json (lo genera `npm run municipios` desde DIVIPOLA).

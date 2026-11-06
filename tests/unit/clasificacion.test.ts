@@ -17,6 +17,8 @@ const perfil = (id: string, nombre: string, palabra: Partial<Estadisticas>): Per
     municipio: est(),
     dicho: est(),
     categoria: est(),
+    sopa: est(),
+    crucigrama: est(),
   },
 });
 
@@ -40,6 +42,13 @@ describe('clasificación', () => {
     );
     expect(filas.map((f) => f.nombre)).toEqual(['Beto', 'Ana', 'Carla', 'Dani']);
     expect(filas[0]).toMatchObject({ id: 'j3', puntos: 6, ganadas: 1, jugadas: 1 });
+  });
+
+  it('la sopa y el crucigrama dan 3 puntos por cada uno completo', () => {
+    const p = perfil('j1', 'Ana', {});
+    p.estadisticas.sopa = est({ ganadas: 2, jugadas: 3 });
+    p.estadisticas.crucigrama = est({ ganadas: 1, jugadas: 1, distribucion: [9, 0, 0, 0, 0, 0] });
+    expect(clasificacion([p], '2026-10-19')[0]?.puntos).toBe(9);
   });
 
   it('la racha es la mejor vigente entre los modos', () => {

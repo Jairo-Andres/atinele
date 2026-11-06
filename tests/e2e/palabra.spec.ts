@@ -76,7 +76,7 @@ test('cambia a inglés y lo recuerda', async ({ page }) => {
   await abrir(page);
   await page.getByRole('button', { name: 'Cambiar a inglés' }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await expect(page.getByRole('tab', { name: /Word/ })).toBeVisible();
+  await expect(page.getByRole('tab', { name: 'Word', exact: true })).toBeVisible();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 });

@@ -12,6 +12,9 @@ import {
   adivinar,
   escribir,
   escribirCategoria,
+  marcarEnSopa,
+  resolverCrucigrama,
+  SOPA,
   escribirDicho,
   palabrasQueNoSon,
 } from './ayudantes';
@@ -114,6 +117,7 @@ test('municipio: "Cali" y "Bogota DC" se entienden sin elegir de la lista', asyn
 });
 
 test('con todos los modos terminados se pueden compartir juntos', async ({ page, context }) => {
+  test.setTimeout(90_000);
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await abrir(page);
   await escribir(page, RESPUESTA);
@@ -132,6 +136,15 @@ test('con todos los modos terminados se pueden compartir juntos', async ({ page,
   await page.keyboard.press('Escape');
   await page.locator('#tab-categoria').click();
   await escribirCategoria(page, RESPUESTA_CATEGORIA);
+  await dialogo.waitFor();
+  await page.keyboard.press('Escape');
+  await page.locator('#tab-sopa').click();
+  for (const p of SOPA.palabras) await marcarEnSopa(page, p);
+  await dialogo.waitFor();
+  await expect(page.locator('#btn-compartir-todo')).toBeHidden();
+  await page.keyboard.press('Escape');
+  await page.locator('#tab-crucigrama').click();
+  await resolverCrucigrama(page);
   await dialogo.getByRole('button', { name: 'Compartir todos' }).click();
   const texto = await page.evaluate(() => navigator.clipboard.readText());
   expect(texto.match(/🇨🇴/g)).toHaveLength(1);
@@ -139,6 +152,8 @@ test('con todos los modos terminados se pueden compartir juntos', async ({ page,
   expect(texto).toContain('📍 Municipio 1/6');
   expect(texto).toContain('💬 Dicho 1/6');
   expect(texto).toContain('🗂️ Categoría 1/6');
+  expect(texto).toContain('🔎 Sopa de letras');
+  expect(texto).toContain('🧩 Crucigrama');
 });
 
 test('el dicho se juega con el teclado físico', async ({ page }) => {

@@ -31,6 +31,7 @@ import { idiomaInicial, t, traducirDocumento, usarIdioma, idioma, type Idioma } 
 import { retoDelDia, type Calendario } from './juego/calendario';
 import { clasificacion } from './juego/clasificacion';
 import {
+  cuadrosPalabras,
   enlaceWhatsApp,
   filaEmoji,
   textoConFilas,
@@ -42,6 +43,8 @@ import { porcentajeVictorias, rachaVigente, registrarPartida } from './juego/est
 import type { DatosMapa } from './juego/mapa';
 import type { DatosMunicipios } from './juego/municipios';
 import { JuegoCategoria } from './modos/categoria';
+import { JuegoCrucigrama } from './modos/crucigrama';
+import { JuegoSopa } from './modos/sopa';
 import { JuegoDicho } from './modos/dicho';
 import { JuegoMunicipio } from './modos/municipio';
 import { JuegoPalabra } from './modos/palabra';
@@ -65,6 +68,8 @@ function claveDeHoy(modo: IdModo): string {
   if (modo === 'municipio') return reto.municipio ?? '';
   if (modo === 'dicho') return reto.dicho?.id ?? '';
   if (modo === 'categoria') return reto.categoria?.id ?? '';
+  if (modo === 'sopa') return reto.sopa?.id ?? '';
+  if (modo === 'crucigrama') return reto.crucigrama?.id ?? '';
   return reto.palabra;
 }
 
@@ -115,6 +120,11 @@ let juego: JuegoPalabra;
 let juegoMunicipio: JuegoMunicipio | null = null;
 let juegoDicho: JuegoDicho | null = null;
 let juegoCategoria: JuegoCategoria | null = null;
+let juegoSopa: JuegoSopa | null = null;
+let juegoCrucigrama: JuegoCrucigrama | null = null;
+
+/** Modos que no se juegan por intentos (no tienen distribución de 1 a 6). */
+const SIN_INTENTOS: IdModo[] = ['sopa', 'crucigrama'];
 /** Modo cuyas estadísticas muestra el diálogo. */
 let modoEstadisticas: IdModo = 'palabra';
 
@@ -140,6 +150,30 @@ function bloque(modo: IdModo): BloqueModo | null {
       etiquetaModo: 'Dicho',
       filas: juegoDicho.intentosEvaluados.map((f) => filaEmoji(f, contraste)),
       extra: juegoDicho.usoPista ? '💡' : undefined,
+    };
+  }
+  if (modo === 'sopa') {
+    if (!juegoSopa) return null;
+    const n = juegoSopa.encontradas;
+    return {
+      ...comun,
+      icono: '🔎',
+      etiquetaModo: 'Sopa de letras',
+      marcador: `${n}/${juegoSopa.total}`,
+      filas: [cuadrosPalabras(n, juegoSopa.total, contraste)],
+    };
+  }
+  if (modo === 'crucigrama') {
+    if (!juegoCrucigrama) return null;
+    const n = juegoCrucigrama.resueltas;
+    return {
+      ...comun,
+      icono: '🧩',
+      etiquetaModo: 'Crucigrama',
+      marcador:
+        p.estado === 'perdida' ? `X/${juegoCrucigrama.total}` : `${n}/${juegoCrucigrama.total}`,
+      filas: [cuadrosPalabras(n, juegoCrucigrama.total, contraste)],
+      extra: juegoCrucigrama.reviso ? '🔍' : undefined,
     };
   }
   if (modo === 'categoria') {
@@ -232,6 +266,7 @@ function pintarEstadisticas(): void {
     }),
   );
 
+  $('seccion-distribucion').hidden = SIN_INTENTOS.includes(modo);
   $('resultado').hidden = !terminado;
   $('compartir').hidden = !terminado;
   if (terminado) {
@@ -244,7 +279,14 @@ function pintarEstadisticas(): void {
           ? (juegoMunicipio?.respuestaVisible() ?? '')
           : modo === 'dicho'
             ? (juegoDicho?.respuestaVisible() ?? '')
-            : (juegoCategoria?.respuestaVisible() ?? '');
+            : modo === 'categoria'
+              ? (juegoCategoria?.respuestaVisible() ?? '')
+              : modo === 'sopa'
+                ? t('deTotal', { n: juegoSopa?.encontradas ?? 0, total: juegoSopa?.total ?? 0 })
+                : t('deTotal', {
+                    n: juegoCrucigrama?.resueltas ?? 0,
+                    total: juegoCrucigrama?.total ?? 0,
+                  });
     $<HTMLAnchorElement>('btn-whatsapp').href = enlaceWhatsApp(textoResultado());
   }
   $('btn-compartir-todo').hidden = !terminado || modosDeHoy().length < 2 || !todosTerminados();
@@ -255,12 +297,16 @@ const NOMBRE_MODO = {
   municipio: 'modoMunicipio',
   dicho: 'modoDicho',
   categoria: 'modoCategoria',
+  sopa: 'modoSopa',
+  crucigrama: 'modoCrucigrama',
 } as const;
 const ETIQUETA_RESPUESTA = {
   palabra: 'laRespuesta',
   municipio: 'elMunicipio',
   dicho: 'elDicho',
   categoria: 'laPalabraCategoria',
+  sopa: 'sopaResultado',
+  crucigrama: 'cruciResultado',
 } as const;
 
 // ---------- Clasificación ----------
@@ -432,6 +478,7 @@ function juegoDeLetras(): { pulsar: (tecla: string) => void } | null {
   if (!$('panel-palabra').hidden) return juego;
   if (!$('panel-dicho').hidden) return juegoDicho;
   if (!$('panel-categoria').hidden) return juegoCategoria;
+  if (!$('panel-crucigrama').hidden) return juegoCrucigrama;
   return null;
 }
 
@@ -445,7 +492,7 @@ function alCambiar(modo: IdModo, p: Partida): void {
       datos.estadisticas[modo],
       hoy,
       p.estado === 'ganada',
-      p.intentos.length,
+      SIN_INTENTOS.includes(modo) ? 0 : p.intentos.length,
     );
     marcarPestanas();
   }
@@ -553,6 +600,40 @@ function iniciar(): void {
     });
   }
 
+  if (reto.sopa) {
+    juegoSopa = new JuegoSopa({
+      sopa: reto.sopa,
+      partida: partidaDeHoy('sopa'),
+      tema: $('sopa-tema'),
+      progreso: $('sopa-progreso'),
+      rejilla: $('sopa-rejilla'),
+      lista: $('sopa-palabras'),
+      botonRendirse: $<HTMLButtonElement>('btn-rendirse-sopa'),
+      alCambiar: (p) => alCambiar('sopa', p),
+      alTerminar: (_p, animado) => {
+        if (animado) window.setTimeout(() => mostrarEstadisticas('sopa'), 700);
+      },
+    });
+  }
+
+  if (reto.crucigrama) {
+    juegoCrucigrama = new JuegoCrucigrama({
+      crucigrama: reto.crucigrama,
+      partida: partidaDeHoy('crucigrama'),
+      rejilla: $('cruci-rejilla'),
+      pistaActual: $('cruci-pista'),
+      horizontales: $('cruci-horizontales'),
+      verticales: $('cruci-verticales'),
+      teclado: $('teclado-cruci'),
+      botonRevisar: $<HTMLButtonElement>('btn-revisar'),
+      botonRendirse: $<HTMLButtonElement>('btn-rendirse-cruci'),
+      alCambiar: (p) => alCambiar('crucigrama', p),
+      alTerminar: (_p, animado) => {
+        if (animado) window.setTimeout(() => mostrarEstadisticas('crucigrama'), 700);
+      },
+    });
+  }
+
   // Teclado físico.
   // ¿La persona navega con teclado (Tab) o con mouse/dedo? Tras un clic, Enter
   // debe enviar el intento aunque el foco haya quedado en un botón.
@@ -649,6 +730,8 @@ function iniciar(): void {
     juegoMunicipio?.retraducir();
     juegoDicho?.retraducir();
     juegoCategoria?.retraducir();
+    juegoSopa?.retraducir();
+    juegoCrucigrama?.retraducir();
     if ($<HTMLDialogElement>('dlg-clasificacion').open) pintarClasificacion();
   });
 

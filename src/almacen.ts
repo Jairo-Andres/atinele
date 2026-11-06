@@ -26,8 +26,8 @@ export interface Ajustes {
   vioInstrucciones: boolean;
 }
 
-export type IdModo = 'palabra' | 'municipio' | 'dicho' | 'categoria';
-export const MODOS: IdModo[] = ['palabra', 'municipio', 'dicho', 'categoria'];
+export type IdModo = 'palabra' | 'municipio' | 'dicho' | 'categoria' | 'sopa' | 'crucigrama';
+export const MODOS: IdModo[] = ['palabra', 'municipio', 'dicho', 'categoria', 'sopa', 'crucigrama'];
 
 export type PartidasPorDia = Record<string, Partial<Record<IdModo, Partida>>>;
 export type EstadisticasPorModo = Record<IdModo, Estadisticas>;
