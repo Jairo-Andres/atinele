@@ -72,3 +72,13 @@ inglés son textos propios del proyecto (MIT).
 
 **EN** · Own list. Every word is in the RLA-ES-derived lists; category names and
 hints (Spanish and English) are the project's own text (MIT).
+
+## data/contenido/sopas.json y data/contenido/crucigramas.json
+
+**ES** · Listas propias. Los temas, las palabras de las sopas y las pistas de
+los crucigramas (español e inglés) son textos del proyecto (MIT), escritos con
+conocimiento general sobre Colombia; no se copiaron de otras publicaciones.
+
+**EN** · Own lists. Word-search themes and words, and crossword clues (Spanish
+and English), are the project's own text (MIT), based on general knowledge about
+Colombia; nothing was copied from other publications.

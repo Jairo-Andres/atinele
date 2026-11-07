@@ -37,6 +37,14 @@ Ver [Decisiones pendientes](#decisiones-pendientes).
 - [x] Modo Categoría: 45 palabras en 10 categorías con pista propia.
 - [ ] Clasificación entre celulares distintos: necesitaría un servidor (por ejemplo Supabase gratis); pendiente de decisión de Jairo.
 
+## Fase 3.2 · Sopas de letras y crucigramas (hecha 2026-10-31)
+
+- [x] Modo Sopa de letras: 16 temas de 8 palabras, rejilla 10×10 en 8 direcciones; se juega arrastrando, tocando o con teclado.
+- [x] Modo Crucigrama: 71 palabras con pista propia ES/EN, que forman 11 crucigramas (5 palabras esperan a que haya más).
+- [x] Rejillas armadas en `npm run calendario` con semilla fija (`scripts/rejillas.mjs`) y revisadas por `npm run validar`.
+- [x] Compartir, estadísticas y clasificación (3 puntos por completar) para los dos modos.
+- [ ] Más contenido: los crucigramas se repiten desde 2026-11-10 y las sopas desde 2026-11-15.
+
 ## Fase 4 · Pulido, accesibilidad y publicación
 
 - [ ] Alto contraste, modo oscuro, animaciones con reduced-motion.
