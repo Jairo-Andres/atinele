@@ -1,6 +1,7 @@
 import './estilos/tokens.css';
 import './estilos/components.css';
 import './estilos/juego.css';
+import './estilos/diseno.css';
 
 import calendarioJson from '../data/contenido/calendario.json';
 import {
@@ -515,7 +516,7 @@ function marcarPestanas(): void {
 function iniciar(): void {
   aplicarAjustes();
   traducirDocumento();
-  $('numero-reto').textContent = `· ${t('reto', { n: reto.numero })}`;
+  $('numero-reto').textContent = t('reto', { n: reto.numero });
   $<HTMLAnchorElement>('enlace-portafolio').href = URL_PORTAFOLIO;
   $<HTMLAnchorElement>('enlace-repo').href = URL_REPO;
   $<HTMLAnchorElement>('enlace-linkedin').href = URL_LINKEDIN;
@@ -725,7 +726,7 @@ function iniciar(): void {
     datos.ajustes.idioma = nuevo;
     guardarDatos();
     traducirDocumento();
-    $('numero-reto').textContent = `· ${t('reto', { n: reto.numero })}`;
+    $('numero-reto').textContent = t('reto', { n: reto.numero });
     juego.retraducir();
     juegoMunicipio?.retraducir();
     juegoDicho?.retraducir();
